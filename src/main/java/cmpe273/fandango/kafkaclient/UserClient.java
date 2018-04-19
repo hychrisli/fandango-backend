@@ -1,4 +1,4 @@
-package cmpe273.fandango.client;
+package cmpe273.fandango.kafkaclient;
 
 import static cmpe273.fandango.constant.TopicConstant.FAN_USER;
 
