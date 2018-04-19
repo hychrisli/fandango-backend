@@ -1,16 +1,6 @@
 package cmpe273.fandango.dto;
 
-import cmpe273.fandango.entity.User;
-
 public class UserSimpleDto {
-
-  public UserSimpleDto(User user){
-    this.userId = user.getUserId();
-    this.username = user.getUsername();
-    this.firstName = user.getFirstName();
-    this.lastName = user.getLastName();
-    this.imageUrl = user.getImageUrl();
-  }
 
   private Integer userId;
 

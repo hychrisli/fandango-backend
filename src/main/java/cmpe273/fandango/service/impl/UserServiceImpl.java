@@ -1,10 +1,12 @@
 package cmpe273.fandango.service.impl;
 
 import cmpe273.fandango.dao.UserDao;
+import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.entity.User;
 import cmpe273.fandango.mapper.UserMapper;
 import cmpe273.fandango.service.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -19,10 +21,12 @@ import java.util.stream.StreamSupport;
 public class UserServiceImpl implements UserService {
 
   @Autowired
-  UserDao userDao;
+  private UserDao userDao;
+
+  private UserMapper userMapper = new UserMapper();
 
   @Override
-  public Boolean createUser(User user) {
+  public Boolean createUser(UserDto userDto) {
     return null;
   }
 
@@ -32,13 +36,19 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User updateUser(User user) {
+  public UserDto updateUser(Integer userId, UserDto userDto) {
+    User user = userDao.findUserByUserId(userId);
+    if (user != null){
+      user = userMapper.updPojo(userDto, user);
+      userDao.save(user);
+      return userMapper.toDto(user);
+    }
     return null;
   }
 
   @Override
-  public User getUser(Integer userId) {
-    return userDao.findUserByUserId(userId);
+  public UserDto getUser(Integer userId) {
+    return userMapper.toDto(userDao.findUserByUserId(userId));
   }
 
   @Override
@@ -46,6 +56,6 @@ public class UserServiceImpl implements UserService {
     Page<User> users = userDao.findAllBy(pageable);
     return new PageImpl<>(
         StreamSupport.stream(users.spliterator(), false)
-        .map(UserMapper::toSimpleDto).collect(Collectors.toList()));
+        .map(userMapper::toSimpleDto).collect(Collectors.toList()));
   }
 }

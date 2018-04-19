@@ -1,5 +1,6 @@
 package cmpe273.fandango.controller;
 
+import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.entity.User;
 import cmpe273.fandango.response.JsonResponse;
@@ -45,15 +46,21 @@ public class UserController extends AbstractController {
   @GetMapping(USER + "/{userId}")
   public ResponseEntity<JsonResponse> getUser(@PathVariable Integer userId) {
 
-    User user = userService.getUser(userId);
+    UserDto userDto = userService.getUser(userId);
 
     //UserDto userDto = userService.retrieveUserDto(username);
-    if (user != null)
-      return success("user", user);
+    if (userDto != null)
+      return success("user", userDto);
     return notFound();
   }
 
-
-
+  @ApiOperation(value = "Put User", response = JsonResponse.class)
+  @PutMapping(USER + "/{userId}")
+  public ResponseEntity<JsonResponse> putUser(@PathVariable Integer userId, @RequestBody UserDto userDto){
+    UserDto updUserDto = userService.updateUser(userId, userDto);
+    if (updUserDto != null)
+      return success("user", updUserDto);
+    return notFound();
+  }
 
 }
