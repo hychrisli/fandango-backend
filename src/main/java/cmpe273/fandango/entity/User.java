@@ -4,42 +4,113 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "users")
+@Table(name="USER")
 public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private long id;
-
+  @Column(name="user_id")
+  private Integer userId;
 
   @NotNull
+  private String username;
+
+  private String password;
+
+  @Column(name="first_name")
+  private String firstName;
+
+  @Column(name="last_name")
+  private String lastName;
+
+  private String street;
+
+  private String city;
+
+  private String state;
+
+  private String zipcode;
+
   private String email;
 
+  private String phone;
 
-  @NotNull
-  private String name;
+  @Column(name="image_url")
+  private String imageUrl;
 
+  @Column(name="credit_card")
+  private String creditCard;
 
-  // Public methods
-
-  public User() { }
-
-  public User(long id) {
-    this.id = id;
+  public Integer getUserId() {
+    return userId;
   }
 
-  public User(String email, String name) {
-    this.email = email;
-    this.name = name;
+  public void setUserId(Integer useId) {
+    this.userId = userId;
   }
 
-  // Getters and setters methods
-  public long getId() {
-    return id;
+  public String getUsername() {
+    return username;
   }
 
-  public void setId(long id) {
-    this.id = id;
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
+  public String getFirstName() {
+    return firstName;
+  }
+
+  public void setFirstName(String firstName) {
+    this.firstName = firstName;
+  }
+
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  public String getStreet() {
+    return street;
+  }
+
+  public void setStreet(String street) {
+    this.street = street;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
+  }
+
+  public String getState() {
+    return state;
+  }
+
+  public void setState(String state) {
+    this.state = state;
+  }
+
+  public String getZipcode() {
+    return zipcode;
+  }
+
+  public void setZipcode(String zipcode) {
+    this.zipcode = zipcode;
   }
 
   public String getEmail() {
@@ -50,11 +121,27 @@ public class User {
     this.email = email;
   }
 
-  public String getName() {
-    return name;
+  public String getPhone() {
+    return phone;
   }
 
-  public void setName(String name) {
-    this.name = name;
+  public void setPhone(String phone) {
+    this.phone = phone;
+  }
+
+  public String getImageUrl() {
+    return imageUrl;
+  }
+
+  public void setImageUrl(String imageUrl) {
+    this.imageUrl = imageUrl;
+  }
+
+  public String getCreditCard() {
+    return creditCard;
+  }
+
+  public void setCreditCard(String creditCard) {
+    this.creditCard = creditCard;
   }
 }

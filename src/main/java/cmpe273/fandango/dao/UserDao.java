@@ -1,12 +1,17 @@
 package cmpe273.fandango.dao;
 
-
-import org.springframework.stereotype.Repository;
+import cmpe273.fandango.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
-@Transactional
-public class UserDao {
+import java.util.List;
 
+@Transactional
+public interface UserDao extends PagingAndSortingRepository<User, Integer>{
+
+  Page<User> findAllBy(Pageable pageable);
+  User findUserByUserId(Integer userId);
 
 }
