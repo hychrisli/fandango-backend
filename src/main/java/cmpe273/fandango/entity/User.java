@@ -1,5 +1,7 @@
 package cmpe273.fandango.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -57,6 +59,7 @@ public class User {
     this.username = username;
   }
 
+  @JsonIgnore
   public String getPassword() {
     return password;
   }

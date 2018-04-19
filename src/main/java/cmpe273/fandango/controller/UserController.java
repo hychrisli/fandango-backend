@@ -1,6 +1,6 @@
 package cmpe273.fandango.controller;
 
-
+import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.entity.User;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.UserService;
@@ -12,11 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
-import java.security.Principal;
-import java.util.List;
-
 import static cmpe273.fandango.constant.UrlConstant.USER;
-
+import static cmpe273.fandango.constant.UrlConstant.USERS;
 
 @RestController
 @Api(tags = {"User"})
@@ -26,40 +23,6 @@ public class UserController extends AbstractController {
 
   @Autowired
   UserService userService;
-/*
-    @ApiOperation(value = "Get User", response = JsonResponse.class)
-    @GetMapping(USER + "/{username}")
-    @PreAuthorize(PRIV_ADMIN)
-    public ResponseEntity<JsonResponse> getUser(@PathVariable String username) {
-        UserDto userDto = userService.retrieveUserDto(username);
-        if (userDto != null)
-            return success("user", userDto);
-        return notFound();
-    }
-
-    @ApiOperation(value = "Get My Username")
-    @GetMapping(USER + "/self")
-    public ResponseEntity<JsonResponse> getMyUserName(Principal principal) {
-        return success("self", principal.getName());
-    }
-
-    @ApiOperation(value = "Add A User")
-    @PostMapping(USER)
-    public ResponseEntity<JsonResponse> addUser(@RequestBody UserDto userDto) {
-        if (userService.createUser(userDto))
-            return created("created", userDto.getUsername());
-
-        return conflict();
-    }
-
-    @ApiOperation(value = "Delete A User")
-    @PreAuthorize(PRIV_ADMIN)
-    public ResponseEntity<JsonResponse> deleteUser(@PathVariable String username) {
-        if (userService.deleteUser(username))
-            return success("deleted", username);
-
-        return notFound();
-    }*/
 
   @ApiOperation(value = "Get All Users", response = JsonResponse.class)
   @ApiImplicitParams({
@@ -72,13 +35,25 @@ public class UserController extends AbstractController {
               "Default sort order is ascending. " +
               "Multiple sort criteria are supported.")
   })
-  @GetMapping(USER + "s")
-  //@PreAuthorize(PRIV_ADMIN)
-  public Page<User> getUser(Pageable pageable) {
+  @GetMapping(USERS)
+  public Page<UserSimpleDto> getUser(Pageable pageable) {
     return userService.getAllUsers(pageable);
-    /*if (users != null && !users.isEmpty())
-      return success("users", users);
-    return notFound();*/
   }
+
+
+  @ApiOperation(value = "Get User", response = JsonResponse.class)
+  @GetMapping(USER + "/{userId}")
+  public ResponseEntity<JsonResponse> getUser(@PathVariable Integer userId) {
+
+    User user = userService.getUser(userId);
+
+    //UserDto userDto = userService.retrieveUserDto(username);
+    if (user != null)
+      return success("user", user);
+    return notFound();
+  }
+
+
+
 
 }
