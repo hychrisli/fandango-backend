@@ -1,0 +1,19 @@
+language: java
+sudo: required
+services:
+  - mysql
+  - docker
+env:
+  - FANDANGO_USER=root
+  - FANDANGO_PASS=""
+  - JDBC_TEST_URL=jdbc:mysql://localhost:3306/fandango_test
+  - KAFKA_ADDRESS=127.0.0.1:9092
+  global:
+    - KAFKA_ADVERTISED_HOST_NAME=127.0.0.1
+before_install:
+  - mysql -u root --password="" < sql/import.sql
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-ce
+  - docker-compose -f docker-compose.yml -f docker/docker-compose.0.11.yml up -d
+script:
+  - mvn test
