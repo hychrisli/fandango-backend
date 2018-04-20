@@ -39,18 +39,16 @@ public class UserControllerTest {
   @Test
   public void userNotFound() throws Exception {
     ResponseEntity<JsonResponse> response =
-        restTemplate.getForEntity(USER + "/1", JsonResponse.class);
-    assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-    //mockMvc.perform(get(USER + "/1")).andExpect(status().isNotFound());
+        restTemplate.getForEntity(USER + "/10", JsonResponse.class);
+    assertThat(response.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));
   }
 
-/*  @Test
+  @Test
   public void userFound() throws Exception {
-    MvcResult result = mockMvc.perform(get(USER + "/1"))
-        .andExpect(status().isOk())
-        .andReturn();
+    ResponseEntity<JsonResponse> response =
+        restTemplate.getForEntity(USER + "/1", JsonResponse.class);
+    assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
+  }
 
-    System.out.println(result.getResponse());
-  }*/
 
 }
