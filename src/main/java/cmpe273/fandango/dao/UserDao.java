@@ -12,6 +12,9 @@ import java.util.List;
 public interface UserDao extends PagingAndSortingRepository<User, Integer>{
 
   Page<User> findAllBy(Pageable pageable);
+
   User findUserByUserId(Integer userId);
+
+  User findUserByUsername(String username);
 
 }

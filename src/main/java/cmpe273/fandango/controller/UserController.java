@@ -1,8 +1,11 @@
 package cmpe273.fandango.controller;
 
+import cmpe273.fandango.dto.LoginDto;
+import cmpe273.fandango.dto.UserCreateDto;
 import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
-import cmpe273.fandango.entity.User;
+import cmpe273.fandango.exception.AppException;
+import cmpe273.fandango.exception.ErrorCode;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.UserService;
 import io.swagger.annotations.*;
@@ -13,8 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
-import static cmpe273.fandango.constant.UrlConstant.USER;
-import static cmpe273.fandango.constant.UrlConstant.USERS;
+import static cmpe273.fandango.constant.UrlConstant.*;
 
 @RestController
 @Api(tags = {"User"})
@@ -48,19 +50,51 @@ public class UserController extends AbstractController {
 
     UserDto userDto = userService.getUser(userId);
 
-    //UserDto userDto = userService.retrieveUserDto(username);
     if (userDto != null)
       return success("user", userDto);
     return notFound();
   }
 
   @ApiOperation(value = "Put User", response = JsonResponse.class)
-  @PutMapping(USER + "/{userId}")
+  @PutMapping(USER_ID)
   public ResponseEntity<JsonResponse> putUser(@PathVariable Integer userId, @RequestBody UserDto userDto){
-    UserDto updUserDto = userService.updateUser(userId, userDto);
-    if (updUserDto != null)
-      return success("user", updUserDto);
+    userDto = userService.updateUser(userId, userDto);
+    if (userDto != null)
+      return success("user", userDto);
     return notFound();
+  }
+
+  @ApiOperation(value = "Create User", response = JsonResponse.class)
+  @PostMapping(USER)
+  public ResponseEntity<JsonResponse> createUser(@RequestBody UserCreateDto userCreateDto){
+    if ( userCreateDto.getEmail() == null || userCreateDto.getUsername() == null || userCreateDto.getPassword() == null)
+      return badRequest("Required Fields needed: username, password, and email");
+    if ( userService.getUserByUsername(userCreateDto.getUsername()) != null)
+      return conflict();
+    UserDto userDto = userService.createUser(userCreateDto);
+    if (userDto != null)
+      return created("user", userDto);
+    return failure(ErrorCode.ERR_FAILED_TO_CREATE, "Failed to Create User");
+  }
+
+  @ApiOperation(value = "Delete User", response = JsonResponse.class)
+  @DeleteMapping(USER_ID)
+  public ResponseEntity<JsonResponse> DeleteUser(@PathVariable Integer userId){
+    if (userService.deleteUser(userId))
+      return success("user", "deleted");
+    return notFound();
+  }
+
+  @ApiOperation(value = "Login User", response = JsonResponse.class)
+  @PostMapping(LOGIN)
+  public ResponseEntity<JsonResponse> loginUser(@RequestBody LoginDto loginDto) {
+    if (loginDto.getPassword() == null || loginDto.getUsername() == null)
+      return badRequest("Required Fields needed: username and password");
+
+    UserDto userDto = userService.loginUser(loginDto);
+    if (userDto != null)
+      return success("user", userDto);
+    return badRequest("Incorrect username and password combination");
   }
 
 }

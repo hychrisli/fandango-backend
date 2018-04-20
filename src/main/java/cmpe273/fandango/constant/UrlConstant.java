@@ -4,6 +4,7 @@ public interface UrlConstant {
 
   public String USER = "user";
   public String USERS = "users";
-  public String MY_PROFILE = "my-profile";
+  public String USER_ID = "user/{userId}";
+  public String LOGIN = "login";
 
 }

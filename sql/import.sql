@@ -13,8 +13,8 @@ CREATE TABLE USER
   city        VARCHAR(30),
   state       CHAR(2),
   zipcode     CHAR(5),
-  phone       CHAR(15) NOT NULL,
-  email       VARCHAR(50),
+  phone       CHAR(15),
+  email       VARCHAR(50) NOT NULL,
   image_url   VARCHAR(100),
   credit_card VARCHAR(20)
 );

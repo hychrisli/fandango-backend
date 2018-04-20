@@ -1,24 +1,16 @@
 package cmpe273.fandango.dto;
 
-public class UserSimpleDto {
-
-  private Integer userId;
+public class UserCreateDto {
 
   private String username;
 
-  private String firstName;
+  private String password;
+
+  private String firstName ;
 
   private String lastName;
 
-  private String imageUrl;
-
-  public Integer getUserId() {
-    return userId;
-  }
-
-  public void setUserId(Integer userId) {
-    this.userId = userId;
-  }
+  private String email;
 
   public String getUsername() {
     return username;
@@ -26,6 +18,14 @@ public class UserSimpleDto {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public String getFirstName() {
@@ -44,11 +44,11 @@ public class UserSimpleDto {
     this.lastName = lastName;
   }
 
-  public String getImageUrl() {
-    return imageUrl;
+  public String getEmail() {
+    return email;
   }
 
-  public void setImageUrl(String imageUrl) {
-    this.imageUrl = imageUrl;
+  public void setEmail(String email) {
+    this.email = email;
   }
 }

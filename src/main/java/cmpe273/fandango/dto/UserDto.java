@@ -1,17 +1,19 @@
 package cmpe273.fandango.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.annotations.ApiModelProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserDto {
 
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private Integer userId;
 
   private String username;
 
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
 
-  private String firstName;
+  private String firstName ;
 
   private String lastName;
 
@@ -35,7 +37,6 @@ public class UserDto {
     return userId;
   }
 
-  @JsonIgnore
   public void setUserId(Integer userId) {
     this.userId = userId;
   }
@@ -48,7 +49,6 @@ public class UserDto {
     this.username = username;
   }
 
-  @JsonIgnore
   public String getPassword() {
     return password;
   }
