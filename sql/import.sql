@@ -26,3 +26,12 @@ VALUES
 ('user2', '$2a$10$bNqsANQaxojDrovhLCF2DeaSxXKMA6l1iss/nzzBkS/SdhhtWCPT6','Tasia','Uhrig','433 Jones Court', 'Youngstown', 'OH', '44512','syrinx@me.com','(714)449-6291'),
 ('user3', '$2a$10$bNqsANQaxojDrovhLCF2DeaSxXKMA6l1iss/nzzBkS/SdhhtWCPT6', 'Albert','Blaschke','91 Hill Field Avenue', 'Cincinnati', 'OH', '45211','solomon@yahoo.ca','(970)156-4910'),
 ('user4', '$2a$10$bNqsANQaxojDrovhLCF2DeaSxXKMA6l1iss/nzzBkS/SdhhtWCPT6', 'Marquis','Reinhold','392 Yukon Dr.', 'Murfreesboro', 'TN', '37128','quantaman@comcast.net','(185) 782-9454');
+
+
+-- test database
+
+DROP DATABASE IF EXISTS fandango_test;
+CREATE DATABASE fandango_test;
+USE fandango_test;
+
+CREATE TABLE USER LIKE fandango.USER;
