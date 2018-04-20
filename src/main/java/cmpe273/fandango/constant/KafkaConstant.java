@@ -7,9 +7,11 @@ public interface KafkaConstant {
   String METHOD = "method";
   String API_URL = "apiURL";
   String TOPIC_RES = "topicRes";
+  String PARAMS = "params";
 
   String DATA = "data";
   String REQ_ID = "reqID";
+  String ERROR = "error";
 
   String DELETE = "delete";
   String GET = "get";
