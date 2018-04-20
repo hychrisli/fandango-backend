@@ -2,9 +2,11 @@ package cmpe273.fandango.constant;
 
 public interface UrlConstant {
 
-  public String USER = "/user";
-  public String USERS = "/users";
-  public String USER_ID = "/user/{userId}";
-  public String LOGIN = "/login";
+  String USER = "/user";
+  String USERS = "/users";
+  String USER_ID = "/user/{userId}";
+  String LOGIN = "/login";
+
+  String HOST = "http://localhost";
 
 }
