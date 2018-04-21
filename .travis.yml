@@ -21,4 +21,3 @@ before_install:
   - docker-compose -f docker-compose.yml -f docker/docker-compose.0.11.yml up -d
 script:
   - mvn test
-  
