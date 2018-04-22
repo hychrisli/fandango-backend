@@ -9,4 +9,7 @@ import java.util.List;
 
 public interface FormatDao extends CrudRepository<Format, Integer>{
   List<Format> findAll();
+
+  @Query("select f from Format f join f.movies fm where fm.movieId = :movieId")
+  List<Format> findAllByMovieId(@Param("movieId") Integer movieId);
 }

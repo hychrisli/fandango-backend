@@ -20,11 +20,4 @@ public interface MovieService {
 
   MovieDto getMovie(Integer movieId);
 
-  MovieDto addFormat (MovieFormatDto movieFormatDto);
-
-  MovieDto removeFormat (MovieFormatDto movieFormatDto);
-
-  MovieDto addGenre (MovieGenreDto movieGenreDto);
-
-  MovieDto removeGenre (MovieGenreDto movieGenreDto);
 }

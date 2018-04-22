@@ -18,7 +18,7 @@ public class Format {
   @Column(name="format_name")
   private String formatName;
 
-  @OneToMany(mappedBy = "formats")
+  @ManyToMany(mappedBy = "formats")
   @JsonIgnore
   private List<Movie> movies;
 
