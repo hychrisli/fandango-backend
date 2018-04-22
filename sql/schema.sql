@@ -92,6 +92,18 @@ CREATE TABLE MOVIE_FORMAT
   UNIQUE movie_format_uniq (format_id, movie_id)
 );
 
+CREATE TABLE MOVIE_REVIEW
+(
+    review_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+    movie_id INTEGER,
+    user_id INTEGER,
+    stars INTEGER,
+    comment VARCHAR(10000),
+    FOREIGN KEY (user_id) REFERENCES USER(user_id),
+    FOREIGN KEY (movie_id) REFERENCES MOVIE(movie_id)
+
+);
+
 
 -- test database
 

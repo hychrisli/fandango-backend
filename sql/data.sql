@@ -5044,3 +5044,14 @@ insert into MOVIE_IMAGE (image_id, movie_id, image_title, image_desc, image_url)
 insert into MOVIE_IMAGE (image_id, movie_id, image_title, image_desc, image_url) values (998, 148, 'VestibulumEgetVulputate.gif', 'Morbi non lectus.', 'http://dummyimage.com/247x169.jpg/5fa2dd/ffffff');
 insert into MOVIE_IMAGE (image_id, movie_id, image_title, image_desc, image_url) values (999, 119, 'FelisSed.png', 'Maecenas ut massa quis augue luctus tincidunt.', 'http://dummyimage.com/231x161.bmp/dddddd/000000');
 insert into MOVIE_IMAGE (image_id, movie_id, image_title, image_desc, image_url) values (1000, 133, 'IdTurpis.tiff', 'In sagittis dui vel nisl.', 'http://dummyimage.com/216x112.bmp/5fa2dd/ffffff');
+
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (1, 74, 1, 3, 'Crowned eagle');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (2, 3, 4, 9, 'Tasmanian devil');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (3, 57, 4, 8, 'Jackrabbit, white-tailed');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (4, 45, 3, 6, 'Dog, black-tailed prairie');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (5, 85, 1, 8, 'Capuchin, white-fronted');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (6, 31, 4, 1, 'Raven, white-necked');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (7, 8, 3, 4, 'Malabar squirrel');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (8, 47, 1, 4, 'Horned puffin');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (9, 64, 2, 10, 'Rattlesnake, horned');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (10, 80, 3, 2, 'Racer, blue');
