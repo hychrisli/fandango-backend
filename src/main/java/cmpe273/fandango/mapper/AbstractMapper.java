@@ -4,7 +4,7 @@ import org.modelmapper.ModelMapper;
 
 import java.util.function.Consumer;
 
-public abstract class GenericMapper<POJO, DTO> {
+public abstract class AbstractMapper<POJO, DTO> {
 
   protected ModelMapper modelMapper = new ModelMapper();
 

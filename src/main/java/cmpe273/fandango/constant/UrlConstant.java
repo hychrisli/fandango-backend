@@ -7,6 +7,10 @@ public interface UrlConstant {
   String USER_ID = "/user/{userId}";
   String LOGIN = "/login";
 
+  String MOVIE = "/movie";
+  String MOVIES = "/movies";
+  String MOVIE_ID = "/movie/{movieId}";
+
   String HOST = "http://localhost";
 
 }

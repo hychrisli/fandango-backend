@@ -5,7 +5,7 @@ import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.entity.User;
 
-public class UserMapper extends GenericMapper<User, UserDto>{
+public class UserMapper extends AbstractMapper<User, UserDto> {
 
   @Override
   public UserDto toDto(User pojo){
