@@ -35,7 +35,7 @@ public class MovieFormatServiceImpl implements MovieFormatService {
   }
 
   @Override
-  public MovieDto addFormat(MovieFormatDto movieFormatDto) {
+  public List<Format> addFormat(MovieFormatDto movieFormatDto) {
     Format format = formatDao.findOne(movieFormatDto.getFormatId());
     Movie movie = movieDao.findOne(movieFormatDto.getMovieId());
     if ( format == null || movie == null) return null;
@@ -43,11 +43,11 @@ public class MovieFormatServiceImpl implements MovieFormatService {
       movie.getFormats().add(format);
       movieDao.save(movie);
     }
-    return movieMapper.toDto(movie);
+    return movie.getFormats();
   }
 
   @Override
-  public MovieDto removeFormat(MovieFormatDto movieFormatDto) {
+  public List<Format> removeFormat(MovieFormatDto movieFormatDto) {
     Format format = formatDao.findOne(movieFormatDto.getFormatId());
     Movie movie = movieDao.findOne(movieFormatDto.getMovieId());
     if ( format == null || movie == null) return null;
@@ -55,7 +55,7 @@ public class MovieFormatServiceImpl implements MovieFormatService {
       movie.getFormats().remove(format);
       movieDao.save(movie);
     }
-    return movieMapper.toDto(movie);
+    return movie.getFormats();
   }
 
 }

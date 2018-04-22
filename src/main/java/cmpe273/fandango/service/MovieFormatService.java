@@ -12,7 +12,7 @@ public interface MovieFormatService {
 
   List<Format> getMovieFormats (Integer movieId);
 
-  MovieDto addFormat (MovieFormatDto movieFormatDto);
+  List<Format> addFormat (MovieFormatDto movieFormatDto);
 
-  MovieDto removeFormat (MovieFormatDto movieFormatDto);
+  List<Format> removeFormat (MovieFormatDto movieFormatDto);
 }

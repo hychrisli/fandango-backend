@@ -1,8 +1,12 @@
 package cmpe273.fandango.dto;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+@ApiModel(description = "A Movie Character")
 public class MovieCharacterDto {
 
+  @ApiModelProperty(value = "movie Id", required = true)
   private Integer movieId;
 
   private Integer characterId;

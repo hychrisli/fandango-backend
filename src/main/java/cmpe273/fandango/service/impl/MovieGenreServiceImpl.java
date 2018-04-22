@@ -35,7 +35,7 @@ public class MovieGenreServiceImpl implements MovieGenreService{
   }
 
   @Override
-  public MovieDto addGenre(MovieGenreDto movieGenreDto) {
+  public List<Genre> addGenre(MovieGenreDto movieGenreDto) {
     Genre genre = genreDao.findOne(movieGenreDto.getGenreId());
     Movie movie = movieDao.findOne(movieGenreDto.getMovieId());
     if ( genre == null || movie == null) return null;
@@ -43,11 +43,11 @@ public class MovieGenreServiceImpl implements MovieGenreService{
       movie.getGenres().add(genre);
       movieDao.save(movie);
     }
-    return movieMapper.toDto(movie);
+    return movie.getGenres();
   }
 
   @Override
-  public MovieDto removeGenre(MovieGenreDto movieGenreDto) {
+  public List<Genre> removeGenre(MovieGenreDto movieGenreDto) {
     Genre genre = genreDao.findOne(movieGenreDto.getGenreId());
     Movie movie = movieDao.findOne(movieGenreDto.getMovieId());
     if ( genre == null || movie == null) return null;
@@ -55,6 +55,6 @@ public class MovieGenreServiceImpl implements MovieGenreService{
       movie.getGenres().remove(genre);
       movieDao.save(movie);
     }
-    return movieMapper.toDto(movie);
+    return movie.getGenres();
   }
 }

@@ -9,8 +9,8 @@ public interface MovieCharacterService {
 
   List<MovieCharacter> getMovieCharacters(Integer movieId);
 
-  MovieCharacterDto addCharacter(MovieCharacterDto movieCharacterDto);
+  List<MovieCharacter> addCharacter(MovieCharacterDto movieCharacterDto);
 
-  Boolean removeCharacter(MovieCharacterDto movieCharacterDto);
+  List<MovieCharacter> removeCharacter(MovieCharacterDto movieCharacterDto);
 
 }

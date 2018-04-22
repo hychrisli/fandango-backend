@@ -9,7 +9,10 @@ public interface JsonConstant {
   String KEY_USER = "user";
   String KEY_MOVIE = "movie";
 
-  String KEY_MOVIE_CHARACTER = "character";
+  String KEY_GENRES = "genres";
+  String KEY_FORMATS = "formats";
+  String KEY_MOVIE_CHARACTERS = "characters";
+  String KEY_MOVIE_IMAGES = "images";
 
   String KEY_CONTENT = "content";
 

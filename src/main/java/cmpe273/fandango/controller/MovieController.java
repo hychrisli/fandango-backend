@@ -24,14 +24,13 @@ import static cmpe273.fandango.constant.UrlConstant.*;
 
 @RestController
 @Api(tags = {"Movie"})
-@SwaggerDefinition(tags = {@Tag(name = "Movie Controller", description = "Movie Controller Endpoints")})
 @Transactional(rollbackFor = Exception.class)
 public class MovieController extends  AbstractController{
 
   @Autowired
   MovieService movieService;
 
-  @ApiOperation(value = "Get All Movies", response = JsonResponse.class)
+  @ApiOperation(value = "Get All Movies [Topic: movies]", response = JsonResponse.class)
   @ApiImplicitParams({
       @ApiImplicitParam(name = "minStars", dataType = "integer", paramType = "query",
           value = "Min stars"),
@@ -53,7 +52,7 @@ public class MovieController extends  AbstractController{
     return movieService.getAllMovies(pageable, minStars, maxStars, genreId);
   }
 
-  @ApiOperation(value = "Get a Movie", response = JsonResponse.class)
+  @ApiOperation(value = "Get a Movie [Topic: movies]", response = JsonResponse.class)
   @GetMapping(MOVIE_ID)
   public ResponseEntity<JsonResponse> getMovie(@PathVariable Integer movieId) {
 
@@ -64,7 +63,7 @@ public class MovieController extends  AbstractController{
     return notFound();
   }
 
-  @ApiOperation(value="Create a Movie", response = JsonResponse.class,
+  @ApiOperation(value="Create a Movie [Topic: movies]", response = JsonResponse.class,
       notes = "movieId, mpaaRating and stars in request body are ignored")
   @PostMapping(MOVIE)
   public ResponseEntity<JsonResponse> createMovie(@RequestBody MovieSimpleDto movieSimpleDto){
@@ -80,7 +79,7 @@ public class MovieController extends  AbstractController{
       return badRequest("Failed to Create Movie");
   }
 
-  @ApiOperation(value="Update a Movie", response = JsonResponse.class,
+  @ApiOperation(value="Update a Movie [Topic: movies]", response = JsonResponse.class,
       notes = "movieId, mpaaRating and stars in request body are ignored")
   @PutMapping(MOVIE_ID)
   public ResponseEntity<JsonResponse> updateMovie(@PathVariable Integer movieId, @RequestBody MovieSimpleDto movieSimpleDto){
