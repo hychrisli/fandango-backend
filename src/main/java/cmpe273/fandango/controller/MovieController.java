@@ -2,8 +2,11 @@ package cmpe273.fandango.controller;
 
 
 import cmpe273.fandango.dto.MovieDto;
+import cmpe273.fandango.dto.MovieFormatDto;
+import cmpe273.fandango.dto.MovieGenreDto;
 import cmpe273.fandango.dto.MovieSimpleDto;
 import cmpe273.fandango.entity.Movie;
+import cmpe273.fandango.entity.MovieFormat;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.MovieService;
 import io.swagger.annotations.*;
@@ -50,7 +53,6 @@ public class MovieController extends  AbstractController{
     return movieService.getAllMovies(pageable, minStars, maxStars, genreId);
   }
 
-
   @ApiOperation(value = "Get a Movie", response = JsonResponse.class)
   @GetMapping(MOVIE_ID)
   public ResponseEntity<JsonResponse> getMovie(@PathVariable Integer movieId) {
@@ -62,7 +64,8 @@ public class MovieController extends  AbstractController{
     return notFound();
   }
 
-  @ApiOperation(value="Create a Movie", response = JsonResponse.class)
+  @ApiOperation(value="Create a Movie", response = JsonResponse.class,
+      notes = "movieId, mpaaRating and stars in request body are ignored")
   @PostMapping(MOVIE)
   public ResponseEntity<JsonResponse> createMovie(@RequestBody MovieSimpleDto movieSimpleDto){
 
@@ -77,12 +80,54 @@ public class MovieController extends  AbstractController{
       return badRequest("Failed to Create Movie");
   }
 
-  @ApiOperation(value="Update a Movie", response = JsonResponse.class)
+  @ApiOperation(value="Update a Movie", response = JsonResponse.class,
+      notes = "movieId, mpaaRating and stars in request body are ignored")
   @PutMapping(MOVIE_ID)
   public ResponseEntity<JsonResponse> updateMovie(@PathVariable Integer movieId, @RequestBody MovieSimpleDto movieSimpleDto){
     movieSimpleDto = movieService.UpdateMovie(movieId, movieSimpleDto);
     if ( movieSimpleDto != null)
       return success(KEY_MOVIE, movieSimpleDto);
+    else
+      return notFound();
+  }
+
+  @ApiOperation(value="Add Format", response = JsonResponse.class)
+  @PostMapping(MOVIE_FORMAT)
+  public ResponseEntity<JsonResponse> addFormat(@RequestBody MovieFormatDto movieFormatDto){
+    MovieDto movieDto = movieService.addFormat(movieFormatDto);
+    if ( movieDto != null)
+      return success(KEY_MOVIE, movieDto);
+    else
+      return notFound();
+  }
+
+  @ApiOperation(value="Remove Format", response = JsonResponse.class)
+  @DeleteMapping(MOVIE_FORMAT)
+  public ResponseEntity<JsonResponse> deleteFormat(@RequestBody MovieFormatDto movieFormatDto){
+    MovieDto movieDto = movieService.removeFormat(movieFormatDto);
+    if ( movieDto != null)
+      return success(KEY_MOVIE, movieDto);
+    else
+      return notFound();
+  }
+
+
+  @ApiOperation(value="Add Genre", response = JsonResponse.class)
+  @PostMapping(MOVIE_GENRE)
+  public ResponseEntity<JsonResponse> addGenre(@RequestBody MovieGenreDto movieGenreDto){
+    MovieDto movieDto = movieService.addGenre(movieGenreDto);
+    if ( movieDto != null)
+      return success(KEY_MOVIE, movieDto);
+    else
+      return notFound();
+  }
+
+  @ApiOperation(value="Remove Format", response = JsonResponse.class)
+  @DeleteMapping(MOVIE_GENRE)
+  public ResponseEntity<JsonResponse> deleteGenre(@RequestBody MovieGenreDto movieGenreDto){
+    MovieDto movieDto = movieService.removeGenre(movieGenreDto);
+    if ( movieDto != null)
+      return success(KEY_MOVIE, movieDto);
     else
       return notFound();
   }

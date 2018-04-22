@@ -8,5 +8,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface GenreDao extends CrudRepository<Genre, Integer> {
-
+  List<Genre> findAll();
 }
