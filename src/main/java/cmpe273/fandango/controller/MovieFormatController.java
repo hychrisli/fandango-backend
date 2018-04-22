@@ -48,6 +48,9 @@ public class MovieFormatController extends AbstractController{
   @ApiOperation(value="Add Format [Topic: movies]", response = JsonResponse.class)
   @PostMapping(MOVIE_FORMAT)
   public ResponseEntity<JsonResponse> addFormat(@RequestBody MovieFormatDto movieFormatDto){
+    if ( movieFormatDto.getMovieId() == null || movieFormatDto.getFormatId() == null)
+      return badRequest("Movie ID or Format ID Cannot Be null");
+
     List<Format> formats = movieFormatService.addFormat(movieFormatDto);
     if ( formats != null)
       return success(KEY_FORMATS, formats);
@@ -58,6 +61,9 @@ public class MovieFormatController extends AbstractController{
   @ApiOperation(value="Remove Format [Topic: movies]", response = JsonResponse.class)
   @DeleteMapping(MOVIE_FORMAT)
   public ResponseEntity<JsonResponse> deleteFormat(@RequestBody MovieFormatDto movieFormatDto){
+    if ( movieFormatDto.getMovieId() == null || movieFormatDto.getFormatId() == null)
+      return badRequest("Movie ID or Format ID Cannot Be null");
+
     List<Format> formats = movieFormatService.removeFormat(movieFormatDto);
     if ( formats != null)
       return success(KEY_FORMATS, formats);

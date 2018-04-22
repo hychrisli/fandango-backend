@@ -44,8 +44,6 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
     if ( movie == null || movieCharacter == null) return null;
     if ( movie.getCharacters().contains(movieCharacter)){
       movieCharacterDao.delete(movieCharacterDto.getCharacterId());
-     /* movie.getCharacters().remove(movieCharacter);
-      movieDao.save(movie);*/
     }
     return movieCharacterDao.findAllByMovieId(movieCharacterDto.getMovieId());
   }

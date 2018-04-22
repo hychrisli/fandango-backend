@@ -39,6 +39,8 @@ public class MovieCharacterController extends AbstractController {
     notes = "characterId field is ignored")
   @PostMapping(MOVIE_CHARACTER)
   public ResponseEntity<JsonResponse> addMovieCharacter(@RequestBody MovieCharacterDto movieCharacterDto) {
+    if ( movieCharacterDto.getMovieId() == null || movieCharacterDto.getCharacterName() == null)
+      return badRequest("Movie ID or Character Name Cannot Be Empty!");
     List<MovieCharacter> movieCharacters = movieCharacterService.addCharacter(movieCharacterDto);
     if (movieCharacters != null )
       return created(KEY_MOVIE_CHARACTERS, movieCharacters);
@@ -46,10 +48,12 @@ public class MovieCharacterController extends AbstractController {
     return notFound();
   }
 
-  @ApiOperation(value = "Add New Character to Movie [Topic: movies]", response = JsonResponse.class,
+  @ApiOperation(value = "Delete a Character from Movie [Topic: movies]", response = JsonResponse.class,
       notes = "characterName field is ignored")
   @DeleteMapping(MOVIE_CHARACTER)
   public ResponseEntity<JsonResponse> removeMovieCharacter(@RequestBody MovieCharacterDto movieCharacterDto) {
+    if ( movieCharacterDto.getMovieId() == null || movieCharacterDto.getCharacterId() == null)
+      return badRequest("Movie ID or Character ID Cannot Be Empty!");
     List<MovieCharacter> movieCharacters = movieCharacterService.removeCharacter(movieCharacterDto);
     if (movieCharacters != null)
       return success(KEY_MOVIE_CHARACTERS, movieCharacters);

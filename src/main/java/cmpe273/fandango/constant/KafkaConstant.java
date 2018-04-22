@@ -3,6 +3,7 @@ package cmpe273.fandango.constant;
 public interface KafkaConstant {
 
   String KAFKA_TOPIC_USERS = "users";
+  String KAFKA_TOPIC_MOVIES = "movies";
 
   String METHOD = "method";
   String API_URL = "apiURL";

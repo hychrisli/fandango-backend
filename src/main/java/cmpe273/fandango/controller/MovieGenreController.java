@@ -49,6 +49,9 @@ public class MovieGenreController extends AbstractController{
   @ApiOperation(value="Add Genre [Topic: movies]", response = JsonResponse.class)
   @PostMapping(MOVIE_GENRE)
   public ResponseEntity<JsonResponse> addGenre(@RequestBody MovieGenreDto movieGenreDto){
+    if ( movieGenreDto.getGenreId() == null || movieGenreDto.getMovieId() == null)
+      return badRequest("Movie ID or Genre ID Cannot Be Empty");
+
     List<Genre> genres = movieGenreService.addGenre(movieGenreDto);
     if ( genres != null)
       return success(KEY_GENRES, genres);
@@ -59,6 +62,9 @@ public class MovieGenreController extends AbstractController{
   @ApiOperation(value="Remove Format [Topic: movies]", response = JsonResponse.class)
   @DeleteMapping(MOVIE_GENRE)
   public ResponseEntity<JsonResponse> deleteGenre(@RequestBody MovieGenreDto movieGenreDto){
+    if ( movieGenreDto.getGenreId() == null || movieGenreDto.getMovieId() == null)
+      return badRequest("Movie ID or Genre ID Cannot Be Empty");
+
     List<Genre> genres = movieGenreService.removeGenre(movieGenreDto);
     if ( genres != null)
       return success(KEY_GENRES, genres);

@@ -1,15 +1,16 @@
 package cmpe273.fandango.service;
 
+import cmpe273.fandango.dto.MovieImageDto;
 import cmpe273.fandango.entity.MovieImage;
 
 import java.util.List;
 
 public interface MovieImageService {
 
-  List<MovieImage> getAllMovieImages ();
+  List<MovieImage> getAllMovieImages (Integer movidId);
 
-  MovieImage addMovieImage(MovieImage movieImage);
+  List<MovieImage> addMovieImage(MovieImageDto movieImageDto);
 
-  Boolean removeMovieImage(Integer movieId, Integer imageId);
+  List<MovieImage> removeMovieImage(MovieImageDto movieImageDto);
 
 }

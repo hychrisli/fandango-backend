@@ -23,6 +23,10 @@ public interface UrlConstant {
   String MOVIE_CHARACTER = "/movie-character";
   String MOVIE_CHARACTER_ID = "/movie-character/{movieId}";
 
+  String MOVIE_IMAGE = "/movie-image";
+  String MOVIE_IMAGE_ID = "/movie-image/{movieId}";
+
+
   String HOST = "http://localhost";
 
 }
