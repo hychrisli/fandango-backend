@@ -30,6 +30,11 @@ public class MovieFormatServiceImpl implements MovieFormatService {
   }
 
   @Override
+  public List<Format> getMovieFormats(Integer movieId) {
+    return formatDao.findAllByMovieId(movieId);
+  }
+
+  @Override
   public MovieDto addFormat(MovieFormatDto movieFormatDto) {
     Format format = formatDao.findOne(movieFormatDto.getFormatId());
     Movie movie = movieDao.findOne(movieFormatDto.getMovieId());

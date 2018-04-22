@@ -9,4 +9,7 @@ import java.util.List;
 
 public interface GenreDao extends CrudRepository<Genre, Integer> {
   List<Genre> findAll();
+
+  @Query("select g from Genre g join g.movies gm where gm.movieId = :movieId")
+  List<Genre> findAllByMovieId(@Param("movieId") Integer movieId);
 }

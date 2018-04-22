@@ -17,6 +17,7 @@ import static cmpe273.fandango.constant.JsonConstant.KEY_CONTENT;
 import static cmpe273.fandango.constant.JsonConstant.KEY_MOVIE;
 import static cmpe273.fandango.constant.UrlConstant.FORMAT;
 import static cmpe273.fandango.constant.UrlConstant.MOVIE_FORMAT;
+import static cmpe273.fandango.constant.UrlConstant.MOVIE_FORMAT_ID;
 
 
 @RestController
@@ -35,6 +36,11 @@ public class MovieFormatController extends AbstractController{
     return success(KEY_CONTENT, movieFormatService.getAllFormats());
   }
 
+  @ApiOperation(value = "Get All Formats of a Movie", response = JsonResponse.class)
+  @GetMapping(MOVIE_FORMAT_ID)
+  public ResponseEntity<JsonResponse> getMovieFormats(@PathVariable Integer movieId) {
+    return success(KEY_CONTENT, movieFormatService.getMovieFormats(movieId));
+  }
 
   @ApiOperation(value="Add Format", response = JsonResponse.class)
   @PostMapping(MOVIE_FORMAT)

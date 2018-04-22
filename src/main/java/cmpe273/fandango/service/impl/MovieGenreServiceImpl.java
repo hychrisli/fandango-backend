@@ -30,6 +30,11 @@ public class MovieGenreServiceImpl implements MovieGenreService{
   }
 
   @Override
+  public List<Genre> getMovieGenres(Integer movieId) {
+    return genreDao.findAllByMovieId(movieId);
+  }
+
+  @Override
   public MovieDto addGenre(MovieGenreDto movieGenreDto) {
     Genre genre = genreDao.findOne(movieGenreDto.getGenreId());
     Movie movie = movieDao.findOne(movieGenreDto.getMovieId());

@@ -18,6 +18,7 @@ import static cmpe273.fandango.constant.JsonConstant.KEY_CONTENT;
 import static cmpe273.fandango.constant.JsonConstant.KEY_MOVIE;
 import static cmpe273.fandango.constant.UrlConstant.GENRE;
 import static cmpe273.fandango.constant.UrlConstant.MOVIE_GENRE;
+import static cmpe273.fandango.constant.UrlConstant.MOVIE_GENRE_ID;
 
 @RestController
 @Api(tags = {"Movie Genres"})
@@ -32,6 +33,13 @@ public class MovieGenreController extends AbstractController{
   @GetMapping(GENRE)
   public ResponseEntity<JsonResponse> getGenres() {
     return success(KEY_CONTENT, movieGenreService.getAllGenres());
+  }
+
+
+  @ApiOperation(value = "Get All Genres of a Movie", response = JsonResponse.class)
+  @GetMapping(MOVIE_GENRE_ID)
+  public ResponseEntity<JsonResponse> getMovieGenres(@PathVariable Integer movieId) {
+    return success(KEY_CONTENT, movieGenreService.getMovieGenres(movieId));
   }
 
 

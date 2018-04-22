@@ -10,6 +10,8 @@ public interface MovieGenreService {
 
   List<Genre> getAllGenres();
 
+  List<Genre> getMovieGenres (Integer movieId);
+
   MovieDto addGenre (MovieGenreDto movieGenreDto);
 
   MovieDto removeGenre (MovieGenreDto movieGenreDto);

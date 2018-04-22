@@ -10,6 +10,8 @@ public interface MovieFormatService {
 
   List<Format> getAllFormats ();
 
+  List<Format> getMovieFormats (Integer movieId);
+
   MovieDto addFormat (MovieFormatDto movieFormatDto);
 
   MovieDto removeFormat (MovieFormatDto movieFormatDto);
