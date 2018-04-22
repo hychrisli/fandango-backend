@@ -1,6 +1,8 @@
 package cmpe273.fandango.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,8 +18,9 @@ public class Format {
   @Column(name="format_name")
   private String formatName;
 
-  @OneToMany(mappedBy = "format")
-  private List<MovieFormat> movieFormats;
+  @OneToMany(mappedBy = "formats")
+  @JsonIgnore
+  private List<Movie> movies;
 
   public Integer getFormatId() {
     return formatId;
@@ -35,11 +38,11 @@ public class Format {
     this.formatName = formatName;
   }
 
-  public List<MovieFormat> getMovieFormats() {
-    return movieFormats;
+  public List<Movie> getMovies() {
+    return movies;
   }
 
-  public void setMovieFormats(List<MovieFormat> movieFormats) {
-    this.movieFormats = movieFormats;
+  public void setMovies(List<Movie> movies) {
+    this.movies = movies;
   }
 }

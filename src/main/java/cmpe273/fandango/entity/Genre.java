@@ -1,5 +1,7 @@
 package cmpe273.fandango.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,8 +17,9 @@ public class Genre {
   @Column(name="genre_name")
   private String genreName;
 
-  @OneToMany(mappedBy = "genre")
-  private List<MovieGenre> movieGenres;
+  @ManyToMany(mappedBy = "genres")
+  @JsonIgnore
+  private List<Movie> movies;
 
   public Integer getGenreId() {
     return genreId;
@@ -34,11 +37,11 @@ public class Genre {
     this.genreName = genreName;
   }
 
-  public List<MovieGenre> getMovieGenres() {
-    return movieGenres;
+  public List<Movie> getMovies() {
+    return movies;
   }
 
-  public void setMovieGenres(List<MovieGenre> movieGenres) {
-    this.movieGenres = movieGenres;
+  public void setMovies(List<Movie> movies) {
+    this.movies = movies;
   }
 }

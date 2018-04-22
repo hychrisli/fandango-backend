@@ -1,9 +1,12 @@
 package cmpe273.fandango.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="MOVIE")
@@ -35,9 +38,32 @@ public class Movie {
   @Column(name="mpaa_rating")
   private String mpaaRating;
 
-  private Integer stars;
+  private Float stars;
 
   private Integer length;
+
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(name="MOVIE_GENRE",
+      joinColumns = @JoinColumn(name="movie_id", referencedColumnName = "movie_id"),
+      inverseJoinColumns = @JoinColumn(name="genre_id", referencedColumnName = "genre_id"))
+  @JsonIgnore
+  private List<Genre> genres;
+
+  @ManyToMany(cascade = CascadeType.ALL)
+  @JoinTable(name="MOVIE_FORMAT",
+      joinColumns = @JoinColumn(name="movie_id", referencedColumnName = "movie_id"),
+      inverseJoinColumns = @JoinColumn(name="format_id", referencedColumnName = "format_id"))
+  @JsonIgnore
+  private List<Format> formats;
+
+  @OneToMany(mappedBy = "movie")
+  @JsonIgnore
+  private List<MovieCharacter> characters;
+
+  @OneToMany(mappedBy = "movie")
+  @JsonIgnore
+  private List<MovieImage> images;
+
 
   public Integer getMovieId() {
     return movieId;
@@ -96,11 +122,11 @@ public class Movie {
     this.length = length;
   }
 
-  public Integer getStars() {
+  public Float getStars() {
     return stars;
   }
 
-  public void setStars(Integer stars) {
+  public void setStars(Float stars) {
     this.stars = stars;
   }
 
@@ -118,5 +144,37 @@ public class Movie {
 
   public void setMpaaRating(String mpaaRating) {
     this.mpaaRating = mpaaRating;
+  }
+
+  public List<Genre> getGenres() {
+    return genres;
+  }
+
+  public void setGenres(List<Genre> genres) {
+    this.genres = genres;
+  }
+
+  public List<Format> getFormats() {
+    return formats;
+  }
+
+  public void setFormats(List<Format> formats) {
+    this.formats = formats;
+  }
+
+  public List<MovieCharacter> getCharacters() {
+    return characters;
+  }
+
+  public void setCharacters(List<MovieCharacter> characters) {
+    this.characters = characters;
+  }
+
+  public List<MovieImage> getImages() {
+    return images;
+  }
+
+  public void setImages(List<MovieImage> images) {
+    this.images = images;
   }
 }

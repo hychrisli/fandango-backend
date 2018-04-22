@@ -9,6 +9,4 @@ import java.util.List;
 
 public interface FormatDao extends CrudRepository<Format, Integer>{
 
-  @Query("select f.formatId, f.formatName from Format f JOIN f.movieFormats mf where mf.movieId = :movieId")
-  List<Format> selectMoiveFormatList(@Param("movieId") Integer movieId);
 }

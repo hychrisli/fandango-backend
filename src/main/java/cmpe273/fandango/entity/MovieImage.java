@@ -1,5 +1,7 @@
 package cmpe273.fandango.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,9 +13,6 @@ public class MovieImage {
   @Column(name="image_id")
   private Integer imageId;
 
-  @Column(name="movie_id")
-  private Integer movieId;
-
   @Column(name="image_title")
   private String imageTitle;
 
@@ -23,20 +22,17 @@ public class MovieImage {
   @Column(name="image_url")
   private String imageUrl;
 
+  @ManyToOne
+  @JoinColumn(name="movie_id")
+  @JsonIgnore
+  private Movie movie;
+
   public Integer getImageId() {
     return imageId;
   }
 
   public void setImageId(Integer imageId) {
     this.imageId = imageId;
-  }
-
-  public Integer getMovieId() {
-    return movieId;
-  }
-
-  public void setMovieId(Integer movieId) {
-    this.movieId = movieId;
   }
 
   public String getImageTitle() {
@@ -61,5 +57,13 @@ public class MovieImage {
 
   public void setImageUrl(String imageUrl) {
     this.imageUrl = imageUrl;
+  }
+
+  public Movie getMovie() {
+    return movie;
+  }
+
+  public void setMovie(Movie movie) {
+    this.movie = movie;
   }
 }

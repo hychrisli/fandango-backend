@@ -6,5 +6,4 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface MovieImageDao extends CrudRepository<MovieImage, Integer>{
-  List<MovieImage> findAllByMovieId(Integer movieId);
 }

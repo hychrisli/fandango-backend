@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface MovieCharacterDao extends CrudRepository<MovieCharacter, Integer> {
 
-  List<MovieCharacter> findAllByMovieId(Integer movieId);
 }

@@ -2,6 +2,7 @@ package cmpe273.fandango.controller;
 
 
 import cmpe273.fandango.dto.MovieDto;
+import cmpe273.fandango.dto.MovieSimpleDto;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.MovieService;
@@ -28,6 +29,12 @@ public class MovieController extends  AbstractController{
 
   @ApiOperation(value = "Get All Movies", response = JsonResponse.class)
   @ApiImplicitParams({
+      @ApiImplicitParam(name = "minStars", dataType = "integer", paramType = "query",
+          value = "Min stars"),
+      @ApiImplicitParam(name = "maxStars", dataType = "integer", paramType = "query",
+          value = "Max Stars"),
+      @ApiImplicitParam(name = "genreId", dataType = "integer", paramType = "query",
+          value = "genre Id"),
       @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
           value = "Results page you want to retrieve (0..N)"),
       @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
@@ -38,14 +45,14 @@ public class MovieController extends  AbstractController{
               "Multiple sort criteria are supported.")
   })
   @GetMapping(MOVIES)
-  public Page<Movie> getUser(Pageable pageable) {
-    return movieService.getAllMovies(pageable);
+  public Page<MovieSimpleDto> getMovies(Pageable pageable, Float minStars, Float maxStars, Integer genreId) {
+    return movieService.getAllMovies(pageable, minStars, maxStars, genreId);
   }
 
 
   @ApiOperation(value = "Get a Movie", response = JsonResponse.class)
   @GetMapping(MOVIE_ID)
-  public ResponseEntity<JsonResponse> getUser(@PathVariable Integer movieId) {
+  public ResponseEntity<JsonResponse> getMovie(@PathVariable Integer movieId) {
 
     MovieDto movieDto = movieService.getMovie(movieId);
 

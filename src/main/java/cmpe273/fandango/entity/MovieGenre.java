@@ -1,5 +1,8 @@
 package cmpe273.fandango.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,11 +14,14 @@ public class MovieGenre {
   @Column(name="movie_genre_id")
   private Integer movieGenreId;
 
-  @Column(name="movie_id")
-  private Integer movieId;
+  @ManyToOne
+  @JoinColumn(name="movie_id")
+  @JsonIgnore
+  private Movie movie;
 
   @ManyToOne
   @JoinColumn(name="genre_id")
+  @JsonIgnore
   private Genre genre;
 
 
@@ -27,12 +33,19 @@ public class MovieGenre {
     this.movieGenreId = movieGenreId;
   }
 
-  public Integer getMovieId() {
-    return movieId;
+  public Movie getMovie() {
+    return movie;
   }
 
-  public void setMovieId(Integer movieId) {
-    this.movieId = movieId;
+  public void setMovie(Movie movie) {
+    this.movie = movie;
   }
 
+  public Genre getGenre() {
+    return genre;
+  }
+
+  public void setGenre(Genre genre) {
+    this.genre = genre;
+  }
 }
