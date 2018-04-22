@@ -27,12 +27,6 @@ public class MovieServiceImpl implements MovieService {
   @Autowired
   private MpaaRatingDao mpaaRatingDao;
 
-  @Autowired
-  private FormatDao formatDao;
-
-  @Autowired
-  private GenreDao genreDao;
-
   private MovieMapper movieMapper = new MovieMapper();
 
   @Override
@@ -91,51 +85,4 @@ public class MovieServiceImpl implements MovieService {
     return movie;
   }
 
-  @Override
-  public MovieDto addFormat(MovieFormatDto movieFormatDto) {
-    Format format = formatDao.findOne(movieFormatDto.getFormatId());
-    Movie movie = movieDao.findOne(movieFormatDto.getMovieId());
-    if ( format == null || movie == null) return null;
-    if ( !movie.getFormats().contains(format)) {
-      movie.getFormats().add(format);
-      movieDao.save(movie);
-    }
-    return movieMapper.toDto(movie);
-  }
-
-  @Override
-  public MovieDto removeFormat(MovieFormatDto movieFormatDto) {
-    Format format = formatDao.findOne(movieFormatDto.getFormatId());
-    Movie movie = movieDao.findOne(movieFormatDto.getMovieId());
-    if ( format == null || movie == null) return null;
-    if ( movie.getFormats().contains(format)) {
-      movie.getFormats().remove(format);
-      movieDao.save(movie);
-    }
-    return movieMapper.toDto(movie);
-  }
-
-  @Override
-  public MovieDto addGenre(MovieGenreDto movieGenreDto) {
-    Genre genre = genreDao.findOne(movieGenreDto.getGenreId());
-    Movie movie = movieDao.findOne(movieGenreDto.getMovieId());
-    if ( genre == null || movie == null) return null;
-    if ( !movie.getGenres().contains(genre)) {
-      movie.getGenres().add(genre);
-      movieDao.save(movie);
-    }
-    return movieMapper.toDto(movie);
-  }
-
-  @Override
-  public MovieDto removeGenre(MovieGenreDto movieGenreDto) {
-    Genre genre = genreDao.findOne(movieGenreDto.getGenreId());
-    Movie movie = movieDao.findOne(movieGenreDto.getMovieId());
-    if ( genre == null || movie == null) return null;
-    if ( movie.getGenres().contains(genre)) {
-      movie.getGenres().remove(genre);
-      movieDao.save(movie);
-    }
-    return movieMapper.toDto(movie);
-  }
 }

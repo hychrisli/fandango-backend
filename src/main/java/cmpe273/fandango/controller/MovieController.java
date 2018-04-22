@@ -91,45 +91,4 @@ public class MovieController extends  AbstractController{
       return notFound();
   }
 
-  @ApiOperation(value="Add Format", response = JsonResponse.class)
-  @PostMapping(MOVIE_FORMAT)
-  public ResponseEntity<JsonResponse> addFormat(@RequestBody MovieFormatDto movieFormatDto){
-    MovieDto movieDto = movieService.addFormat(movieFormatDto);
-    if ( movieDto != null)
-      return success(KEY_MOVIE, movieDto);
-    else
-      return notFound();
-  }
-
-  @ApiOperation(value="Remove Format", response = JsonResponse.class)
-  @DeleteMapping(MOVIE_FORMAT)
-  public ResponseEntity<JsonResponse> deleteFormat(@RequestBody MovieFormatDto movieFormatDto){
-    MovieDto movieDto = movieService.removeFormat(movieFormatDto);
-    if ( movieDto != null)
-      return success(KEY_MOVIE, movieDto);
-    else
-      return notFound();
-  }
-
-
-  @ApiOperation(value="Add Genre", response = JsonResponse.class)
-  @PostMapping(MOVIE_GENRE)
-  public ResponseEntity<JsonResponse> addGenre(@RequestBody MovieGenreDto movieGenreDto){
-    MovieDto movieDto = movieService.addGenre(movieGenreDto);
-    if ( movieDto != null)
-      return success(KEY_MOVIE, movieDto);
-    else
-      return notFound();
-  }
-
-  @ApiOperation(value="Remove Format", response = JsonResponse.class)
-  @DeleteMapping(MOVIE_GENRE)
-  public ResponseEntity<JsonResponse> deleteGenre(@RequestBody MovieGenreDto movieGenreDto){
-    MovieDto movieDto = movieService.removeGenre(movieGenreDto);
-    if ( movieDto != null)
-      return success(KEY_MOVIE, movieDto);
-    else
-      return notFound();
-  }
-
 }
