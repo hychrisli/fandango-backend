@@ -1,5 +1,7 @@
 package cmpe273.fandango.response;
 
+import io.swagger.annotations.ApiModel;
+
 import java.util.HashMap;
 import java.util.Map;
 

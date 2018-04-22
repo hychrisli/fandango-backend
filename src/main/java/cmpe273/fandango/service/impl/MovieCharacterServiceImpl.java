@@ -21,33 +21,32 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
   @Autowired
   MovieCharacterDao movieCharacterDao;
 
-  private MovieCharacterMapper movieCharacterMapper = new MovieCharacterMapper();
-
   @Override
   public List<MovieCharacter> getMovieCharacters(Integer movieId) {
-    Movie movie = movieDao.findOne(movieId);
-    if (movie == null) return null;
-    return movieCharacterDao.findAllByMovie(movie);
+    return movieCharacterDao.findAllByMovieId(movieId);
   }
 
   @Override
-  public MovieCharacterDto addCharacter(MovieCharacterDto movieCharacterDto) {
+  public List<MovieCharacter> addCharacter(MovieCharacterDto movieCharacterDto) {
     Movie movie = movieDao.findOne(movieCharacterDto.getMovieId());
     if ( movie == null ) return null;
     MovieCharacter movieCharacter = new MovieCharacter();
     movieCharacter.setCharacterName(movieCharacterDto.getCharacterName());
     movieCharacter.setMovie(movie);
-    movieCharacter = movieCharacterDao.save(movieCharacter);
-    return movieCharacterMapper.toDto(movieCharacter);
+    movieCharacterDao.save(movieCharacter);
+    return  movieCharacterDao.findAllByMovieId(movieCharacterDto.getMovieId());
   }
 
   @Override
-  public Boolean removeCharacter(MovieCharacterDto movieCharacterDto) {
+  public List<MovieCharacter> removeCharacter(MovieCharacterDto movieCharacterDto) {
+    Movie movie = movieDao.findOne(movieCharacterDto.getMovieId());
     MovieCharacter movieCharacter = movieCharacterDao.findOne(movieCharacterDto.getCharacterId());
-    if (movieCharacter.getMovie().getMovieId() == movieCharacterDto.getMovieId()) {
+    if ( movie == null || movieCharacter == null) return null;
+    if ( movie.getCharacters().contains(movieCharacter)){
       movieCharacterDao.delete(movieCharacterDto.getCharacterId());
-      return true;
+     /* movie.getCharacters().remove(movieCharacter);
+      movieDao.save(movie);*/
     }
-    return false;
+    return movieCharacterDao.findAllByMovieId(movieCharacterDto.getMovieId());
   }
 }

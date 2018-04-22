@@ -21,14 +21,13 @@ import static cmpe273.fandango.constant.UrlConstant.*;
 
 @RestController
 @Api(tags = {"User"})
-@SwaggerDefinition(tags = {@Tag(name = "User Controller", description = "User Controller Endpoints")})
 @Transactional(rollbackFor = Exception.class)
 public class UserController extends AbstractController {
 
   @Autowired
   UserService userService;
 
-  @ApiOperation(value = "Get All Users", response = JsonResponse.class)
+  @ApiOperation(value = "Get All Users [Topic: users]", response = JsonResponse.class)
   @ApiImplicitParams({
       @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
           value = "Results page you want to retrieve (0..N)"),
@@ -45,7 +44,7 @@ public class UserController extends AbstractController {
   }
 
 
-  @ApiOperation(value = "Get User", response = JsonResponse.class)
+  @ApiOperation(value = "Get User [Topic: users]", response = JsonResponse.class)
   @GetMapping(USER + "/{userId}")
   public ResponseEntity<JsonResponse> getUser(@PathVariable Integer userId) {
 
@@ -56,7 +55,7 @@ public class UserController extends AbstractController {
     return notFound();
   }
 
-  @ApiOperation(value = "Put User", response = JsonResponse.class)
+  @ApiOperation(value = "Put User [Topic: users]", response = JsonResponse.class)
   @PutMapping(USER_ID)
   public ResponseEntity<JsonResponse> putUser(@PathVariable Integer userId, @RequestBody UserDto userDto){
     userDto = userService.updateUser(userId, userDto);
@@ -65,7 +64,7 @@ public class UserController extends AbstractController {
     return notFound();
   }
 
-  @ApiOperation(value = "Create User", response = JsonResponse.class)
+  @ApiOperation(value = "Create User [Topic: users]", response = JsonResponse.class)
   @PostMapping(USER)
   public ResponseEntity<JsonResponse> createUser(@RequestBody UserCreateDto userCreateDto){
     if ( userCreateDto.getEmail() == null || userCreateDto.getUsername() == null || userCreateDto.getPassword() == null)
@@ -78,7 +77,7 @@ public class UserController extends AbstractController {
     return failure(ErrorCode.ERR_FAILED_TO_CREATE, "Failed to Create User");
   }
 
-  @ApiOperation(value = "Delete User", response = JsonResponse.class)
+  @ApiOperation(value = "Delete User [Topic: users]", response = JsonResponse.class)
   @DeleteMapping(USER_ID)
   public ResponseEntity<JsonResponse> DeleteUser(@PathVariable Integer userId){
     if (userService.deleteUser(userId))
@@ -86,7 +85,7 @@ public class UserController extends AbstractController {
     return notFound();
   }
 
-  @ApiOperation(value = "Login User", response = JsonResponse.class)
+  @ApiOperation(value = "Login User [Topic: users]", response = JsonResponse.class)
   @PostMapping(LOGIN)
   public ResponseEntity<JsonResponse> loginUser(@RequestBody LoginDto loginDto) {
     if (loginDto.getPassword() == null || loginDto.getUsername() == null)
@@ -94,7 +93,7 @@ public class UserController extends AbstractController {
 
     UserDto userDto = userService.loginUser(loginDto);
     if (userDto != null)
-      return success(KEY_USER, userDto);
+      return success("user", userDto);
     return badRequest("Incorrect username and password combination");
   }
 
