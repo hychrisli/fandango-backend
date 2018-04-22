@@ -5,28 +5,22 @@ import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.entity.User;
 
-public class UserMapper extends AbstractMapper<User, UserDto> {
+public class UserMapper extends GenericMapper {
 
-  @Override
   public UserDto toDto(User pojo){
-    if ( pojo == null ) return null;
-    return modelMapper.map(pojo, UserDto.class);
+    return T1toT2(pojo, new UserDto());
   }
 
-  @Override
   public User toPojo (UserDto dto) {
-    if ( dto == null ) return null;
-    return modelMapper.map(dto, User.class);
+    return T1toT2(dto, new User());
   }
 
   public User toPojo (UserCreateDto dto) {
-    if (dto == null) return null;
-    return modelMapper.map(dto, User.class);
+    return T1toT2(dto, new User());
   }
 
   public UserSimpleDto toSimpleDto(User pojo){
-    if (pojo == null)  return null;
-    return modelMapper.map(pojo, UserSimpleDto.class);
+    return T1toT2(pojo, new UserSimpleDto());
   }
 
   public User updPojo (UserDto dto, User pojo){

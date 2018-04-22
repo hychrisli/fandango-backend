@@ -3,27 +3,35 @@ package cmpe273.fandango.mapper;
 import cmpe273.fandango.dto.MovieDto;
 import cmpe273.fandango.dto.MovieSimpleDto;
 import cmpe273.fandango.entity.Movie;
-import org.modelmapper.convention.MatchingStrategies;
 
-public class MovieMapper extends AbstractMapper<Movie, MovieDto> {
+public class MovieMapper extends GenericMapper {
 
-  public MovieMapper(){
-    modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-  }
-
-  @Override
   public MovieDto toDto(Movie pojo) {
-    if ( pojo == null) return null;
-    return modelMapper.map(pojo,MovieDto.class);
+    return T1toT2(pojo, new MovieDto());
   }
 
   public MovieSimpleDto toSimpleDto(Movie pojo){
-    if (pojo == null) return null;
-    return modelMapper.map(pojo, MovieSimpleDto.class);
+    return T1toT2(pojo, new MovieSimpleDto());
   }
 
-  @Override
-  public Movie toPojo(MovieDto movieDto) {
-    return null;
+  public Movie toPojo(MovieDto dto) {
+    return T1toT2(dto, new Movie());
   }
+
+  public Movie toPojo(MovieSimpleDto dto){
+    if (dto == null) return null;
+    return T1toT2(dto, new Movie());
+  }
+
+  public Movie updPojo (MovieSimpleDto dto, Movie pojo) {
+    if ( dto == null ) return pojo;
+    updateValue(pojo::setCoverImageUrl, dto.getCoverImageUrl());
+    updateValue(pojo::setLength, dto.getLength());
+    updateValue(pojo::setMovieDesc, dto.getMovieDesc());
+    updateValue(pojo::setMovieTitle, dto.getMovieTitle());
+    updateValue(pojo::setReleaseDate, dto.getReleaseDate());
+    updateValue(pojo::setTrailerUrl, dto.getTrailerUrl());
+    return pojo;
+  }
+
 }

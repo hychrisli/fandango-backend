@@ -23,35 +23,39 @@ public class MovieServiceImpl implements MovieService {
   private MovieDao movieDao;
 
   @Autowired
-  private GenreDao genreDao;
-
-  @Autowired
-  private FormatDao formatDao;
-
-  @Autowired
-  private MovieCharacterDao movieCharacterDao;
-
-  @Autowired
-  private MovieImageDao movieImageDao;
+  private MpaaRatingDao mpaaRatingDao;
 
   private MovieMapper movieMapper = new MovieMapper();
 
   @Override
-  public Boolean CreateMovie(Movie movie) {
-    return null;
+  public MovieSimpleDto CreateMovie(MovieSimpleDto movieSimpleDto) {
+    Movie movie = movieMapper.toPojo(movieSimpleDto);
+    movie = updMpaaRating(movieSimpleDto, movie);
+    movie = movieDao.save(movie);
+    return movieMapper.toSimpleDto(movie);
+  }
+
+  @Override
+  public MovieSimpleDto UpdateMovie(Integer movieId, MovieSimpleDto dto) {
+    Movie movie = movieDao.findOne(movieId);
+    if ( movie == null ) return null;
+    movie = movieMapper.updPojo(dto, movie);
+    movie = updMpaaRating(dto, movie);
+    movieDao.save(movie);
+    return movieMapper.toSimpleDto(movie);
   }
 
   @Override
   public Page<MovieSimpleDto> getAllMovies(Pageable pageable, Float minStars, Float maxStars, Integer genreId) {
 
     Page<Movie> movies;
+    minStars = minStars == null ? 0.0f : minStars;
+    maxStars = maxStars == null ? 5.0f : maxStars;
 
     if (genreId == null) {
-      minStars = minStars == null ? 0.0f : minStars;
-      maxStars = maxStars == null ? 5.0f : maxStars;
       movies =  movieDao.findAllBy(pageable, minStars, maxStars);
     } else {
-      movies =  movieDao.SelectAllMoviesByGenre(pageable, genreId);
+      movies =  movieDao.SelectAllMoviesByGenre(pageable, genreId, minStars, maxStars);
     }
 
     return new PageImpl<>(StreamSupport
@@ -65,12 +69,17 @@ public class MovieServiceImpl implements MovieService {
     Movie movie = movieDao.findOne(movieId);
     if (movie != null) {
       MovieDto movieDto = movieMapper.toDto(movie);
-      // movieDto.setGenres(genreDao.selectMoiveGenreList(movieId));
-      //movieDto.setFormats(formatDao.selectMoiveFormatList(movieId));
-      //movieDto.setCharacters(movieCharacterDao.findAllByMovieId(movieId));
-      //movieDto.setImages(movieImageDao.findAllByMovieId(movieId));
       return movieDto;
     }
     return null;
+  }
+
+  private Movie updMpaaRating(MovieSimpleDto dto, Movie movie){
+    if ( dto.getMpaaId() != null){
+      MpaaRating mpaaRating = mpaaRatingDao.findOne(dto.getMpaaId());
+      if (mpaaRating != null)
+        movie.setMpaaRating(mpaaRating.getMpaaName());
+    }
+    return movie;
   }
 }

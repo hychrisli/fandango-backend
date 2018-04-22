@@ -1,11 +1,14 @@
 package cmpe273.fandango.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
 public class MovieSimpleDto {
 
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private Integer movieId;
 
   private String movieTitle;
@@ -18,8 +21,12 @@ public class MovieSimpleDto {
 
   private Date releaseDate;
 
+  private Integer mpaaId;
+
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private String mpaaRating;
 
+  @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private Float stars;
 
   private Integer length;
@@ -95,5 +102,13 @@ public class MovieSimpleDto {
 
   public void setLength(Integer length) {
     this.length = length;
+  }
+
+  public Integer getMpaaId() {
+    return mpaaId;
+  }
+
+  public void setMpaaId(Integer mpaaId) {
+    this.mpaaId = mpaaId;
   }
 }

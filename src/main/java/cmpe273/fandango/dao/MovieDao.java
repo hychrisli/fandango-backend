@@ -12,6 +12,6 @@ public interface MovieDao extends PagingAndSortingRepository<Movie, Integer> {
   @Query("select m from Movie m where m.stars >= :minStars and m.stars <= :maxStars")
   Page<Movie> findAllBy(Pageable pageable, @Param("minStars") Float minStars, @Param("maxStars") Float maxStars);
 
-  @Query("select m from Movie m join m.genres mg where mg.genreId = :genreId")
-  Page<Movie> SelectAllMoviesByGenre(Pageable pageable, @Param("genreId") Integer genreId);
+  @Query("select m from Movie m join m.genres mg where mg.genreId = :genreId and m.stars >= :minStars and m.stars <= :maxStars")
+  Page<Movie> SelectAllMoviesByGenre(Pageable pageable, @Param("genreId") Integer genreId, @Param("minStars") Float minStars, @Param("maxStars") Float maxStars);
 }

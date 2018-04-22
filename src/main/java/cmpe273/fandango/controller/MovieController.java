@@ -12,10 +12,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
+
+import static cmpe273.fandango.constant.JsonConstant.KEY_MOVIE;
 import static cmpe273.fandango.constant.UrlConstant.*;
 
 @RestController
@@ -57,9 +58,33 @@ public class MovieController extends  AbstractController{
     MovieDto movieDto = movieService.getMovie(movieId);
 
     if (movieDto != null)
-      return success("movie", movieDto);
+      return success(KEY_MOVIE, movieDto);
     return notFound();
   }
 
+  @ApiOperation(value="Create a Movie", response = JsonResponse.class)
+  @PostMapping(MOVIE)
+  public ResponseEntity<JsonResponse> createMovie(@RequestBody MovieSimpleDto movieSimpleDto){
+
+    if ( movieSimpleDto.getMovieTitle() == null )
+      return badRequest("Movie Title Cannot be Empty");
+
+    movieSimpleDto = movieService.CreateMovie(movieSimpleDto);
+
+    if ( movieSimpleDto != null)
+      return created(KEY_MOVIE, movieSimpleDto);
+    else
+      return badRequest("Failed to Create Movie");
+  }
+
+  @ApiOperation(value="Update a Movie", response = JsonResponse.class)
+  @PutMapping(MOVIE_ID)
+  public ResponseEntity<JsonResponse> updateMovie(@PathVariable Integer movieId, @RequestBody MovieSimpleDto movieSimpleDto){
+    movieSimpleDto = movieService.UpdateMovie(movieId, movieSimpleDto);
+    if ( movieSimpleDto != null)
+      return success(KEY_MOVIE, movieSimpleDto);
+    else
+      return notFound();
+  }
 
 }

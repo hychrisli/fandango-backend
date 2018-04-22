@@ -9,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 
 public interface MovieService {
 
-  Boolean CreateMovie (Movie movie);
+  MovieSimpleDto CreateMovie (MovieSimpleDto movieSimpleDto);
+
+  MovieSimpleDto UpdateMovie (Integer movieId, MovieSimpleDto movieSimpleDto);
 
   Page<MovieSimpleDto> getAllMovies (Pageable pageable, Float minStars, Float maxStars, Integer genreId);
 

@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 
+import static cmpe273.fandango.constant.JsonConstant.KEY_USER;
 import static cmpe273.fandango.constant.UrlConstant.*;
 
 @RestController
@@ -51,7 +52,7 @@ public class UserController extends AbstractController {
     UserDto userDto = userService.getUser(userId);
 
     if (userDto != null)
-      return success("user", userDto);
+      return success(KEY_USER, userDto);
     return notFound();
   }
 
@@ -60,7 +61,7 @@ public class UserController extends AbstractController {
   public ResponseEntity<JsonResponse> putUser(@PathVariable Integer userId, @RequestBody UserDto userDto){
     userDto = userService.updateUser(userId, userDto);
     if (userDto != null)
-      return success("user", userDto);
+      return success(KEY_USER, userDto);
     return notFound();
   }
 
@@ -73,7 +74,7 @@ public class UserController extends AbstractController {
       return conflict();
     UserDto userDto = userService.createUser(userCreateDto);
     if (userDto != null)
-      return created("user", userDto);
+      return created(KEY_USER, userDto);
     return failure(ErrorCode.ERR_FAILED_TO_CREATE, "Failed to Create User");
   }
 
@@ -81,7 +82,7 @@ public class UserController extends AbstractController {
   @DeleteMapping(USER_ID)
   public ResponseEntity<JsonResponse> DeleteUser(@PathVariable Integer userId){
     if (userService.deleteUser(userId))
-      return success("user", "deleted");
+      return success(KEY_USER, "deleted");
     return notFound();
   }
 
@@ -93,7 +94,7 @@ public class UserController extends AbstractController {
 
     UserDto userDto = userService.loginUser(loginDto);
     if (userDto != null)
-      return success("user", userDto);
+      return success(KEY_USER, userDto);
     return badRequest("Incorrect username and password combination");
   }
 
