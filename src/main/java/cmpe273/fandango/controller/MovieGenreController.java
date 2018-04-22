@@ -1,15 +1,11 @@
 package cmpe273.fandango.controller;
 
-import cmpe273.fandango.dto.MovieDto;
 import cmpe273.fandango.dto.MovieGenreDto;
 import cmpe273.fandango.entity.Genre;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.MovieGenreService;
-import cmpe273.fandango.service.MovieService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,10 +15,7 @@ import java.util.List;
 
 import static cmpe273.fandango.constant.JsonConstant.KEY_CONTENT;
 import static cmpe273.fandango.constant.JsonConstant.KEY_GENRES;
-import static cmpe273.fandango.constant.JsonConstant.KEY_MOVIE;
-import static cmpe273.fandango.constant.UrlConstant.GENRE;
-import static cmpe273.fandango.constant.UrlConstant.MOVIE_GENRE;
-import static cmpe273.fandango.constant.UrlConstant.MOVIE_GENRE_ID;
+import static cmpe273.fandango.constant.UrlConstant.*;
 
 @RestController
 @Api(tags = {"Movie Genres"})
@@ -33,7 +26,7 @@ public class MovieGenreController extends AbstractController{
   MovieGenreService movieGenreService;
 
   @ApiOperation(value = "Get All Genres [Topic: movies]", response = JsonResponse.class)
-  @GetMapping(GENRE)
+  @GetMapping(GENRES)
   public ResponseEntity<JsonResponse> getGenres() {
     return success(KEY_CONTENT, movieGenreService.getAllGenres());
   }

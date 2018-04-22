@@ -2,7 +2,6 @@ package cmpe273.fandango.controller;
 
 
 import cmpe273.fandango.dto.MovieCharacterDto;
-import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.MovieCharacter;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.MovieCharacterService;

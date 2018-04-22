@@ -93,6 +93,33 @@ CREATE TABLE MOVIE_FORMAT
 );
 
 
+CREATE TABLE THEATER
+(
+  theater_id    INTEGER PRIMARY KEY AUTO_INCREMENT,
+  theater_name  VARCHAR(100),
+  street        VARCHAR(100),
+  city          VARCHAR(30),
+  state         CHAR(2),
+  zipcode       CHAR(5)
+);
+
+CREATE TABLE SCHEDULE
+(
+  schedule_id   BIGINT PRIMARY KEY AUTO_INCREMENT,
+  movie_id      INTEGER,
+  theater_id    INTEGER,
+  format_id     INTEGER,
+  schedule_date DATE,
+  showtime      TIME,
+  tot_seats     INTEGER DEFAULT 0,
+  avail_seats   INTEGER DEFAULT 0,
+  price         FLOAT DEFAULT 15.0,
+  FOREIGN KEY (movie_id) REFERENCES MOVIE(movie_id),
+  FOREIGN KEY (theater_id) REFERENCES THEATER(theater_id),
+  FOREIGN KEY (format_id) REFERENCES FORMAT(format_id)
+);
+
+
 -- test database
 
 DROP DATABASE IF EXISTS fandango_test;

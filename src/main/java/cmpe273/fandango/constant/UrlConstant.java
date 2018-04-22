@@ -7,8 +7,8 @@ public interface UrlConstant {
   String USER_ID = "/user/{userId}";
   String LOGIN = "/login";
 
-  String FORMAT = "/format";
-  String GENRE = "/genre";
+  String FORMATS = "/formats";
+  String GENRES = "/genres";
 
   String MOVIE = "/movie";
   String MOVIES = "/movies";

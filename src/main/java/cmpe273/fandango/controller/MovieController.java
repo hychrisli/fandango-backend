@@ -2,11 +2,7 @@ package cmpe273.fandango.controller;
 
 
 import cmpe273.fandango.dto.MovieDto;
-import cmpe273.fandango.dto.MovieFormatDto;
-import cmpe273.fandango.dto.MovieGenreDto;
 import cmpe273.fandango.dto.MovieSimpleDto;
-import cmpe273.fandango.entity.Movie;
-import cmpe273.fandango.entity.MovieFormat;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.MovieService;
 import io.swagger.annotations.*;
@@ -16,8 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import javax.xml.ws.Response;
 
 import static cmpe273.fandango.constant.JsonConstant.KEY_MOVIE;
 import static cmpe273.fandango.constant.UrlConstant.*;
