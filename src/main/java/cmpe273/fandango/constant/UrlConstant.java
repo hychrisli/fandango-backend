@@ -17,6 +17,9 @@ public interface UrlConstant {
   String MOVIE_FORMAT = "/movie-format";
   String MOVIE_GENRE = "/movie-genre";
 
+  String MOVIE_CHARACTER = "/movie-character";
+  String MOVIE_CHARACTER_ID = "/movie-character/{movieId}";
+
   String HOST = "http://localhost";
 
 }

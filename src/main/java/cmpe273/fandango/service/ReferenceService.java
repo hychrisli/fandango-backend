@@ -6,7 +6,7 @@ import cmpe273.fandango.entity.Genre;
 
 import java.util.List;
 
-public interface CategoryService {
+public interface ReferenceService {
 
   List<Format> getAllFormats ();
 

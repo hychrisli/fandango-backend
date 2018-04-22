@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface MovieCharacterService {
 
-  List<MovieCharacter>  getMovieCharacters(Integer movieId);
+  List<MovieCharacter> getMovieCharacters(Integer movieId);
 
-  MovieCharacterDto addCharacter(Integer movieId, String characterName);
+  MovieCharacterDto addCharacter(MovieCharacterDto movieCharacterDto);
 
-  MovieCharacterDto removeCharacter(Integer movieId, Integer characterId);
+  Boolean removeCharacter(MovieCharacterDto movieCharacterDto);
 
 }

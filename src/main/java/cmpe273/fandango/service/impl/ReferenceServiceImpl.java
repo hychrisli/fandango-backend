@@ -4,14 +4,14 @@ import cmpe273.fandango.dao.FormatDao;
 import cmpe273.fandango.dao.GenreDao;
 import cmpe273.fandango.entity.Format;
 import cmpe273.fandango.entity.Genre;
-import cmpe273.fandango.service.CategoryService;
+import cmpe273.fandango.service.ReferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class CategoryServiceImpl implements CategoryService {
+public class ReferenceServiceImpl implements ReferenceService {
 
   @Autowired
   FormatDao formatDao;

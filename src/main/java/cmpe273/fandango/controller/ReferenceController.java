@@ -2,7 +2,7 @@ package cmpe273.fandango.controller;
 
 
 import cmpe273.fandango.response.JsonResponse;
-import cmpe273.fandango.service.CategoryService;
+import cmpe273.fandango.service.ReferenceService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.SwaggerDefinition;
@@ -18,25 +18,25 @@ import static cmpe273.fandango.constant.UrlConstant.FORMAT;
 import static cmpe273.fandango.constant.UrlConstant.GENRE;
 
 @RestController
-@Api(tags = {"Category"})
-@SwaggerDefinition(tags = {@Tag(name = "Category Controller", description = "Category Controller Endpoints")})
+@Api(tags = {"Reference"})
+@SwaggerDefinition(tags = {@Tag(name = "Reference Controller", description = "Reference Controller Endpoints")})
 @Transactional(rollbackFor = Exception.class)
-public class CategoryController extends AbstractController {
+public class ReferenceController extends AbstractController {
 
   @Autowired
-  CategoryService categoryService;
+  ReferenceService referenceService;
 
 
   @ApiOperation(value = "Get All Formats", response = JsonResponse.class)
   @GetMapping(FORMAT)
   public ResponseEntity<JsonResponse> getFormats() {
-    return success(KEY_CONTENT, categoryService.getAllFormats());
+    return success(KEY_CONTENT, referenceService.getAllFormats());
   }
 
   @ApiOperation(value = "Get All Genres", response = JsonResponse.class)
   @GetMapping(GENRE)
   public ResponseEntity<JsonResponse> getGenres() {
-    return success(KEY_CONTENT, categoryService.getAllGenres());
+    return success(KEY_CONTENT, referenceService.getAllGenres());
   }
 
 }

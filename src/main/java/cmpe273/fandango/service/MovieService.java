@@ -27,6 +27,4 @@ public interface MovieService {
   MovieDto addGenre (MovieGenreDto movieGenreDto);
 
   MovieDto removeGenre (MovieGenreDto movieGenreDto);
-
-
 }
