@@ -6,7 +6,7 @@ import cmpe273.fandango.entity.MovieCharacter;
 public class MovieCharacterMapper extends GenericMapper {
 
   public MovieCharacterDto toDto (MovieCharacter pojo){
-    MovieCharacterDto dto = T1toT2(pojo, new MovieCharacterDto());
+    MovieCharacterDto dto = mapT1toT2(pojo, new MovieCharacterDto());
     dto.setMovieId(pojo.getMovie().getMovieId());
     return dto;
   }

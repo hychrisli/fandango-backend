@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -37,6 +38,11 @@ public class ControllerExceptionHandler extends JsonResponseHandler {
     return failure(ERR_INTEGRITY_VIOLATION, e.getRootCause().getMessage());
   }
 
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public ResponseEntity<JsonResponse> handleMethodArgumentNotValidException(DataIntegrityViolationException e) {
+    LOGGER.warn(ERR_BAD_REQUEST.name(), e);
+    return badRequest(e.getMessage());
+  }
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<JsonResponse> handleException(Exception e) {

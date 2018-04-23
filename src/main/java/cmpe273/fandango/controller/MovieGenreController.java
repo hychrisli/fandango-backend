@@ -33,7 +33,7 @@ public class MovieGenreController extends AbstractController{
 
 
   @ApiOperation(value = "Get All Genres of a Movie [Topic: movies]", response = JsonResponse.class)
-  @GetMapping(MOVIE_GENRE_ID)
+  @GetMapping(MOVIE_GENRE_MOVIEID)
   public ResponseEntity<JsonResponse> getMovieGenres(@PathVariable Integer movieId) {
     return success(KEY_GENRES, movieGenreService.getMovieGenres(movieId));
   }

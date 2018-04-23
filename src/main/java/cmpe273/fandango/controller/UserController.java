@@ -4,7 +4,6 @@ import cmpe273.fandango.dto.LoginDto;
 import cmpe273.fandango.dto.UserCreateDto;
 import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
-import cmpe273.fandango.exception.AppException;
 import cmpe273.fandango.exception.ErrorCode;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.UserService;
@@ -56,7 +55,7 @@ public class UserController extends AbstractController {
   }
 
   @ApiOperation(value = "Put User [Topic: users]", response = JsonResponse.class)
-  @PutMapping(USER_ID)
+  @PutMapping(USER_USERID)
   public ResponseEntity<JsonResponse> putUser(@PathVariable Integer userId, @RequestBody UserDto userDto){
     userDto = userService.updateUser(userId, userDto);
     if (userDto != null)
@@ -78,7 +77,7 @@ public class UserController extends AbstractController {
   }
 
   @ApiOperation(value = "Delete User [Topic: users]", response = JsonResponse.class)
-  @DeleteMapping(USER_ID)
+  @DeleteMapping(USER_USERID)
   public ResponseEntity<JsonResponse> DeleteUser(@PathVariable Integer userId){
     if (userService.deleteUser(userId))
       return success(KEY_USER, "deleted");

@@ -7,20 +7,20 @@ import cmpe273.fandango.entity.Movie;
 public class MovieMapper extends GenericMapper {
 
   public MovieDto toDto(Movie pojo) {
-    return T1toT2(pojo, new MovieDto());
+    return mapT1toT2(pojo, new MovieDto());
   }
 
   public MovieSimpleDto toSimpleDto(Movie pojo){
-    return T1toT2(pojo, new MovieSimpleDto());
+    return mapT1toT2(pojo, new MovieSimpleDto());
   }
 
   public Movie toPojo(MovieDto dto) {
-    return T1toT2(dto, new Movie());
+    return mapT1toT2(dto, new Movie());
   }
 
   public Movie toPojo(MovieSimpleDto dto){
     if (dto == null) return null;
-    return T1toT2(dto, new Movie());
+    return mapT1toT2(dto, new Movie());
   }
 
   public Movie updPojo (MovieSimpleDto dto, Movie pojo) {

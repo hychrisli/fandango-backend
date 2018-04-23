@@ -92,16 +92,24 @@ CREATE TABLE MOVIE_FORMAT
   UNIQUE movie_format_uniq (format_id, movie_id)
 );
 
+CREATE TABLE CITY
+(
+  city_id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  city_name VARCHAR(20),
+  state CHAR(2)
+);
+
 
 CREATE TABLE THEATER
 (
   theater_id    INTEGER PRIMARY KEY AUTO_INCREMENT,
+  city_id       INTEGER,
   theater_name  VARCHAR(100),
   street        VARCHAR(100),
-  city          VARCHAR(30),
-  state         CHAR(2),
-  zipcode       CHAR(5)
+  zipcode       CHAR(5),
+  FOREIGN KEY (city_id) REFERENCES CITY(city_id)
 );
+
 
 CREATE TABLE SCHEDULE
 (

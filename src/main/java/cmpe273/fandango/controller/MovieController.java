@@ -47,7 +47,7 @@ public class MovieController extends  AbstractController{
   }
 
   @ApiOperation(value = "Get a Movie [Topic: movies]", response = JsonResponse.class)
-  @GetMapping(MOVIE_ID)
+  @GetMapping(MOVIE_MOVIEID)
   public ResponseEntity<JsonResponse> getMovie(@PathVariable Integer movieId) {
 
     MovieDto movieDto = movieService.getMovie(movieId);
@@ -75,7 +75,7 @@ public class MovieController extends  AbstractController{
 
   @ApiOperation(value="Update a Movie [Topic: movies]", response = JsonResponse.class,
       notes = "movieId, mpaaRating and stars in request body are ignored")
-  @PutMapping(MOVIE_ID)
+  @PutMapping(MOVIE_MOVIEID)
   public ResponseEntity<JsonResponse> updateMovie(@PathVariable Integer movieId, @RequestBody MovieSimpleDto movieSimpleDto){
     movieSimpleDto = movieService.UpdateMovie(movieId, movieSimpleDto);
     if ( movieSimpleDto != null)

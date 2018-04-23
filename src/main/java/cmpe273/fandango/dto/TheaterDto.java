@@ -1,26 +1,22 @@
-package cmpe273.fandango.entity;
+package cmpe273.fandango.dto;
 
-import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name="THEATER")
-public class Theater {
+public class TheaterDto {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name="theater_id")
   private Integer theaterId;
 
-  @Column(name="theater_name")
+  @NotNull
   private String theaterName;
 
+  @NotNull
   private String street;
 
+  @NotNull
   private String zipcode;
 
-  @ManyToOne
-  @JoinColumn(name="city_id")
-  private City city;
+  @NotNull
+  private Integer cityId;
 
   public Integer getTheaterId() {
     return theaterId;
@@ -54,11 +50,11 @@ public class Theater {
     this.zipcode = zipcode;
   }
 
-  public City getCity() {
-    return city;
+  public Integer getCityId() {
+    return cityId;
   }
 
-  public void setCity(City city) {
-    this.city = city;
+  public void setCityId(Integer cityId) {
+    this.cityId = cityId;
   }
 }

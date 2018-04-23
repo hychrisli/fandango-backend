@@ -34,7 +34,7 @@ public class MovieFormatController extends AbstractController{
   }
 
   @ApiOperation(value = "Get All Formats of a Movie [Topic: movies]", response = JsonResponse.class)
-  @GetMapping(MOVIE_FORMAT_ID)
+  @GetMapping(MOVIE_FORMAT_MOVIEID)
   public ResponseEntity<JsonResponse> getMovieFormats(@PathVariable Integer movieId) {
     return success(KEY_FORMATS, movieFormatService.getMovieFormats(movieId));
   }
