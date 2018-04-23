@@ -20,7 +20,7 @@ public class GenericMapper {
     }
   }
 
-  protected <T1, T2> T2 T1toT2 (T1 a, T2 b){
+  protected <T1, T2> T2 mapT1toT2 (T1 a, T2 b){
     if ( a == null) return null;
     modelMapper.map(a, b);
     return b;

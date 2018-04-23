@@ -2,7 +2,6 @@ package cmpe273.fandango.controller;
 
 
 import cmpe273.fandango.dto.MovieCharacterDto;
-import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.MovieCharacter;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.MovieCharacterService;
@@ -16,7 +15,7 @@ import java.util.List;
 
 import static cmpe273.fandango.constant.JsonConstant.KEY_MOVIE_CHARACTERS;
 import static cmpe273.fandango.constant.UrlConstant.MOVIE_CHARACTER;
-import static cmpe273.fandango.constant.UrlConstant.MOVIE_CHARACTER_ID;
+import static cmpe273.fandango.constant.UrlConstant.MOVIE_CHARACTER_MOVIEID;
 
 @RestController
 @Api(tags = {"Movie Characters"})
@@ -27,7 +26,7 @@ public class MovieCharacterController extends AbstractController {
   MovieCharacterService movieCharacterService;
 
   @ApiOperation(value = "Get Characters of a Movie [Topic: movies]", response = JsonResponse.class)
-  @GetMapping(MOVIE_CHARACTER_ID)
+  @GetMapping(MOVIE_CHARACTER_MOVIEID)
   public ResponseEntity<JsonResponse> getMovieCharacters(@PathVariable Integer movieId) {
     List<MovieCharacter> movieCharacters = movieCharacterService.getMovieCharacters(movieId);
     if ( movieCharacters != null )

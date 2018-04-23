@@ -16,7 +16,7 @@ import java.util.List;
 
 import static cmpe273.fandango.constant.JsonConstant.KEY_MOVIE_IMAGES;
 import static cmpe273.fandango.constant.UrlConstant.MOVIE_IMAGE;
-import static cmpe273.fandango.constant.UrlConstant.MOVIE_IMAGE_ID;
+import static cmpe273.fandango.constant.UrlConstant.MOVIE_IMAGE_MOVIEID;
 
 @RestController
 @Api(tags = {"Movie Images"})
@@ -27,7 +27,7 @@ public class MovieImageController  extends AbstractController{
   MovieImageService movieImageService;
 
   @ApiOperation(value = "Get Images of a Movie [Topic: movies]", response = JsonResponse.class)
-  @GetMapping(MOVIE_IMAGE_ID)
+  @GetMapping(MOVIE_IMAGE_MOVIEID)
   public ResponseEntity<JsonResponse> getMovieCharacters(@PathVariable Integer movieId) {
     List<MovieImage> movieImages = movieImageService.getAllMovieImages(movieId);
     if ( movieImages != null )

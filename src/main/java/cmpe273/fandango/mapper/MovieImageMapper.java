@@ -6,7 +6,7 @@ import cmpe273.fandango.entity.MovieImage;
 public class MovieImageMapper extends  GenericMapper{
 
   public MovieImage toPojo (MovieImageDto dto){
-    MovieImage pojo = T1toT2(dto, new MovieImage());
+    MovieImage pojo = mapT1toT2(dto, new MovieImage());
     return pojo;
   }
 

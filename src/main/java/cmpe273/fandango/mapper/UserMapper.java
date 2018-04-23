@@ -8,19 +8,19 @@ import cmpe273.fandango.entity.User;
 public class UserMapper extends GenericMapper {
 
   public UserDto toDto(User pojo){
-    return T1toT2(pojo, new UserDto());
+    return mapT1toT2(pojo, new UserDto());
   }
 
   public User toPojo (UserDto dto) {
-    return T1toT2(dto, new User());
+    return mapT1toT2(dto, new User());
   }
 
   public User toPojo (UserCreateDto dto) {
-    return T1toT2(dto, new User());
+    return mapT1toT2(dto, new User());
   }
 
   public UserSimpleDto toSimpleDto(User pojo){
-    return T1toT2(pojo, new UserSimpleDto());
+    return mapT1toT2(pojo, new UserSimpleDto());
   }
 
   public User updPojo (UserDto dto, User pojo){
