@@ -5097,3 +5097,16 @@ and f.format_id = st.format_id;
 
 DROP TABLE SHOWDAY;
 DROP TABLE SHOWTIME;
+
+
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (1, 74, 1, 3, 'Crowned eagle');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (2, 3, 4, 9, 'Tasmanian devil');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (3, 57, 4, 8, 'Jackrabbit, white-tailed');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (4, 45, 3, 6, 'Dog, black-tailed prairie');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (5, 85, 1, 8, 'Capuchin, white-fronted');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (6, 31, 4, 1, 'Raven, white-necked');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (7, 8, 3, 4, 'Malabar squirrel');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (8, 47, 1, 4, 'Horned puffin');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (9, 64, 2, 10, 'Rattlesnake, horned');
+insert into MOVIE_REVIEW (review_id, movie_id, user_id, stars, comment) values (10, 80, 3, 2, 'Racer, blue');
+

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name="USER")
@@ -42,6 +43,10 @@ public class User {
 
   @Column(name="credit_card")
   private String creditCard;
+
+  @OneToMany(mappedBy = "user")
+  @JsonIgnore
+  private List<MovieReview> review;
 
   public Integer getUserId() {
     return userId;
@@ -145,5 +150,13 @@ public class User {
 
   public void setCreditCard(String creditCard) {
     this.creditCard = creditCard;
+  }
+
+  public List<MovieReview> getReview() {
+    return review;
+  }
+
+  public void setReview(List<MovieReview> review) {
+    this.review = review;
   }
 }

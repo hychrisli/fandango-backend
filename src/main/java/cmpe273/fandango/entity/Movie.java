@@ -64,6 +64,10 @@ public class Movie {
   @JsonIgnore
   private List<MovieImage> images;
 
+  @OneToMany(mappedBy = "movie")
+  @JsonIgnore
+  private List<MovieReview> review;
+
 
   public Integer getMovieId() {
     return movieId;
@@ -176,5 +180,13 @@ public class Movie {
 
   public void setImages(List<MovieImage> images) {
     this.images = images;
+  }
+
+  public List<MovieReview> getReview() {
+    return review;
+  }
+
+  public void setReview(List<MovieReview> review) {
+    this.review = review;
   }
 }
