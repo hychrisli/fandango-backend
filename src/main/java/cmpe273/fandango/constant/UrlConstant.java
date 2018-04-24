@@ -26,6 +26,9 @@ public interface UrlConstant {
   String MOVIE_IMAGE = "/movie-image";
   String MOVIE_IMAGE_ID = "/movie-image/{movieId}";
 
+  String MOVIE_REVIEW = "/movie-review";
+  String MOVIE_REVIEW_ID = "/movie-review/{reviewID}";
+
 
   String HOST = "http://localhost";
 

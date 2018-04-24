@@ -65,6 +65,10 @@ public class Movie {
   private List<MovieImage> images;
 
   @OneToMany(mappedBy = "movie")
+//  @JoinTable(name = "MOVIE_REVIEW",
+//          joinColumns = @JoinColumn(name="movie_id", referencedColumnName = "movie_id"),
+//          inverseJoinColumns = @JoinColumn(name="review_id", referencedColumnName = "review_id")
+//  )
   @JsonIgnore
   private List<MovieReview> review;
 
