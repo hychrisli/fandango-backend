@@ -13,6 +13,7 @@ public interface UrlConstant {
   String MOVIE = "/movie";
   String MOVIES = "/movies";
   String MOVIE_MOVIEID = "/movie/{movieId}";
+  String THEATER_MOVIES_CITYID = "/theater-movies/{cityId}";
 
   String MOVIE_FORMAT = "/movie-format";
   String MOVIE_FORMAT_MOVIEID = "/movie-format/{movieId}";
@@ -35,6 +36,7 @@ public interface UrlConstant {
   String THEATER_THEATERID = "/theater/{theaterId}";
 
   String SCHEDULES = "/schedules";
+
 
   String HOST = "http://localhost";
 

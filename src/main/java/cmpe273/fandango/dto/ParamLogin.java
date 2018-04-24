@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotNull;
 
-public class LoginDto {
+public class ParamLogin {
 
   @NotNull
   @JsonProperty(required=true)

@@ -1,6 +1,6 @@
 package cmpe273.fandango.mapper;
 
-import cmpe273.fandango.dto.UserCreateDto;
+import cmpe273.fandango.dto.ParamCreateUser;
 import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.entity.User;
@@ -15,7 +15,7 @@ public class UserMapper extends GenericMapper {
     return mapT1toT2(dto, new User());
   }
 
-  public User toPojo (UserCreateDto dto) {
+  public User toPojo (ParamCreateUser dto) {
     return mapT1toT2(dto, new User());
   }
 

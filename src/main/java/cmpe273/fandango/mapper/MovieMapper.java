@@ -1,6 +1,7 @@
 package cmpe273.fandango.mapper;
 
 import cmpe273.fandango.dto.MovieDto;
+import cmpe273.fandango.dto.MovieSearchDto;
 import cmpe273.fandango.dto.MovieSimpleDto;
 import cmpe273.fandango.entity.Movie;
 
@@ -13,6 +14,8 @@ public class MovieMapper extends GenericMapper {
   public MovieSimpleDto toSimpleDto(Movie pojo){
     return mapT1toT2(pojo, new MovieSimpleDto());
   }
+
+  public MovieSearchDto toSearchDto(Movie pojo) { return mapT1toT2(pojo, new MovieSearchDto ());}
 
   public Movie toPojo(MovieDto dto) {
     return mapT1toT2(dto, new Movie());

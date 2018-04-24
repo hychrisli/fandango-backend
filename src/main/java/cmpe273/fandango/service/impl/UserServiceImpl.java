@@ -1,8 +1,8 @@
 package cmpe273.fandango.service.impl;
 
 import cmpe273.fandango.dao.UserDao;
-import cmpe273.fandango.dto.LoginDto;
-import cmpe273.fandango.dto.UserCreateDto;
+import cmpe273.fandango.dto.ParamLogin;
+import cmpe273.fandango.dto.ParamCreateUser;
 import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.entity.User;
@@ -31,9 +31,9 @@ public class UserServiceImpl implements UserService {
   private UserMapper userMapper = new UserMapper();
 
   @Override
-  public UserDto createUser(UserCreateDto userCreateDto) {
-    userCreateDto.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
-    User user = userMapper.toPojo(userCreateDto);
+  public UserDto createUser(ParamCreateUser paramCreateUser) {
+    paramCreateUser.setPassword(passwordEncoder.encode(paramCreateUser.getPassword()));
+    User user = userMapper.toPojo(paramCreateUser);
     user = userDao.save(user);
     return userMapper.toDto(user);
   }
@@ -68,11 +68,11 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserDto loginUser(LoginDto loginDto) {
-    User user = userDao.findUserByUsername(loginDto.getUsername());
+  public UserDto loginUser(ParamLogin paramLogin) {
+    User user = userDao.findUserByUsername(paramLogin.getUsername());
     if ( user == null )
       return null;
-    if(passwordEncoder.matches(loginDto.getPassword(), user.getPassword()))
+    if(passwordEncoder.matches(paramLogin.getPassword(), user.getPassword()))
       return userMapper.toDto(user);
     else
       return null;

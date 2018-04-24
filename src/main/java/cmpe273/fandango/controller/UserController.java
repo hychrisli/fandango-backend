@@ -1,7 +1,7 @@
 package cmpe273.fandango.controller;
 
-import cmpe273.fandango.dto.LoginDto;
-import cmpe273.fandango.dto.UserCreateDto;
+import cmpe273.fandango.dto.ParamLogin;
+import cmpe273.fandango.dto.ParamCreateUser;
 import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.exception.ErrorCode;
@@ -65,12 +65,12 @@ public class UserController extends AbstractController {
 
   @ApiOperation(value = "Create User [Topic: users]", response = JsonResponse.class)
   @PostMapping(USER)
-  public ResponseEntity<JsonResponse> createUser(@RequestBody UserCreateDto userCreateDto){
-    if ( userCreateDto.getEmail() == null || userCreateDto.getUsername() == null || userCreateDto.getPassword() == null)
+  public ResponseEntity<JsonResponse> createUser(@RequestBody ParamCreateUser paramCreateUser){
+    if ( paramCreateUser.getEmail() == null || paramCreateUser.getUsername() == null || paramCreateUser.getPassword() == null)
       return badRequest("Required Fields needed: username, password, and email");
-    if ( userService.getUserByUsername(userCreateDto.getUsername()) != null)
+    if ( userService.getUserByUsername(paramCreateUser.getUsername()) != null)
       return conflict();
-    UserDto userDto = userService.createUser(userCreateDto);
+    UserDto userDto = userService.createUser(paramCreateUser);
     if (userDto != null)
       return created(KEY_USER, userDto);
     return failure(ErrorCode.ERR_FAILED_TO_CREATE, "Failed to Create User");
@@ -86,11 +86,11 @@ public class UserController extends AbstractController {
 
   @ApiOperation(value = "Login User [Topic: users]", response = JsonResponse.class)
   @PostMapping(LOGIN)
-  public ResponseEntity<JsonResponse> loginUser(@RequestBody LoginDto loginDto) {
-    if (loginDto.getPassword() == null || loginDto.getUsername() == null)
+  public ResponseEntity<JsonResponse> loginUser(@RequestBody ParamLogin paramLogin) {
+    if (paramLogin.getPassword() == null || paramLogin.getUsername() == null)
       return badRequest("Required Fields needed: username and password");
 
-    UserDto userDto = userService.loginUser(loginDto);
+    UserDto userDto = userService.loginUser(paramLogin);
     if (userDto != null)
       return success("user", userDto);
     return badRequest("Incorrect username and password combination");

@@ -1,5 +1,6 @@
 package cmpe273.fandango.dao;
 
+import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Schedule;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,6 +22,24 @@ public interface ScheduleDao extends CrudRepository<Schedule, Long> {
       @Param("cityId") Integer cityId,
       @Param("movieId") Integer movieId,
       @Param("today") Date today);
+
+
+  @Query("select s from Schedule s " +
+      "where s.price >= :minPrice and s.price <= :maxPrice " +
+      "and s.movie.stars >= :minStars and s.movie.stars <= :maxStars " +
+      "and s.movie.mpaaId in :mpaaIds and s.format.formatId in :formatIds " +
+      "and s.theater.city.cityId = :cityId and s.scheduleDate = :today")
+  List<Schedule> searchMovie (
+      @Param("minPrice") Float minPrice,
+      @Param("maxPrice") Float maxPrice,
+      @Param("minStars") Float minStars,
+      @Param("maxStars") Float maxStars,
+      @Param("mpaaIds") List<Integer> mpaaIds,
+      @Param("formatIds") List<Integer> formatIds,
+      @Param("cityId") Integer cityId,
+      @Param("today") Date today
+  );
+
 
 
 }

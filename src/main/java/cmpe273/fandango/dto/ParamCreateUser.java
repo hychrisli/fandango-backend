@@ -1,6 +1,6 @@
 package cmpe273.fandango.dto;
 
-public class UserCreateDto {
+public class ParamCreateUser {
 
   private String username;
 
