@@ -111,5 +111,21 @@ public class MovieReviewServiceImpl implements MovieReviewService {
         return result;
     }
 
+    public List<MovieReviewDto> pageSearchMovieReviewUserId(Pageable pageable, Integer userId) {
+        Page<MovieReview> movieReviews = movieReviewDao.findAllByPagesUserId(pageable,userId);
+        List<MovieReviewDto> result = new ArrayList<>();
+        for (MovieReview movieReview : movieReviews) {
+
+            MovieReviewDto movieReviewDto = movieReviewMapper.toDto(movieReview);
+            movieReviewDto.setMovieId(movieReview.getMovie().getMovieId());
+            movieReviewDto.setUserId(movieReview.getUser().getUserId());
+            movieReviewDto.setMovieTitle(movieReview.getMovie().getMovieTitle());
+            result.add(movieReviewDto);
+        }
+        return result;
+    }
+
+
+
 
 }

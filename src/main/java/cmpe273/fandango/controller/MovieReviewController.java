@@ -73,7 +73,7 @@ public class MovieReviewController extends AbstractController {
             return notFound();
     }
 
-    @ApiOperation(value = "Get All Movies [Topic: movies]", response = JsonResponse.class)
+    @ApiOperation(value = "Get All MovieReviews by movieId [Topic: movieReview]", response = JsonResponse.class)
     @ApiImplicitParams({
 
             @ApiImplicitParam(name = "movieId", dataType = "integer", paramType = "query",
@@ -90,6 +90,25 @@ public class MovieReviewController extends AbstractController {
     @GetMapping(MOVIE_REVIEWS)
     public List<MovieReviewDto> getMovies(Pageable pageable, Integer movieId) {
         return movieReviewService.pageSearchMovieReview(pageable, movieId);
+    }
+
+    @ApiOperation(value = "Get All MovieReviews by userId [Topic: movieReview]", response = JsonResponse.class)
+    @ApiImplicitParams({
+
+            @ApiImplicitParam(name = "userId", dataType = "integer", paramType = "query",
+                    value = "user Id"),
+            @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+                    value = "Results page you want to retrieve (0..N)"),
+            @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
+                    value = "Number of records per page."),
+            @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
+                    value = "Sorting criteria in the format: property(,asc|desc). " +
+                            "Default sort order is ascending. " +
+                            "Multiple sort criteria are supported.")
+    })
+    @GetMapping(MOVIE_REVIEW_USER)
+    public List<MovieReviewDto> SearchReviewByUserId(Pageable pageable, Integer userId) {
+        return movieReviewService.pageSearchMovieReviewUserId(pageable, userId);
     }
 
 }
