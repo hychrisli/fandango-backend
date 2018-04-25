@@ -3,7 +3,7 @@ package cmpe273.fandango.dto;
 import cmpe273.fandango.entity.City;
 import java.util.List;
 
-public class TheaterScheduleDto {
+public class SchedulePerTheaterDto implements Comparable<SchedulePerTheaterDto>{
 
   private Integer theaterId;
 
@@ -16,6 +16,11 @@ public class TheaterScheduleDto {
   private City city;
 
   private List<ScheduleSimpleDto> schedules;
+
+  @Override
+  public int compareTo(SchedulePerTheaterDto o) {
+    return theaterId - o.theaterId;
+  }
 
   public Integer getTheaterId() {
     return theaterId;

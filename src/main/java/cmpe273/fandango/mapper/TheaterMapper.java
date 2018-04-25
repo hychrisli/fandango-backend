@@ -1,8 +1,10 @@
 package cmpe273.fandango.mapper;
 
+import cmpe273.fandango.dto.SchedulePerMovieDto;
 import cmpe273.fandango.dto.TheaterDto;
 import cmpe273.fandango.dto.TheaterMovieTodayDto;
-import cmpe273.fandango.dto.TheaterScheduleDto;
+import cmpe273.fandango.dto.SchedulePerTheaterDto;
+import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Theater;
 
 public class TheaterMapper extends GenericMapper{
@@ -11,8 +13,12 @@ public class TheaterMapper extends GenericMapper{
     return mapT1toT2(dto, new Theater());
   }
 
-  public TheaterScheduleDto toTheaterScheduleDto (Theater pojo) {
-    return mapT1toT2(pojo, new TheaterScheduleDto());
+  public SchedulePerTheaterDto toPerTheaterDto (Theater pojo) {
+    return mapT1toT2(pojo, new SchedulePerTheaterDto());
+  }
+
+  public SchedulePerMovieDto toPerMovieDto(Movie pojo) {
+    return mapT1toT2(pojo, new SchedulePerMovieDto());
   }
 
   public TheaterMovieTodayDto toTheaterMovieTodayDto (Theater pojo) {return mapT1toT2(pojo, new TheaterMovieTodayDto());}

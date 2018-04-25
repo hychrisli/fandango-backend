@@ -18,4 +18,6 @@ public interface TheaterService {
 
   Page<Theater> searchTheatersByPattern(String pattern, Pageable pageable);
 
+
+
 }

@@ -18,11 +18,26 @@ public interface ScheduleDao extends CrudRepository<Schedule, Long> {
       "s.theater.city.cityId = :cityId and " +
       "s.movie.movieId = :movieId and " +
       "s.scheduleDate = :today")
-  List<Schedule> findNearByMovieSchedule (
+  List<Schedule> findMovieScheduleByCityId (
       @Param("cityId") Integer cityId,
       @Param("movieId") Integer movieId,
       @Param("today") Date today);
 
+  @Query("select s from Schedule s where " +
+      "s.theater.zipcode = :zipcode and " +
+      "s.movie.movieId = :movieId and " +
+      "s.scheduleDate = :today")
+  List<Schedule> findMovieScheduleByZipcode (
+      @Param("zipcode") String zipcode,
+      @Param("movieId") Integer movieId,
+      @Param("today") Date today);
+
+  @Query("select s from Schedule s where " +
+      "s.theater.theaterId = :theaterId and " +
+      "s.scheduleDate = :today")
+  List<Schedule> findMovieSchedulesByTheaterId (
+      @Param("theaterId") Integer theaterId,
+      @Param("today") Date today);
 
   @Query("select s from Schedule s " +
       "where s.price >= :minPrice and s.price <= :maxPrice " +
