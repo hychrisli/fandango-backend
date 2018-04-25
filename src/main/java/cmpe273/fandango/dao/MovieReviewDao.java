@@ -16,4 +16,7 @@ public interface MovieReviewDao extends PagingAndSortingRepository<MovieReview, 
     @Query("select mr from MovieReview mr where mr.movie.movieId = :movieId")
     List<MovieReview> SelectByReviewId(@Param("movieId") Integer movieId);
 
+    @Query("select mr from MovieReview mr join mr.movie mv where mr.movie.movieId = :movieId")
+    Page<MovieReview> findAllByPages(Pageable pageable, @Param("movieId") Integer movieId);
+
 }
