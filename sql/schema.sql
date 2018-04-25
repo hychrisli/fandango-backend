@@ -139,7 +139,6 @@ CREATE TABLE MOVIE_REVIEW
 
 );
 
-
 -- test database
 
 DROP DATABASE IF EXISTS fandango_test;

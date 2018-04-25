@@ -40,6 +40,9 @@ public interface ScheduleDao extends CrudRepository<Schedule, Long> {
       @Param("today") Date today
   );
 
-
-
+  @Query("select distinct s.theater, s.movie from Schedule s " +
+      "where s.theater.zipcode = :zipcode and s.scheduleDate = :today " +
+      "order by s.movie.releaseDate desc")
+  List<Object> findTheatersWithMoviesTodayByZipcode(@Param("zipcode") String zipcode,
+                                               @Param("today") Date today);
 }

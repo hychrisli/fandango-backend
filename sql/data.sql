@@ -5077,23 +5077,33 @@ VALUES(1, SEC_TO_TIME(39600)),
 (4, SEC_TO_TIME(70000));
 
 
-INSERT INTO SCHEDULE (movie_id, theater_id, format_id, schedule_date, showtime, tot_seats, avail_seats, price) SELECT
+INSERT INTO SCHEDULE (movie_id, theater_id, format_id, schedule_date, showtime, tot_seats, avail_seats, price)
+SELECT
 m.movie_id,
 t.theater_id,
 f.format_id,
 m.release_date + INTERVAL sd.day DAY showday,
-st.time + INTERVAL CHAR_LENGTH(m.movie_title) MINUTE showtime,
-20 + CHAR_LENGTH(m.movie_title) + CHAR_LENGTH(f.format_name) tot_seats,
-20 + CHAR_LENGTH(m.movie_title) + CHAR_LENGTH(f.format_name) avail_seats,
-10 + f.format_id * 1.5 price
+st.time + INTERVAL CHAR_LENGTH(m.movie_title) - MOD(t.theater_id, 20) MINUTE showtime,
+20 + CHAR_LENGTH(m.movie_title) + CHAR_LENGTH(f.format_name) + MOD(theater_id, 9) tot_seats,
+20 + CHAR_LENGTH(m.movie_title) + CHAR_LENGTH(f.format_name) + MOD(theater_id, 9) avail_seats,
+10 + f.format_id * 1.5 + MOD(m.movie_id, 7) * 0.1 + MOD(t.theater_id, 11) * 0.1 price
 FROM
 MOVIE m,
 THEATER t,
+MOVIE_FORMAT mf,
 FORMAT f,
 SHOWDAY sd,
 SHOWTIME st
-WHERE m.release_date >= STR_TO_DATE('2018-04-12', '%Y-%m-%d') and m.release_date < STR_TO_DATE('2018-5-22', '%Y-%m-%d')
-and f.format_id = st.format_id;
+WHERE
+m.release_date >= STR_TO_DATE('2018-04-12', '%Y-%m-%d') and m.release_date < STR_TO_DATE('2018-5-22', '%Y-%m-%d')
+-- m.release_date = STR_TO_DATE('2018-04-12', '%Y-%m-%d')
+and m.movie_id = mf.movie_id
+and mf.format_id = st.format_id
+and mf.format_id = f.format_id
+and MOD(m.movie_id, 2) <> MOD(t.theater_id, 3)
+and MOD(f.format_id, 3) <> MOD(t.theater_id, 3)
+and MOD(sd.day, 4) <> MOD(m.movie_id,4) ;
+
 
 DROP TABLE SHOWDAY;
 DROP TABLE SHOWTIME;

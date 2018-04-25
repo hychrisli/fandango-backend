@@ -1,12 +1,10 @@
 package cmpe273.fandango.service.impl;
 
 import cmpe273.fandango.dao.ScheduleDao;
-import cmpe273.fandango.dto.MovieDto;
-import cmpe273.fandango.dto.MovieSearchDto;
-import cmpe273.fandango.dto.ParamSearchMovie;
-import cmpe273.fandango.dto.TheaterScheduleDto;
+import cmpe273.fandango.dto.*;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Schedule;
+import cmpe273.fandango.entity.Theater;
 import cmpe273.fandango.lib.DateTime;
 import cmpe273.fandango.lib.Pagintation;
 import cmpe273.fandango.mapper.MovieMapper;
@@ -88,5 +86,29 @@ public class ScheduleServiceImpl implements ScheduleService {
     Collections.sort(movieList);
 
     return Pagintation.getPage(movieList, pageable);
+  }
+
+  @Override
+  public Page<TheaterMovieTodayDto> getTheaterMovieTodayByZipcode(Pageable pageable, String zipcode) {
+    List<Object> rows = scheduleDao.findTheatersWithMoviesTodayByZipcode(zipcode, DateTime.getToday());
+    Map<Integer, TheaterMovieTodayDto> theaterMap = new HashMap<>();
+
+    for (Object row : rows ) {
+      Object[] fields = (Object[]) row;
+      Theater theater = (Theater) fields[0];
+      Movie movie = (Movie) fields[1];
+
+      Integer key = theater.getTheaterId();
+      TheaterMovieTodayDto tmtDto = theaterMap.getOrDefault(key, theaterMapper.toTheaterMovieTodayDto(theater));
+      if (tmtDto.getMovies() == null)
+        tmtDto.setMovies(new ArrayList<>());
+      tmtDto.getMovies().add(movie);
+      theaterMap.put(key, tmtDto);
+    }
+
+    List<TheaterMovieTodayDto> theaterList = new ArrayList<>(theaterMap.values());
+    Collections.sort(theaterList);
+
+    return Pagintation.getPage(theaterList, pageable);
   }
 }

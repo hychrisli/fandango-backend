@@ -34,6 +34,7 @@ public interface UrlConstant {
   String THEATER = "/theater";
   String THEATERS_CITYID = "/theaters/{cityId}";
   String THEATER_THEATERID = "/theater/{theaterId}";
+  String THEATERS_ZIPCDOE = "/theaters-zipcode/{zipcode}";
 
   String SCHEDULES = "/schedules";
 
