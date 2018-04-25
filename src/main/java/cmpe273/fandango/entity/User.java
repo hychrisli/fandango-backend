@@ -1,9 +1,11 @@
 package cmpe273.fandango.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -41,8 +43,18 @@ public class User {
   @Column(name="image_url")
   private String imageUrl;
 
-  @Column(name="credit_card")
-  private String creditCard;
+  @Type(type="yes_no")
+  @Column(name="is_admin")
+  private Boolean isAdmin;
+
+  @Column(name="card_num")
+  private String cardNum;
+
+  @Column(name="card_cvv")
+  private String cardCvv;
+
+  @Column(name="card_expire")
+  private Date cardExpire;
 
   @OneToMany(mappedBy = "user")
   @JsonIgnore
@@ -144,19 +156,43 @@ public class User {
     this.imageUrl = imageUrl;
   }
 
-  public String getCreditCard() {
-    return creditCard;
-  }
-
-  public void setCreditCard(String creditCard) {
-    this.creditCard = creditCard;
-  }
-
   public List<MovieReview> getReview() {
     return review;
   }
 
   public void setReview(List<MovieReview> review) {
     this.review = review;
+  }
+
+  public Boolean getAdmin() {
+    return isAdmin;
+  }
+
+  public void setAdmin(Boolean admin) {
+    isAdmin = admin;
+  }
+
+  public String getCardNum() {
+    return cardNum;
+  }
+
+  public void setCardNum(String cardNum) {
+    this.cardNum = cardNum;
+  }
+
+  public String getCardCvv() {
+    return cardCvv;
+  }
+
+  public void setCardCvv(String cardCvv) {
+    this.cardCvv = cardCvv;
+  }
+
+  public Date getCardExpire() {
+    return cardExpire;
+  }
+
+  public void setCardExpire(Date cardExpire) {
+    this.cardExpire = cardExpire;
   }
 }

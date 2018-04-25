@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserDto updateUser(Integer userId, UserDto userDto) {
     User user = userDao.findUserByUserId(userId);
+    System.out.print(userDto.getCardExpire());
     if (user != null){
       user = userMapper.updPojo(userDto, user);
       userDao.save(user);

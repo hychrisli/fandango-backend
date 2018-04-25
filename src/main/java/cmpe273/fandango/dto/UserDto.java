@@ -1,7 +1,10 @@
 package cmpe273.fandango.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
 
 public class UserDto {
 
@@ -31,7 +34,14 @@ public class UserDto {
 
   private String imageUrl;
 
-  private String creditCard;
+  private Boolean isAdmin;
+
+  private String cardNum;
+
+  private String cardCvv;
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM", timezone="US/Pacific")
+  private Date cardExpire;
 
   public Integer getUserId() {
     return userId;
@@ -129,11 +139,35 @@ public class UserDto {
     this.imageUrl = imageUrl;
   }
 
-  public String getCreditCard() {
-    return creditCard;
+  public Boolean getAdmin() {
+    return isAdmin;
   }
 
-  public void setCreditCard(String creditCard) {
-    this.creditCard = creditCard;
+  public void setAdmin(Boolean admin) {
+    isAdmin = admin;
+  }
+
+  public String getCardNum() {
+    return cardNum;
+  }
+
+  public void setCardNum(String cardNum) {
+    this.cardNum = cardNum;
+  }
+
+  public String getCardCvv() {
+    return cardCvv;
+  }
+
+  public void setCardCvv(String cardCvv) {
+    this.cardCvv = cardCvv;
+  }
+
+  public Date getCardExpire() {
+    return cardExpire;
+  }
+
+  public void setCardExpire(Date cardExpire) {
+    this.cardExpire = cardExpire;
   }
 }
