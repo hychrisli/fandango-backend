@@ -10,7 +10,7 @@ public class MovieReview {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "review_id")
-    private Integer reviewID;
+    private Integer reviewId;
 
     @Column(name = "stars")
     private Integer stars;
@@ -33,11 +33,11 @@ public class MovieReview {
     private User user;
 
     public Integer getReviewID() {
-        return reviewID;
+        return reviewId;
     }
 
     public void setReviewID(Integer reviewID) {
-        this.reviewID = reviewID;
+        this.reviewId = reviewID;
     }
 
     public Integer getStars() {
