@@ -19,4 +19,5 @@ public interface UserDao extends PagingAndSortingRepository<User, Integer>{
   User findUserByUserId(Integer userId);
 
   User findUserByUsername(String username);
+
 }
