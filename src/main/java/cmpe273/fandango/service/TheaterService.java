@@ -16,4 +16,6 @@ public interface TheaterService {
 
   Boolean removeTheater(Integer theaterId);
 
+  Page<Theater> searchTheatersByPattern(String pattern, Pageable pageable);
+
 }

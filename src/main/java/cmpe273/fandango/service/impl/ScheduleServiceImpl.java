@@ -89,8 +89,18 @@ public class ScheduleServiceImpl implements ScheduleService {
   }
 
   @Override
-  public Page<TheaterMovieTodayDto> getTheaterMovieTodayByZipcode(Pageable pageable, String zipcode) {
+  public Page<TheaterMovieTodayDto> getTheaterMovieTodayByZipcode(String zipcode, Pageable pageable) {
     List<Object> rows = scheduleDao.findTheatersWithMoviesTodayByZipcode(zipcode, DateTime.getToday());
+    return getTheatersMovieToday(rows, pageable);
+  }
+
+  @Override
+  public Page<TheaterMovieTodayDto> getTheaterMovieTodayByCityId(Integer cityId, Pageable pageable) {
+    List<Object> rows = scheduleDao.findTheatersWithMoviesTodayByCityId(cityId, DateTime.getToday());
+    return getTheatersMovieToday(rows, pageable);
+  }
+
+  private Page<TheaterMovieTodayDto> getTheatersMovieToday (List<Object> rows, Pageable pageable){
     Map<Integer, TheaterMovieTodayDto> theaterMap = new HashMap<>();
 
     for (Object row : rows ) {

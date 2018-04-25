@@ -34,10 +34,14 @@ public interface UrlConstant {
   String THEATER = "/theater";
   String THEATERS_CITYID = "/theaters/{cityId}";
   String THEATER_THEATERID = "/theater/{theaterId}";
-  String THEATERS_ZIPCDOE = "/theaters-zipcode/{zipcode}";
+  String THEATERS_MOVIES_ZIPCDOE = "/theaters-movies-zipcode/{zipcode}";
+  String THEATERS_MOVIES_CITYID = "/theaters-movies-cityid/{cityId}";
+
+  String SEARCH_CITIES = "/search-cities/{pattern}";
+  String SEARCH_THEATERS = "/search-theaters/{pattern}";
+  String SEARCH_MOVIES = "/search-movies/{pattern}";
 
   String SCHEDULES = "/schedules";
-
 
   String HOST = "http://localhost";
 

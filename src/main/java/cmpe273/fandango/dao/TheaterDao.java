@@ -21,4 +21,8 @@ public interface TheaterDao extends CrudRepository<Theater, Integer>{
   @Query("select t from Theater t where lower(t.theaterName) = lower(:theaterName) and t.city.cityId = :cityId")
   Theater findByTheaterNameAndCityId(@Param("theaterName") String theaterName, @Param("cityId") Integer cityId );
 
+
+  @Query("select t from Theater t where lower(t.theaterName) like lower(concat('%',:pattern,'%'))")
+  Page<Theater> searchTheatersByPattern(@Param("pattern") String pattern, Pageable pageable);
+
 }

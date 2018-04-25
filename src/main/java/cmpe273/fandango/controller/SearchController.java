@@ -1,11 +1,12 @@
 package cmpe273.fandango.controller;
 
+import cmpe273.fandango.dto.MovieSimpleDto;
 import cmpe273.fandango.dto.TheaterDto;
-import cmpe273.fandango.dto.TheaterMovieTodayDto;
 import cmpe273.fandango.entity.City;
 import cmpe273.fandango.entity.Theater;
 import cmpe273.fandango.response.JsonResponse;
-import cmpe273.fandango.service.ScheduleService;
+import cmpe273.fandango.service.CityService;
+import cmpe273.fandango.service.MovieService;
 import cmpe273.fandango.service.TheaterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -14,29 +15,28 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
-
-import static cmpe273.fandango.constant.JsonConstant.KEY_MESSAGE;
-import static cmpe273.fandango.constant.JsonConstant.KEY_THEATER;
-import static cmpe273.fandango.constant.JsonConstant.KEY_THEATERS;
-import static cmpe273.fandango.constant.UrlConstant.*;
+import static cmpe273.fandango.constant.UrlConstant.SEARCH_CITIES;
+import static cmpe273.fandango.constant.UrlConstant.SEARCH_MOVIES;
+import static cmpe273.fandango.constant.UrlConstant.SEARCH_THEATERS;
 
 @RestController
-@Api(tags = {"Theater"})
+@Api(tags = {"Search"})
 @Transactional(rollbackFor = Exception.class)
-public class TheaterController extends AbstractController{
+public class SearchController extends AbstractController {
+
+  @Autowired
+  CityService cityService;
 
   @Autowired
   TheaterService theaterService;
 
   @Autowired
-  ScheduleService scheduleService;
-
+  MovieService movieService;
 
   @ApiOperation(value = "Get Theaters in a city[Topic: theaters]", response = JsonResponse.class)
   @ApiImplicitParams({
@@ -49,13 +49,12 @@ public class TheaterController extends AbstractController{
               "Default sort order is ascending. " +
               "Multiple sort criteria are supported.")
   })
-  @GetMapping(THEATERS_CITYID)
-  public Page<Theater> getTheaters(@PathVariable Integer cityId, Pageable pageable) {
-    return theaterService.getAllTheatersByCityId(cityId, pageable);
+  @GetMapping(SEARCH_CITIES)
+  public Page<City> getCities(@PathVariable String pattern, Pageable pageable) {
+    return cityService.searchCitiesByPattern(pattern, pageable);
   }
 
-
-  @ApiOperation(value = "Get Theaters and movies today by zipcode [Topic: theaters]", response = JsonResponse.class)
+  @ApiOperation(value = "Get Theaters in a city[Topic: theaters]", response = JsonResponse.class)
   @ApiImplicitParams({
       @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
           value = "Results page you want to retrieve (0..N)"),
@@ -66,13 +65,12 @@ public class TheaterController extends AbstractController{
               "Default sort order is ascending. " +
               "Multiple sort criteria are supported.")
   })
-  @GetMapping(THEATERS_MOVIES_ZIPCDOE)
-  public Page<TheaterMovieTodayDto> getTheatersWithMoviesByZipcode(@PathVariable String zipcode, Pageable pageable) {
-    return scheduleService.getTheaterMovieTodayByZipcode(zipcode, pageable);
+  @GetMapping(SEARCH_THEATERS)
+  public Page<Theater> getTheaters(@PathVariable String pattern, Pageable pageable) {
+    return theaterService.searchTheatersByPattern(pattern, pageable);
   }
 
-
-  @ApiOperation(value = "Get Theaters and movies today by cityId [Topic: theaters]", response = JsonResponse.class)
+  @ApiOperation(value = "Get Theaters in a city[Topic: theaters]", response = JsonResponse.class)
   @ApiImplicitParams({
       @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
           value = "Results page you want to retrieve (0..N)"),
@@ -83,30 +81,8 @@ public class TheaterController extends AbstractController{
               "Default sort order is ascending. " +
               "Multiple sort criteria are supported.")
   })
-  @GetMapping(THEATERS_MOVIES_CITYID)
-  public Page<TheaterMovieTodayDto> getTheatersWithMoviesByCityId(@PathVariable Integer cityId, Pageable pageable) {
-    return scheduleService.getTheaterMovieTodayByCityId(cityId, pageable);
+  @GetMapping(SEARCH_MOVIES)
+  public Page<MovieSimpleDto> getMovies(@PathVariable String pattern, Pageable pageable) {
+    return movieService.searchMoviesByPattern(pattern, pageable);
   }
-
-
-  @ApiOperation(value = "Add a new theater [Topic: theaters]", response = JsonResponse.class,
-      notes = "theaterId field is ignored. All other fields are required")
-  @PostMapping(THEATER)
-  public ResponseEntity<JsonResponse> createTheater(@Valid @RequestBody TheaterDto theaterDto) {
-    Theater theater = theaterService.addTheater(theaterDto);
-    if ( theater != null )
-      return success(KEY_THEATER, theater);
-    return conflict();
-  }
-
-  @ApiOperation(value = "Delete a theater [Topic: theaters]", response = JsonResponse.class)
-  @DeleteMapping(THEATER_THEATERID)
-  public ResponseEntity<JsonResponse> deleteTheater(@PathVariable Integer theaterId) {
-    if ( theaterService.removeTheater(theaterId) )
-      return success(KEY_MESSAGE, "deleted");
-    return badRequest("Delete unsuccessful");
-  }
-
-
-
 }

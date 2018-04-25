@@ -15,5 +15,8 @@ public interface ScheduleService {
 
   Page<MovieSearchDto> searchMovies(Pageable pageable, Integer cityId, ParamSearchMovie paramSearchMovie);
 
-  Page<TheaterMovieTodayDto> getTheaterMovieTodayByZipcode(Pageable pageable, String zipcode);
+  Page<TheaterMovieTodayDto> getTheaterMovieTodayByZipcode(String zipcode, Pageable pageable);
+
+  Page<TheaterMovieTodayDto> getTheaterMovieTodayByCityId(Integer cityId, Pageable pageable);
+
 }

@@ -52,4 +52,9 @@ public class TheaterServiceImpl implements TheaterService {
     theaterDao.delete(theaterId);
     return true;
   }
+
+  @Override
+  public Page<Theater> searchTheatersByPattern(String pattern, Pageable pageable) {
+    return theaterDao.searchTheatersByPattern(pattern, pageable);
+  }
 }
