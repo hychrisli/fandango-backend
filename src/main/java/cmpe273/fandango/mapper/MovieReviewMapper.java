@@ -6,11 +6,14 @@ import cmpe273.fandango.entity.MovieReview;
 
 public class MovieReviewMapper extends GenericMapper {
     public MovieReviewDto toDto(MovieReview pojo) {
-        return T1toT2(pojo, new MovieReviewDto());
+        return mapT1toT2(pojo, new MovieReviewDto());
     }
 
     public MovieReviewSimpleDto toSimpleDto(MovieReview pojo) {
-        return T1toT2(pojo, new MovieReviewSimpleDto());
+        MovieReviewSimpleDto dto = mapT1toT2(pojo, new MovieReviewSimpleDto());
+        dto.setMovieId(pojo.getMovie().getMovieId());
+        dto.setUserId(pojo.getUser().getUserId());
+        return dto;
     }
 
     public MovieReview updPojo (MovieReviewSimpleDto dto, MovieReview pojo) {

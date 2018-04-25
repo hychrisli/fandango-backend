@@ -17,7 +17,5 @@ public interface MovieReviewService {
 
     MovieReviewSimpleDto updateReview(Integer reviewId, MovieReviewSimpleDto dto);
 
-    List<MovieReviewDto> pageSearchMovieReview(Pageable pageable, Integer movieId);
-
-    List<MovieReviewDto> pageSearchMovieReviewUserId(Pageable pageable, Integer userId);
+    Page<MovieReviewDto> pageSearchMovieReview(Pageable pageable, Integer movieId, Integer userId);
 }

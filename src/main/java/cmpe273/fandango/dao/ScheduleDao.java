@@ -4,12 +4,13 @@ import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Schedule;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
 
-public interface ScheduleDao extends CrudRepository<Schedule, Long> {
+public interface ScheduleDao extends PagingAndSortingRepository<Schedule, Long> {
 
   @Query("select count(s) from Schedule s where s.theater.theaterId = :theaterId")
   Integer countAllByTheaterId(@Param("theaterId") Integer theaterId);
