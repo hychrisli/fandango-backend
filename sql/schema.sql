@@ -16,7 +16,10 @@ CREATE TABLE USER
   phone       CHAR(15),
   email       VARCHAR(50) NOT NULL,
   image_url   VARCHAR(100),
-  credit_card VARCHAR(20)
+  is_admin    CHAR(1) DEFAULT 'F',
+  card_num VARCHAR(20),
+  card_cvv    VARCHAR(4),
+  card_expire DATE
 );
 
 

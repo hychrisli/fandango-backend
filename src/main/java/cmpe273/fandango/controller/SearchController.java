@@ -38,7 +38,7 @@ public class SearchController extends AbstractController {
   @Autowired
   MovieService movieService;
 
-  @ApiOperation(value = "Get Theaters in a city[Topic: theaters]", response = JsonResponse.class)
+  @ApiOperation(value = "Get Cities in a city[Topic: cities]", response = JsonResponse.class)
   @ApiImplicitParams({
       @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
           value = "Results page you want to retrieve (0..N)"),
@@ -70,7 +70,7 @@ public class SearchController extends AbstractController {
     return theaterService.searchTheatersByPattern(pattern, pageable);
   }
 
-  @ApiOperation(value = "Get Theaters in a city[Topic: theaters]", response = JsonResponse.class)
+  @ApiOperation(value = "Get Movies in a city[Topic: movies]", response = JsonResponse.class)
   @ApiImplicitParams({
       @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
           value = "Results page you want to retrieve (0..N)"),
