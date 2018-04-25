@@ -2,9 +2,13 @@ package cmpe273.fandango.controller;
 
 
 import cmpe273.fandango.dto.MovieDto;
+import cmpe273.fandango.dto.MovieSearchDto;
 import cmpe273.fandango.dto.MovieSimpleDto;
+import cmpe273.fandango.dto.ParamSearchMovie;
+import cmpe273.fandango.entity.Schedule;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.MovieService;
+import cmpe273.fandango.service.ScheduleService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,7 +17,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+import static cmpe273.fandango.constant.JsonConstant.KEY_CONTENT;
 import static cmpe273.fandango.constant.JsonConstant.KEY_MOVIE;
+import static cmpe273.fandango.constant.JsonConstant.KEY_MOVIES;
 import static cmpe273.fandango.constant.UrlConstant.*;
 
 @RestController
@@ -23,6 +31,9 @@ public class MovieController extends  AbstractController{
 
   @Autowired
   MovieService movieService;
+
+  @Autowired
+  ScheduleService scheduleService;
 
   @ApiOperation(value = "Get All Movies [Topic: movies]", response = JsonResponse.class)
   @ApiImplicitParams({
@@ -82,6 +93,31 @@ public class MovieController extends  AbstractController{
       return success(KEY_MOVIE, movieSimpleDto);
     else
       return notFound();
+  }
+
+  @ApiOperation(value = "Filter Movies in local Theaters [Topic: movies]",
+      response = JsonResponse.class)
+  @ApiImplicitParams({
+      @ApiImplicitParam(name = "minPrice", dataType = "float", paramType = "query",
+          value = "minimum price"),
+      @ApiImplicitParam(name = "maxPrice", dataType = "float", paramType = "query",
+          value = "maximum price"),
+      @ApiImplicitParam(name = "minStars", dataType = "integer", paramType = "query",
+          value = "minimum stars"),
+      @ApiImplicitParam(name = "maxStars", dataType = "integer", paramType = "query",
+          value = "maximum stars"),
+      @ApiImplicitParam(name = "mpaaId", dataType = "integer", paramType = "query",
+          value = "mpaa movie rating ID"),
+      @ApiImplicitParam(name = "formatId", dataType = "integer", paramType = "query",
+          value = "movie format ID"),
+      @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+          value = "Results page you want to retrieve (0..N)"),
+      @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
+          value = "Number of records per page.")
+  })
+  @GetMapping(THEATER_MOVIES_CITYID)
+  public Page<MovieSearchDto> searchSchedules(@PathVariable Integer cityId, ParamSearchMovie dto, Pageable pageable) {
+    return scheduleService.searchMovies(pageable, cityId, dto);
   }
 
 }

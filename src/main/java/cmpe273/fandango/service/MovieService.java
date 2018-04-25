@@ -20,4 +20,6 @@ public interface MovieService {
 
   MovieDto getMovie(Integer movieId);
 
+  Page<MovieSimpleDto> searchMoviesByPattern(String pattern, Pageable pageable);
+
 }

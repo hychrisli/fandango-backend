@@ -17,15 +17,15 @@ public class Schedule {
 
   @ManyToOne
   @JoinColumn(name="movie_id")
-  Movie movie;
+  private Movie movie;
 
   @ManyToOne
   @JoinColumn(name="theater_id")
-  Theater theater;
+  private Theater theater;
 
   @ManyToOne
   @JoinColumn(name="format_id")
-  Format format;
+  private Format format;
 
   @Column(name="schedule_date")
   private Date scheduleDate;

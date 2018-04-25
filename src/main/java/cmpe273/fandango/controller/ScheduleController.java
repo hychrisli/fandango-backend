@@ -1,10 +1,13 @@
 package cmpe273.fandango.controller;
 
+import cmpe273.fandango.dto.ParamSearchMovie;
 import cmpe273.fandango.dto.TheaterScheduleDto;
 import cmpe273.fandango.entity.Schedule;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.ScheduleService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

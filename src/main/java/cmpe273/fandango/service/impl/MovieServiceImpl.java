@@ -85,4 +85,12 @@ public class MovieServiceImpl implements MovieService {
     return movie;
   }
 
+  @Override
+  public Page<MovieSimpleDto> searchMoviesByPattern(String pattern, Pageable pageable) {
+    Page<Movie> movies = movieDao.searchMoviesByPattern(pattern, pageable);
+
+    return new PageImpl<>(StreamSupport
+        .stream(movies.spliterator(), false)
+        .map(movieMapper::toSimpleDto).collect(Collectors.toList()));
+  }
 }

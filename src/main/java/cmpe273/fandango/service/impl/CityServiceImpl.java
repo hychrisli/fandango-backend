@@ -5,6 +5,8 @@ import cmpe273.fandango.dao.TheaterDao;
 import cmpe273.fandango.entity.City;
 import cmpe273.fandango.service.CityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +26,11 @@ public class CityServiceImpl implements CityService{
   }
 
   @Override
+  public Page<City> searchCitiesByPattern(String pattern, Pageable pageable) {
+    return cityDao.searchCityByPattern(pattern, pageable);
+  }
+
+  @Override
   public City addCity(City city) {
     City curCity = cityDao.findCityByNameAndState(city.getCityName(), city.getState());
     if ( curCity != null) return null;
@@ -37,4 +44,6 @@ public class CityServiceImpl implements CityService{
     cityDao.delete(cityId);
     return true;
   }
+
+
 }
