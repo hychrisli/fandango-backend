@@ -5101,7 +5101,7 @@ and m.movie_id = mf.movie_id
 and mf.format_id = st.format_id
 and mf.format_id = f.format_id
 and MOD(m.movie_id, 2) <> MOD(t.theater_id, 3)
-and MOD(f.format_id, 3) <> MOD(t.theater_id, 3)
+and MOD(f.format_id, 4) <> MOD(t.theater_id, 4)
 and MOD(sd.day, 4) <> MOD(m.movie_id,4) ;
 
 

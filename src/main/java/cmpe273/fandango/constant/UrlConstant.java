@@ -42,12 +42,16 @@ public interface UrlConstant {
   String SEARCH_MOVIES = "/search-movies/{pattern}";
 
   String SCHEDULES = "/schedules";
+  String SCHEDULE = "/schedule";
+  String SCHEDULE_ID = "/schedule/{scheduleId}";
+  String SCHEDULES_CITYID_MOVIEID = "/schedules-city/{cityId}/{movieId}";
+  String SCHEDULES_ZIPCODE_MOVIEID = "/schedules-zipcode/{zipcode}/{movieId}";
+  String SCHEDULES_THEATER = "/schedules-theater/{theaterId}";
 
   String HOST = "http://localhost";
 
   String MOVIE_REVIEW = "/movie-review";
-  String MOVIE_REVIEW_ID = "/movie-review/{reviewID}";
-  String MOVIE_REVIEWS = "/movie-review/{movieId}";
-  String MOVIE_REVIEW_USER = "/movie-review/{userId}";
+  String MOVIE_REVIEW_ID = "/movie-review/{reviewId}";
+  String MOVIE_REVIEWS = "/movie-reviews";
 
 }

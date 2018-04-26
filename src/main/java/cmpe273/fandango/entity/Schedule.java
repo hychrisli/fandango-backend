@@ -1,5 +1,6 @@
 package cmpe273.fandango.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Schedule {
   private Format format;
 
   @Column(name="schedule_date")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="US/Pacific")
   private Date scheduleDate;
 
   private Time showtime;

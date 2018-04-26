@@ -4,12 +4,12 @@ import cmpe273.fandango.entity.Theater;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface TheaterDao extends CrudRepository<Theater, Integer>{
+public interface TheaterDao extends PagingAndSortingRepository<Theater, Integer> {
 
 
   @Query("select t from Theater t where t.city.cityId = :cityId")

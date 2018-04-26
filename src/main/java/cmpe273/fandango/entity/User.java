@@ -43,9 +43,7 @@ public class User {
   @Column(name="image_url")
   private String imageUrl;
 
-  @Type(type="yes_no")
-  @Column(name="is_admin")
-  private Boolean isAdmin;
+  private Integer role;
 
   @Column(name="card_num")
   private String cardNum;
@@ -164,12 +162,12 @@ public class User {
     this.review = review;
   }
 
-  public Boolean getAdmin() {
-    return isAdmin;
+  public Integer getRole() {
+    return role;
   }
 
-  public void setAdmin(Boolean admin) {
-    isAdmin = admin;
+  public void setRole(Integer role) {
+    this.role = role;
   }
 
   public String getCardNum() {

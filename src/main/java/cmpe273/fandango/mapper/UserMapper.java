@@ -25,7 +25,7 @@ public class UserMapper extends GenericMapper {
 
   public User updPojo (UserDto dto, User pojo){
     if ( dto == null ) return pojo;
-    updateValue(pojo::setAdmin, dto.getAdmin());
+    updateValue(pojo::setRole, dto.getRole());
     updateValue(pojo::setCity, dto.getCity());
     updateValue(pojo::setCardNum, dto.getCardNum());
     updateValue(pojo::setCardCvv, dto.getCardCvv());

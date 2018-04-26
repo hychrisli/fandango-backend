@@ -10,16 +10,14 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MovieReviewDao extends PagingAndSortingRepository<MovieReview, Integer>{
-    @Query("select mr from MovieReview mr join mr.movie mv where mr.reviewId = :reviewId")
-    MovieReview SelectAllByReviewId(@Param("reviewId") Integer reviewId);
 
     @Query("select mr from MovieReview mr where mr.movie.movieId = :movieId")
-    List<MovieReview> SelectByReviewId(@Param("movieId") Integer movieId);
+    Page<MovieReview> findAllByMovieId(Pageable pageable, @Param("movieId") Integer movieId);
 
-    @Query("select mr from MovieReview mr join mr.movie mv where mr.movie.movieId = :movieId")
-    Page<MovieReview> findAllByPages(Pageable pageable, @Param("movieId") Integer movieId);
+    @Query("select mr from MovieReview mr where mr.user.userId = :userId")
+    Page<MovieReview> findAllByUserId(Pageable pageable, @Param("userId") Integer userId);
 
-    @Query("select mr from MovieReview mr join mr.user mv where mr.user.userId = :userId")
-    Page<MovieReview> findAllByPagesUserId(Pageable pageable, @Param("userId") Integer userId);
+    @Query("select mr from MovieReview mr where mr.movie.movieId = :movieId and mr.user.userId = :userId ")
+    Page<MovieReview> findAllByMovieIdAndUserId(Pageable pageable, @Param("movieId") Integer movieId, @Param("userId") Integer userId);
 
 }

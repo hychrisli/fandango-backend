@@ -1,7 +1,11 @@
 package cmpe273.fandango.service.impl;
 
+import cmpe273.fandango.dao.FormatDao;
+import cmpe273.fandango.dao.MovieDao;
 import cmpe273.fandango.dao.ScheduleDao;
+import cmpe273.fandango.dao.TheaterDao;
 import cmpe273.fandango.dto.*;
+import cmpe273.fandango.entity.Format;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Schedule;
 import cmpe273.fandango.entity.Theater;
@@ -24,6 +28,15 @@ public class ScheduleServiceImpl implements ScheduleService {
   @Autowired
   ScheduleDao scheduleDao;
 
+  @Autowired
+  MovieDao movieDao;
+
+  @Autowired
+  TheaterDao theaterDao;
+
+  @Autowired
+  FormatDao formatDao;
+
   private TheaterMapper theaterMapper = new TheaterMapper();
 
   private ScheduleMapper scheduleMapper = new ScheduleMapper();
@@ -31,21 +44,59 @@ public class ScheduleServiceImpl implements ScheduleService {
   private MovieMapper movieMapper = new MovieMapper();
 
   @Override
-  public List<TheaterScheduleDto> getNearByMovieSchedule(Integer cityId, Integer movieId) {
+  public Schedule createSchedule(ParamCreateSchedule param) {
+    Movie movie = movieDao.findOne(param.getMovieId());
+    Theater theater = theaterDao.findOne(param.getTheaterId());
+    Format format = formatDao.findOne(param.getFormatId());
 
-    Date today = DateTime.getToday();
-    List<Schedule> schedules = scheduleDao.findNearByMovieSchedule(cityId, movieId, today);
-    Map<Integer, TheaterScheduleDto> lkp = new HashMap<>();
+    if ( movie == null || theater == null || format == null) return null;
+    if ( ! movie.getFormats().contains(format)) return null;
 
-    for (Schedule s : schedules) {
-      Integer key = s.getTheater().getTheaterId();
-      TheaterScheduleDto tsd = lkp.getOrDefault(key,
-          theaterMapper.toTheaterScheduleDto(s.getTheater()));
-      if (tsd.getSchedules() == null) tsd.setSchedules(new ArrayList<>());
-      tsd.getSchedules().add(scheduleMapper.toScheduleSimpleDto(s));
-      lkp.put(key, tsd);
-    }
-    return new ArrayList<>(lkp.values());
+    Schedule schedule = scheduleMapper.toPojo(param);
+    schedule.setMovie(movie);
+    schedule.setTheater(theater);
+    schedule.setFormat(format);
+
+    return scheduleDao.save(schedule);
+  }
+
+  @Override
+  public Schedule updateSchedule(Long scheduleId, ParamUpdateSchedule param) {
+    Schedule schedule = scheduleDao.findOne(scheduleId);
+    if (schedule == null) return null;
+    schedule = scheduleMapper.updPojo(param, schedule);
+    return scheduleDao.save(schedule);
+  }
+
+  @Override
+  public Schedule getScheduleById(Long scheduleId) {
+    return scheduleDao.findOne(scheduleId);
+  }
+
+  @Override
+  public Boolean deleteSchedule(Long scheduleId) {
+    Schedule schedule = scheduleDao.findOne(scheduleId);
+    if ( schedule == null) return false;
+    scheduleDao.delete(scheduleId);
+    return true;
+  }
+
+  @Override
+  public Page<SchedulePerTheaterDto> getScheduleInTheatersByCityId(Integer cityId, Integer movieId, Pageable pageable) {
+    List<Schedule> schedules = scheduleDao.findMovieScheduleByCityId(cityId, movieId, DateTime.getToday());
+    return getSchedulePerTheaterToday(schedules, pageable);
+  }
+
+  @Override
+  public Page<SchedulePerTheaterDto> getScheduleInTheatersByzipcode(String zipcode, Integer movieId, Pageable pageable) {
+    List<Schedule> schedules = scheduleDao.findMovieScheduleByZipcode(zipcode, movieId, DateTime.getToday());
+    return getSchedulePerTheaterToday(schedules, pageable);
+  }
+
+  @Override
+  public Page<SchedulePerMovieDto> getScheduleByTheaterId(Integer theaterId, Pageable pageable) {
+    List<Schedule> schedules = scheduleDao.findMovieSchedulesByTheaterId(theaterId, DateTime.getToday());
+    return getSchuedulePerMovieToday(schedules, pageable);
   }
 
   @Override
@@ -120,5 +171,42 @@ public class ScheduleServiceImpl implements ScheduleService {
     Collections.sort(theaterList);
 
     return Pagintation.getPage(theaterList, pageable);
+  }
+
+  private Page<SchedulePerTheaterDto> getSchedulePerTheaterToday(List<Schedule> schedules, Pageable pageable) {
+    Map<Integer, SchedulePerTheaterDto> lkp = new HashMap<>();
+
+    for (Schedule s : schedules) {
+      Integer key = s.getTheater().getTheaterId();
+      SchedulePerTheaterDto sptd = lkp.getOrDefault(key,
+          theaterMapper.toPerTheaterDto(s.getTheater()));
+      if (sptd.getSchedules() == null) sptd.setSchedules(new ArrayList<>());
+      sptd.getSchedules().add(scheduleMapper.toScheduleSimpleDto(s));
+      lkp.put(key, sptd);
+    }
+
+    List<SchedulePerTheaterDto> sptDtos=  new ArrayList<>(lkp.values());
+    Collections.sort(sptDtos);
+
+    return Pagintation.getPage(sptDtos, pageable);
+  }
+
+  private Page<SchedulePerMovieDto> getSchuedulePerMovieToday(List<Schedule> schedules, Pageable pageable) {
+    Map<Integer, SchedulePerMovieDto> lkp = new HashMap<>();
+
+    for ( Schedule s: schedules) {
+      Integer key = s.getMovie().getMovieId();
+      SchedulePerMovieDto spmd = lkp.getOrDefault(key, theaterMapper.toPerMovieDto(s.getMovie()));
+      if (spmd.getSchedules() == null ) spmd.setSchedules(new ArrayList<>());
+      spmd.getSchedules().add(scheduleMapper.toScheduleSimpleDto(s));
+      lkp.put(key, spmd);
+
+    }
+
+    List<SchedulePerMovieDto> spmdDtos = new ArrayList<>(lkp.values());
+    Collections.sort(spmdDtos);
+
+    return Pagintation.getPage(spmdDtos, pageable);
+
   }
 }

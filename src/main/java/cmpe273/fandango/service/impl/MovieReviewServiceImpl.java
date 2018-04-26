@@ -10,14 +10,19 @@ import cmpe273.fandango.dao.MovieReviewDao;
 import cmpe273.fandango.entity.MovieReview;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import cmpe273.fandango.dao.MovieReviewDao;
 import cmpe273.fandango.mapper.MovieReviewMapper;
 import cmpe273.fandango.dao.MovieDao;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class MovieReviewServiceImpl implements MovieReviewService {
@@ -34,7 +39,7 @@ public class MovieReviewServiceImpl implements MovieReviewService {
 
     @Override
     public MovieReviewDto getMovieReviews (Integer reviewId) {
-        MovieReview movieReview = movieReviewDao.SelectAllByReviewId(reviewId);
+        MovieReview movieReview = movieReviewDao.findOne(reviewId);
 
         if (movieReview != null) {
             MovieReviewDto movieReviewDto = movieReviewMapper.toDto(movieReview);
@@ -94,11 +99,22 @@ public class MovieReviewServiceImpl implements MovieReviewService {
         movieReview = movieReviewMapper.updPojo(dto, movieReview);
         movieReviewDao.save(movieReview);
         return movieReviewMapper.toSimpleDto(movieReview);
-
     }
 
-    public List<MovieReviewDto> pageSearchMovieReview(Pageable pageable, Integer movieId) {
-        Page<MovieReview> movieReviews = movieReviewDao.findAllByPages(pageable,movieId);
+    @Override
+    public Page<MovieReviewDto> pageSearchMovieReview(Pageable pageable, Integer movieId, Integer userId) {
+
+        Page<MovieReview> movieReviews;
+
+        if ( movieId != null && userId != null)
+            movieReviews = movieReviewDao.findAllByMovieIdAndUserId(pageable, movieId, userId);
+        else if ( movieId != null )
+            movieReviews = movieReviewDao.findAllByMovieId(pageable, movieId);
+        else if ( userId != null)
+            movieReviews = movieReviewDao.findAllByUserId(pageable, userId);
+        else
+            movieReviews = movieReviewDao.findAll(pageable);
+
         List<MovieReviewDto> result = new ArrayList<>();
         for (MovieReview movieReview : movieReviews) {
 
@@ -108,24 +124,9 @@ public class MovieReviewServiceImpl implements MovieReviewService {
             movieReviewDto.setMovieTitle(movieReview.getMovie().getMovieTitle());
             result.add(movieReviewDto);
         }
-        return result;
+
+
+        return new PageImpl<> (result, pageable, movieReviews.getTotalElements());
     }
-
-    public List<MovieReviewDto> pageSearchMovieReviewUserId(Pageable pageable, Integer userId) {
-        Page<MovieReview> movieReviews = movieReviewDao.findAllByPagesUserId(pageable,userId);
-        List<MovieReviewDto> result = new ArrayList<>();
-        for (MovieReview movieReview : movieReviews) {
-
-            MovieReviewDto movieReviewDto = movieReviewMapper.toDto(movieReview);
-            movieReviewDto.setMovieId(movieReview.getMovie().getMovieId());
-            movieReviewDto.setUserId(movieReview.getUser().getUserId());
-            movieReviewDto.setMovieTitle(movieReview.getMovie().getMovieTitle());
-            result.add(movieReviewDto);
-        }
-        return result;
-    }
-
-
-
 
 }

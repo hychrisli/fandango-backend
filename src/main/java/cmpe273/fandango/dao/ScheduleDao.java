@@ -4,12 +4,13 @@ import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Schedule;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
 
-public interface ScheduleDao extends CrudRepository<Schedule, Long> {
+public interface ScheduleDao extends PagingAndSortingRepository<Schedule, Long> {
 
   @Query("select count(s) from Schedule s where s.theater.theaterId = :theaterId")
   Integer countAllByTheaterId(@Param("theaterId") Integer theaterId);
@@ -18,11 +19,26 @@ public interface ScheduleDao extends CrudRepository<Schedule, Long> {
       "s.theater.city.cityId = :cityId and " +
       "s.movie.movieId = :movieId and " +
       "s.scheduleDate = :today")
-  List<Schedule> findNearByMovieSchedule (
+  List<Schedule> findMovieScheduleByCityId (
       @Param("cityId") Integer cityId,
       @Param("movieId") Integer movieId,
       @Param("today") Date today);
 
+  @Query("select s from Schedule s where " +
+      "s.theater.zipcode = :zipcode and " +
+      "s.movie.movieId = :movieId and " +
+      "s.scheduleDate = :today")
+  List<Schedule> findMovieScheduleByZipcode (
+      @Param("zipcode") String zipcode,
+      @Param("movieId") Integer movieId,
+      @Param("today") Date today);
+
+  @Query("select s from Schedule s where " +
+      "s.theater.theaterId = :theaterId and " +
+      "s.scheduleDate = :today")
+  List<Schedule> findMovieSchedulesByTheaterId (
+      @Param("theaterId") Integer theaterId,
+      @Param("today") Date today);
 
   @Query("select s from Schedule s " +
       "where s.price >= :minPrice and s.price <= :maxPrice " +

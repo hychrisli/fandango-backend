@@ -1,6 +1,7 @@
 package cmpe273.fandango.dto;
 
 public class MovieReviewSimpleDto {
+
     private Integer movieId;
 
     private Integer stars;
