@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.Date;
 
 public class MovieSimpleDto {
@@ -11,6 +13,7 @@ public class MovieSimpleDto {
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private Integer movieId;
 
+  @NotNull
   private String movieTitle;
 
   private String movieDesc;
@@ -27,7 +30,7 @@ public class MovieSimpleDto {
   private String mpaaRating;
 
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-  private Float stars;
+  private Float stars = 5.0f;
 
   private Integer length;
 

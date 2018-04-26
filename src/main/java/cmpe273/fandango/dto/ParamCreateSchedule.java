@@ -25,14 +25,11 @@ public class ParamCreateSchedule {
   @NotNull
   private Time showtime;
 
-  @NotNull
-  private Integer totSeats;
+  private Integer totSeats = 50;
 
-  @NotNull
-  private Integer availSeats;
+  private Integer availSeats = 50;
 
-  @NotNull
-  private Float Price;
+  private Float Price = 15.0f;
 
   public Integer getMovieId() {
     return movieId;

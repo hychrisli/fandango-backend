@@ -35,12 +35,12 @@ public class Schedule {
   private Time showtime;
 
   @Column(name="tot_seats")
-  private Integer totSeats;
+  private Integer totSeats = 50;
 
   @Column(name="avail_seats")
-  private Integer availSeats;
+  private Integer availSeats = 50;
 
-  private Float price;
+  private Float price = 15.0f;
 
   public Long getScheduleId() {
     return scheduleId;

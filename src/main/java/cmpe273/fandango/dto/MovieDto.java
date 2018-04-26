@@ -25,7 +25,7 @@ public class MovieDto {
 
   private String mpaaRating;
 
-  private Float stars;
+  private Float stars = 5.0f;
 
   private Integer length;
 
