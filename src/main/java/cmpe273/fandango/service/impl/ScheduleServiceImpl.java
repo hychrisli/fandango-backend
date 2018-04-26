@@ -1,7 +1,11 @@
 package cmpe273.fandango.service.impl;
 
+import cmpe273.fandango.dao.FormatDao;
+import cmpe273.fandango.dao.MovieDao;
 import cmpe273.fandango.dao.ScheduleDao;
+import cmpe273.fandango.dao.TheaterDao;
 import cmpe273.fandango.dto.*;
+import cmpe273.fandango.entity.Format;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Schedule;
 import cmpe273.fandango.entity.Theater;
@@ -24,11 +28,58 @@ public class ScheduleServiceImpl implements ScheduleService {
   @Autowired
   ScheduleDao scheduleDao;
 
+  @Autowired
+  MovieDao movieDao;
+
+  @Autowired
+  TheaterDao theaterDao;
+
+  @Autowired
+  FormatDao formatDao;
+
   private TheaterMapper theaterMapper = new TheaterMapper();
 
   private ScheduleMapper scheduleMapper = new ScheduleMapper();
 
   private MovieMapper movieMapper = new MovieMapper();
+
+  @Override
+  public Schedule createSchedule(ParamCreateSchedule param) {
+    Movie movie = movieDao.findOne(param.getMovieId());
+    Theater theater = theaterDao.findOne(param.getTheaterId());
+    Format format = formatDao.findOne(param.getFormatId());
+
+    if ( movie == null || theater == null || format == null) return null;
+    if ( ! movie.getFormats().contains(format)) return null;
+
+    Schedule schedule = scheduleMapper.toPojo(param);
+    schedule.setMovie(movie);
+    schedule.setTheater(theater);
+    schedule.setFormat(format);
+
+    return scheduleDao.save(schedule);
+  }
+
+  @Override
+  public Schedule updateSchedule(Long scheduleId, ParamUpdateSchedule param) {
+    Schedule schedule = scheduleDao.findOne(scheduleId);
+    if (schedule == null) return null;
+    schedule = scheduleMapper.updPojo(param, schedule);
+    return scheduleDao.save(schedule);
+  }
+
+  @Override
+  public Schedule getScheduleById(Long scheduleId) {
+    return scheduleDao.findOne(scheduleId);
+  }
+
+  @Override
+  public Boolean deleteSchedule(Long scheduleId) {
+    Schedule schedule = scheduleDao.findOne(scheduleId);
+    if ( schedule == null) return false;
+    scheduleDao.delete(scheduleId);
+    return true;
+  }
 
   @Override
   public Page<SchedulePerTheaterDto> getScheduleInTheatersByCityId(Integer cityId, Integer movieId, Pageable pageable) {

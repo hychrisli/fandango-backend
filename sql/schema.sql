@@ -9,15 +9,15 @@ CREATE TABLE USER
   password    VARCHAR(100) NOT NULL,
   first_name  VARCHAR(30),
   last_name   VARCHAR(30),
-  street     VARCHAR(100),
+  street      VARCHAR(100),
   city        VARCHAR(30),
   state       CHAR(2),
   zipcode     CHAR(5),
   phone       CHAR(15),
   email       VARCHAR(50) NOT NULL,
   image_url   VARCHAR(100),
-  is_admin    CHAR(1) DEFAULT 'F',
-  card_num VARCHAR(20),
+  role        INTEGER DEFAULT 1,
+  card_num    VARCHAR(20),
   card_cvv    VARCHAR(4),
   card_expire DATE
 );

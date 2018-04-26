@@ -21,6 +21,8 @@ public interface JsonConstant {
   String KEY_THEATER = "theater";
   String KEY_THEATERS = "theaters";
 
+  String KEY_SCHEDULE = "schedule";
+
   String KEY_CONTENT = "content";
   String KEY_MOVIE_REVIEW = "Review";
 

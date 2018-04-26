@@ -34,7 +34,7 @@ public class UserDto {
 
   private String imageUrl;
 
-  private Boolean isAdmin;
+  private Integer role;
 
   private String cardNum;
 
@@ -139,12 +139,12 @@ public class UserDto {
     this.imageUrl = imageUrl;
   }
 
-  public Boolean getAdmin() {
-    return isAdmin;
+  public Integer getRole() {
+    return role;
   }
 
-  public void setAdmin(Boolean admin) {
-    isAdmin = admin;
+  public void setRole(Integer role) {
+    this.role = role;
   }
 
   public String getCardNum() {
