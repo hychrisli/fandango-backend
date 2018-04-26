@@ -43,7 +43,7 @@ public class User {
   @Column(name="image_url")
   private String imageUrl;
 
-  private Integer role;
+  private Integer role = 1;
 
   @Column(name="card_num")
   private String cardNum;

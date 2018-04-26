@@ -38,7 +38,7 @@ public class Movie {
   @Column(name="mpaa_rating")
   private String mpaaRating;
 
-  private Float stars;
+  private Float stars = 5.0f;
 
   private Integer length;
 
