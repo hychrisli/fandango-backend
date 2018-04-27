@@ -3,72 +3,99 @@ package cmpe273.fandango.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "MOVIE_REVIEW")
 public class MovieReview {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "review_id")
-    private Integer reviewId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "review_id")
+  private Integer reviewId;
 
-    @Column(name = "stars")
-    private Integer stars;
+  @Column(name = "review_title")
+  private String reviewTitle;
 
+  @Column(name = "stars")
+  private Integer stars;
 
-    @Column(name = "comment")
-    private String comment;
+  @Column(name = "comment")
+  private String comment;
 
-    @ManyToOne
-    @JoinColumn(name = "movie_id")
-    @JsonIgnore
-    private Movie movie;
+  @Column(name = "post_date")
+  private Date postDate;
 
+  @ManyToOne
+  @JoinColumn(name = "movie_id")
+  @JsonIgnore
+  private Movie movie;
 
+  @ManyToOne
+  @JoinColumn(name = "user_id")
+  @JsonIgnore
+  private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+  public Integer getReviewID() {
+    return reviewId;
+  }
 
-    @JsonIgnore
-    private User user;
+  public void setReviewID(Integer reviewID) {
+    this.reviewId = reviewID;
+  }
 
-    public Integer getReviewID() {
-        return reviewId;
-    }
+  public Integer getStars() {
+    return stars;
+  }
 
-    public void setReviewID(Integer reviewID) {
-        this.reviewId = reviewID;
-    }
+  public void setStars(Integer stars) {
+    this.stars = stars;
+  }
 
-    public Integer getStars() {
-        return stars;
-    }
+  public String getComment() {
+    return comment;
+  }
 
-    public void setStars(Integer stars) {
-        this.stars = stars;
-    }
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
 
-    public String getComment() {
-        return comment;
-    }
+  public Movie getMovie() {
+    return movie;
+  }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+  public void setMovie(Movie movie) {
+    this.movie = movie;
+  }
 
-    public Movie getMovie() {
-        return movie;
-    }
+  public User getUser() {
+    return user;
+  }
 
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
+  public void setUser(User user) {
+    this.user = user;
+  }
 
-    public User getUser() {
-        return user;
-    }
+  public Integer getReviewId() {
+    return reviewId;
+  }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+  public void setReviewId(Integer reviewId) {
+    this.reviewId = reviewId;
+  }
+
+  public String getReviewTitle() {
+    return reviewTitle;
+  }
+
+  public void setReviewTitle(String reviewTitle) {
+    this.reviewTitle = reviewTitle;
+  }
+
+  public Date getPostDate() {
+    return postDate;
+  }
+
+  public void setPostDate(Date postDate) {
+    this.postDate = postDate;
+  }
 }
