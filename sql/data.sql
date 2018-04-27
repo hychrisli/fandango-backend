@@ -6365,3 +6365,6 @@ insert into MOVIE_REVIEW (movie_id, user_id, review_title, stars, comment, post_
 insert into MOVIE_REVIEW (movie_id, user_id, review_title, stars, comment, post_date) values (487, 41, 'Down-sized background success', 3, 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin risus. Praesent lectus.', '2017-11-04');
 insert into MOVIE_REVIEW (movie_id, user_id, review_title, stars, comment, post_date) values (176, 167, 'Proactive bandwidth-monitored task-force', 3, 'Aliquam quis turpis eget elit sodales scelerisque. Mauris sit amet eros. Suspendisse accumsan tortor quis turpis.', '2017-12-23');
 insert into MOVIE_REVIEW (movie_id, user_id, review_title, stars, comment, post_date) values (328, 37, 'Front-line executive website', 3, 'Maecenas ut massa quis augue luctus tincidunt. Nulla mollis molestie lorem. Quisque ut erat.', '2017-10-17');
+
+
+update MOVIE m set stars = COALESCE( (SELECT avg(stars) FROM MOVIE_REVIEW mr WHERE mr.movie_id = m.movie_id), 5);
