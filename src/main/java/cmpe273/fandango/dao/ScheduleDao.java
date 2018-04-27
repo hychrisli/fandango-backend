@@ -33,6 +33,24 @@ public interface ScheduleDao extends PagingAndSortingRepository<Schedule, Long> 
       @Param("movieId") Integer movieId,
       @Param("today") Date today);
 
+
+  @Query("select s from Schedule s where " +
+      "s.theater.city.cityId = :cityId and " +
+      "s.scheduleDate = :today " +
+      "order by s.theater.theaterId, s.movie.releaseDate desc, s.showtime")
+  List<Schedule> findAllScheduleByCityId (
+      @Param("cityId") Integer cityId,
+      @Param("today") Date today);
+
+  @Query("select s from Schedule s where " +
+      "s.theater.zipcode = :zipcode and " +
+      "s.scheduleDate = :today " +
+      "order by s.theater.theaterId, s.movie.releaseDate desc, s.showtime" )
+  List<Schedule> findAllScheduleByZipcode (
+      @Param("zipcode") String zipcode,
+      @Param("today") Date today);
+
+
   @Query("select s from Schedule s where " +
       "s.theater.theaterId = :theaterId and " +
       "s.scheduleDate = :today")

@@ -7,9 +7,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface ScheduleService {
 
-  Page<SchedulePerTheaterDto> getScheduleInTheatersByCityId(Integer cityId, Integer movieId, Pageable pageable);
+  Page<SchedulePerTheaterDto> getMovieScheduleInTheatersByCityId(Integer cityId, Integer movieId, Pageable pageable);
 
-  Page<SchedulePerTheaterDto> getScheduleInTheatersByzipcode(String zipcode, Integer movieId, Pageable pageable);
+  Page<SchedulePerTheaterDto> getMovieScheduleInTheatersByzipcode(String zipcode, Integer movieId, Pageable pageable);
+
+  Page<ScheduleAllTheaterMovieDto> getAllScheduleInTheatersByCityId(Integer cityId, Pageable pageable);
+
+  Page<ScheduleAllTheaterMovieDto> getAllScheduleInTheatersByzipcode(String zipcode, Pageable pageable);
 
   Page<SchedulePerMovieDto> getScheduleByTheaterId(Integer theaterId, Pageable pageable);
 

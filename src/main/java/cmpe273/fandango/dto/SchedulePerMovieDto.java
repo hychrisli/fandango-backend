@@ -3,6 +3,7 @@ package cmpe273.fandango.dto;
 import cmpe273.fandango.entity.Format;
 import cmpe273.fandango.entity.Genre;
 import cmpe273.fandango.entity.MovieCharacter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +20,7 @@ public class SchedulePerMovieDto implements Comparable<SchedulePerMovieDto>{
 
   private String coverImageUrl;
 
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="US/Pacific")
   private Date releaseDate;
 
   private String mpaaRating;

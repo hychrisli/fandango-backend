@@ -44,7 +44,9 @@ public interface UrlConstant {
   String SCHEDULES = "/schedules";
   String SCHEDULE = "/schedule";
   String SCHEDULE_ID = "/schedule/{scheduleId}";
+  String SCHEDULES_CITYID = "/schedules-city/{cityId}";
   String SCHEDULES_CITYID_MOVIEID = "/schedules-city/{cityId}/{movieId}";
+  String SCHEDULES_ZIPCODE = "/schedules-zipcdoe/{zipcode}";
   String SCHEDULES_ZIPCODE_MOVIEID = "/schedules-zipcode/{zipcode}/{movieId}";
   String SCHEDULES_THEATER = "/schedules-theater/{theaterId}";
 

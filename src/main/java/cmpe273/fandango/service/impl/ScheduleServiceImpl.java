@@ -82,21 +82,33 @@ public class ScheduleServiceImpl implements ScheduleService {
   }
 
   @Override
-  public Page<SchedulePerTheaterDto> getScheduleInTheatersByCityId(Integer cityId, Integer movieId, Pageable pageable) {
+  public Page<SchedulePerTheaterDto> getMovieScheduleInTheatersByCityId(Integer cityId, Integer movieId, Pageable pageable) {
     List<Schedule> schedules = scheduleDao.findMovieScheduleByCityId(cityId, movieId, DateTime.getToday());
     return getSchedulePerTheaterToday(schedules, pageable);
   }
 
   @Override
-  public Page<SchedulePerTheaterDto> getScheduleInTheatersByzipcode(String zipcode, Integer movieId, Pageable pageable) {
+  public Page<SchedulePerTheaterDto> getMovieScheduleInTheatersByzipcode(String zipcode, Integer movieId, Pageable pageable) {
     List<Schedule> schedules = scheduleDao.findMovieScheduleByZipcode(zipcode, movieId, DateTime.getToday());
     return getSchedulePerTheaterToday(schedules, pageable);
   }
 
   @Override
+  public Page<ScheduleAllTheaterMovieDto> getAllScheduleInTheatersByCityId(Integer cityId, Pageable pageable) {
+    List<Schedule> schedules = scheduleDao.findAllScheduleByCityId(cityId, DateTime.getToday());
+    return getAllSchedulePerTheaterToday(schedules, pageable);
+  }
+
+  @Override
+  public Page<ScheduleAllTheaterMovieDto> getAllScheduleInTheatersByzipcode(String zipcode, Pageable pageable) {
+    List<Schedule> schedules = scheduleDao.findAllScheduleByZipcode(zipcode, DateTime.getToday());
+    return getAllSchedulePerTheaterToday(schedules, pageable);
+  }
+
+  @Override
   public Page<SchedulePerMovieDto> getScheduleByTheaterId(Integer theaterId, Pageable pageable) {
     List<Schedule> schedules = scheduleDao.findMovieSchedulesByTheaterId(theaterId, DateTime.getToday());
-    return getSchuedulePerMovieToday(schedules, pageable);
+    return getSchedulePerMovieToday(schedules, pageable);
   }
 
   @Override
@@ -191,7 +203,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     return Pagintation.getPage(sptDtos, pageable);
   }
 
-  private Page<SchedulePerMovieDto> getSchuedulePerMovieToday(List<Schedule> schedules, Pageable pageable) {
+  private Page<SchedulePerMovieDto> getSchedulePerMovieToday(List<Schedule> schedules, Pageable pageable) {
     Map<Integer, SchedulePerMovieDto> lkp = new HashMap<>();
 
     for ( Schedule s: schedules) {
@@ -208,5 +220,38 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     return Pagintation.getPage(spmdDtos, pageable);
 
+  }
+
+  private Page<ScheduleAllTheaterMovieDto> getAllSchedulePerTheaterToday(List<Schedule> schedules, Pageable pageable) {
+    // Note: sorted Schedules only, order by theaterId, movie releaseDate, showtime
+
+    List<ScheduleAllTheaterMovieDto> satmDtos = new ArrayList<>();
+
+    for (Schedule s: schedules) {
+      Theater theater = s.getTheater();
+      Integer satmNum = satmDtos.size();
+      if ( satmNum == 0 || ! satmDtos.get(satmNum - 1).getTheaterId().equals(theater.getTheaterId())){
+        satmDtos.add(theaterMapper.toSceduleAllTheaterMovieDto(theater));
+        satmNum += 1;
+      }
+      ScheduleAllTheaterMovieDto satmDto = satmDtos.get(satmNum - 1);
+      if ( satmDto.getMovies() == null)
+        satmDto.setMovies(new ArrayList<>());
+
+      List<SchedulePerMovieDto> spmDtos = satmDto.getMovies();
+      Movie movie = s.getMovie();
+      Integer spmNum = spmDtos.size();
+      if ( spmNum == 0 || ! spmDtos.get(spmNum - 1).getMovieId().equals(movie.getMovieId())) {
+        spmDtos.add(theaterMapper.toPerMovieDto(movie));
+        spmNum += 1;
+      }
+      SchedulePerMovieDto spmDto = spmDtos.get(spmNum - 1);
+      if ( spmDto.getSchedules() == null)
+        spmDto.setSchedules(new ArrayList<>());
+
+      spmDto.getSchedules().add(scheduleMapper.toScheduleSimpleDto(s));
+    }
+
+    return Pagintation.getPage(satmDtos, pageable);
   }
 }
