@@ -1,9 +1,6 @@
 package cmpe273.fandango.controller;
 
-import cmpe273.fandango.dto.ParamCreateSchedule;
-import cmpe273.fandango.dto.ParamUpdateSchedule;
-import cmpe273.fandango.dto.SchedulePerMovieDto;
-import cmpe273.fandango.dto.SchedulePerTheaterDto;
+import cmpe273.fandango.dto.*;
 import cmpe273.fandango.entity.Schedule;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.ScheduleService;
@@ -83,7 +80,24 @@ public class ScheduleController extends AbstractController{
   })
   @GetMapping(SCHEDULES_CITYID_MOVIEID)
   public Page<SchedulePerTheaterDto> getSchedulesByCityId(@PathVariable Integer cityId, @PathVariable Integer movieId, Pageable pageable) {
-    return scheduleService.getScheduleInTheatersByCityId(cityId, movieId, pageable);
+    return scheduleService.getMovieScheduleInTheatersByCityId(cityId, movieId, pageable);
+  }
+
+
+  @ApiOperation(value = "Get All Movie Schedules by cityId [Topic: schedules]", response = JsonResponse.class)
+  @ApiImplicitParams({
+      @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+          value = "Results page you want to retrieve (0..N)"),
+      @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
+          value = "Number of records per page."),
+      @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
+          value = "Sorting criteria in the format: property(,asc|desc). " +
+              "Default sort order is ascending. " +
+              "Multiple sort criteria are supported.")
+  })
+  @GetMapping(SCHEDULES_CITYID)
+  public Page<ScheduleAllTheaterMovieDto> getAllSchedulesByCityId(@PathVariable Integer cityId, Pageable pageable) {
+    return scheduleService.getAllScheduleInTheatersByCityId(cityId, pageable);
   }
 
 
@@ -100,7 +114,23 @@ public class ScheduleController extends AbstractController{
   })
   @GetMapping(SCHEDULES_ZIPCODE_MOVIEID)
   public Page<SchedulePerTheaterDto> getSchedulesByZipcode(@PathVariable String zipcode, @PathVariable Integer movieId, Pageable pageable) {
-    return scheduleService.getScheduleInTheatersByzipcode(zipcode, movieId, pageable);
+    return scheduleService.getMovieScheduleInTheatersByzipcode(zipcode, movieId, pageable);
+  }
+
+  @ApiOperation(value = "Get Nearby Movie Schedules by zipcode [Topic: schedules]", response = JsonResponse.class)
+  @ApiImplicitParams({
+      @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
+          value = "Results page you want to retrieve (0..N)"),
+      @ApiImplicitParam(name = "size", dataType = "integer", paramType = "query",
+          value = "Number of records per page."),
+      @ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query",
+          value = "Sorting criteria in the format: property(,asc|desc). " +
+              "Default sort order is ascending. " +
+              "Multiple sort criteria are supported.")
+  })
+  @GetMapping(SCHEDULES_ZIPCODE)
+  public Page<ScheduleAllTheaterMovieDto> getAllSchedulesByZipcode(@PathVariable String zipcode, Pageable pageable) {
+    return scheduleService.getAllScheduleInTheatersByzipcode(zipcode, pageable);
   }
 
 

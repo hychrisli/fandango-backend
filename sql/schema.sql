@@ -135,8 +135,10 @@ CREATE TABLE MOVIE_REVIEW
     review_id INTEGER PRIMARY KEY AUTO_INCREMENT,
     movie_id INTEGER,
     user_id INTEGER,
+    review_title VARCHAR(100),
     stars INTEGER,
     comment VARCHAR(10000),
+    post_date DATE,
     FOREIGN KEY (user_id) REFERENCES USER(user_id),
     FOREIGN KEY (movie_id) REFERENCES MOVIE(movie_id)
 

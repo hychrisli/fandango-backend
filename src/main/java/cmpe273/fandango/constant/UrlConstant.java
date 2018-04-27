@@ -44,14 +44,17 @@ public interface UrlConstant {
   String SCHEDULES = "/schedules";
   String SCHEDULE = "/schedule";
   String SCHEDULE_ID = "/schedule/{scheduleId}";
+  String SCHEDULES_CITYID = "/schedules-city/{cityId}";
   String SCHEDULES_CITYID_MOVIEID = "/schedules-city/{cityId}/{movieId}";
+  String SCHEDULES_ZIPCODE = "/schedules-zipcdoe/{zipcode}";
   String SCHEDULES_ZIPCODE_MOVIEID = "/schedules-zipcode/{zipcode}/{movieId}";
   String SCHEDULES_THEATER = "/schedules-theater/{theaterId}";
 
   String HOST = "http://localhost";
 
   String MOVIE_REVIEW = "/movie-review";
-  String MOVIE_REVIEW_ID = "/movie-review/{reviewId}";
+  String MOVIE_REVIEW_USER_REVIEWID = "/movie-review/{userId}/{reviewId}";
+  String MOVIE_REVIEWID = "/movie-review/{reviewId}";
   String MOVIE_REVIEWS = "/movie-reviews";
 
 }

@@ -3,69 +3,81 @@ package cmpe273.fandango.dto;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.MovieReview;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Date;
 
 public class MovieReviewDto {
-    private Integer reviewId;
+  private Integer reviewId;
 
-    private Integer movieId;
+  private MovieSimpleDto movie;
 
-    private String movieTitle;
+  private UserSimpleDto user;
 
-    private Integer userId;
+  private String reviewTitle;
 
-    private Integer stars;
+  private Integer stars;
 
-    private String comment;
+  private String comment;
 
-    public Integer getReviewId() {
-        return reviewId;
-    }
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "US/Pacific")
+  private Date postDate;
 
-    public void setReviewId(Integer reviewId) {
-        this.reviewId = reviewId;
-    }
+  public Integer getReviewId() {
+    return reviewId;
+  }
 
-    public Integer getMovieId() {
-        return movieId;
-    }
+  public void setReviewId(Integer reviewId) {
+    this.reviewId = reviewId;
+  }
 
-    public void setMovieId(Integer movieId) {
-        this.movieId = movieId;
-    }
+  public MovieSimpleDto getMovie() {
+    return movie;
+  }
 
-    public String getMovieTitle() {
-        return movieTitle;
-    }
+  public void setMovie(MovieSimpleDto movie) {
+    this.movie = movie;
+  }
 
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
-    }
+  public UserSimpleDto getUser() {
+    return user;
+  }
 
-    public Integer getUserId() {
-        return userId;
-    }
+  public void setUser(UserSimpleDto user) {
+    this.user = user;
+  }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+  public String getReviewTitle() {
+    return reviewTitle;
+  }
 
+  public void setReviewTitle(String reviewTitle) {
+    this.reviewTitle = reviewTitle;
+  }
 
-    public String getComment() {
-        return comment;
-    }
+  public Integer getStars() {
+    return stars;
+  }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+  public void setStars(Integer stars) {
+    this.stars = stars;
+  }
 
-    public Integer getStars() {
-        return stars;
-    }
+  public String getComment() {
+    return comment;
+  }
 
-    public void setStars(Integer stars) {
-        this.stars = stars;
-    }
+  public void setComment(String comment) {
+    this.comment = comment;
+  }
+
+  public Date getPostDate() {
+    return postDate;
+  }
+
+  public void setPostDate(Date postDate) {
+    this.postDate = postDate;
+  }
 }
