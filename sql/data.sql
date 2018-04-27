@@ -259,7 +259,8 @@ insert into USER (username, password, first_name, last_name, street, city, state
 insert into USER (username, password, first_name, last_name, street, city, state, zipcode, phone, email, image_url, role, card_num, card_cvv, card_expire) values ('bferney6w', '$2a$10$bNqsANQaxojDrovhLCF2DeaSxXKMA6l1iss/nzzBkS/SdhhtWCPT6', 'Bert', 'Ferney', '20357 Rusk Hill', 'Sacramento', 'CA', '94245', '916-894-7182', 'bferney6w@usda.gov', 'http://dummyimage.com/170x150.jpg/cc0000/ffffff', 1, '374622548992402', 622, '2019-06-12');
 insert into USER (username, password, first_name, last_name, street, city, state, zipcode, phone, email, image_url, role, card_num, card_cvv, card_expire) values ('kledgister6x', '$2a$10$bNqsANQaxojDrovhLCF2DeaSxXKMA6l1iss/nzzBkS/SdhhtWCPT6', 'Kalli', 'Ledgister', '069 Haas Center', 'Irvine', 'CA', '92710', '714-838-1175', 'kledgister6x@4shared.com', 'http://dummyimage.com/225x103.jpg/ff4444/ffffff', 1, '5100143559381773', 709, '2020-05-11');
 
-
+insert into USER (username, password, first_name, last_name, street, city, state, zipcode, phone, email, image_url, role) values ('siriustom', '$2a$10$OiLZLQ1e8u1iTRxtyuHqBOp0fxUC/95WyD6m.NlAmmR2UqMesSEVq', 'Xiaoran', 'Lin', '9 Bobwhite Crossing', 'San Jose', 'CA', '' ||
+ '95118', '408-670-5756', 'egummow0@icq.com', 'http://dummyimage.com/126x131.jpg/5fa2dd/ffffff', 3);
 
 
 
