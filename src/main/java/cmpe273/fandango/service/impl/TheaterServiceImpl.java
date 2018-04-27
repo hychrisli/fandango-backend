@@ -3,9 +3,8 @@ package cmpe273.fandango.service.impl;
 import cmpe273.fandango.dao.CityDao;
 import cmpe273.fandango.dao.ScheduleDao;
 import cmpe273.fandango.dao.TheaterDao;
-import cmpe273.fandango.dto.TheaterDto;
+import cmpe273.fandango.dto.ParamCreateTheater;
 import cmpe273.fandango.entity.City;
-import cmpe273.fandango.entity.Schedule;
 import cmpe273.fandango.entity.Theater;
 import cmpe273.fandango.mapper.TheaterMapper;
 import cmpe273.fandango.service.TheaterService;
@@ -13,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class TheaterServiceImpl implements TheaterService {
@@ -28,7 +25,8 @@ public class TheaterServiceImpl implements TheaterService {
   @Autowired
   ScheduleDao scheduleDao;
 
-  private TheaterMapper theaterMapper = new TheaterMapper();
+  @Autowired
+  TheaterMapper theaterMapper;
 
   @Override
   public Page<Theater> getAllTheatersByCityId(Integer cityId, Pageable pageable) {
@@ -36,7 +34,7 @@ public class TheaterServiceImpl implements TheaterService {
   }
 
   @Override
-  public Theater addTheater(TheaterDto theaterDto) {
+  public Theater addTheater(ParamCreateTheater theaterDto) {
     Theater theater = theaterDao.findByTheaterNameAndCityId(theaterDto.getTheaterName(), theaterDto.getCityId());
     City city = cityDao.findOne(theaterDto.getCityId());
     if ( theater != null ) return null;

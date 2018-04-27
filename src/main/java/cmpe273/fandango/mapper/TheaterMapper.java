@@ -4,23 +4,18 @@ import cmpe273.fandango.dto.*;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Theater;
 
-public class TheaterMapper extends GenericMapper{
+public interface TheaterMapper {
 
-  public Theater toPojo ( TheaterDto dto) {
-    return mapT1toT2(dto, new Theater());
-  }
+  Theater toPojo (ParamCreateTheater dto);
 
-  public SchedulePerTheaterDto toPerTheaterDto (Theater pojo) {
-    return mapT1toT2(pojo, new SchedulePerTheaterDto());
-  }
+  TheaterDto toDto (Theater pojo);
 
-  public SchedulePerMovieDto toPerMovieDto(Movie pojo) {
-    return mapT1toT2(pojo, new SchedulePerMovieDto());
-  }
+  SchedulePerTheaterDto toPerTheaterDto (Theater pojo);
 
-  public TheaterMovieTodayDto toTheaterMovieTodayDto (Theater pojo) {return mapT1toT2(pojo, new TheaterMovieTodayDto());}
+  SchedulePerMovieDto toPerMovieDto(Movie pojo);
 
-  public ScheduleAllTheaterMovieDto toSceduleAllTheaterMovieDto (Theater pojo) {
-    return mapT1toT2(pojo, new ScheduleAllTheaterMovieDto());
-  }
+  TheaterMovieTodayDto toTheaterMovieTodayDto (Theater pojo);
+
+  ScheduleAllTheaterMovieDto toSceduleAllTheaterMovieDto (Theater pojo);
 }
+

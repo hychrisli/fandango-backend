@@ -13,6 +13,7 @@ import cmpe273.fandango.lib.DateTime;
 import cmpe273.fandango.lib.Pagintation;
 import cmpe273.fandango.mapper.MovieMapper;
 import cmpe273.fandango.mapper.ScheduleMapper;
+import cmpe273.fandango.mapper.impl.ScheduleMapperImpl;
 import cmpe273.fandango.mapper.TheaterMapper;
 import cmpe273.fandango.service.ScheduleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,11 +38,14 @@ public class ScheduleServiceImpl implements ScheduleService {
   @Autowired
   FormatDao formatDao;
 
-  private TheaterMapper theaterMapper = new TheaterMapper();
+  @Autowired
+  MovieMapper movieMapper;
 
-  private ScheduleMapper scheduleMapper = new ScheduleMapper();
+  @Autowired
+  TheaterMapper theaterMapper;
 
-  private MovieMapper movieMapper = new MovieMapper();
+  @Autowired
+  ScheduleMapper scheduleMapper;
 
   @Override
   public Schedule createSchedule(ParamCreateSchedule param) {

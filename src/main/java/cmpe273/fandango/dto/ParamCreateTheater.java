@@ -2,19 +2,21 @@ package cmpe273.fandango.dto;
 
 import javax.validation.constraints.NotNull;
 
-public class TheaterDto {
+public class ParamCreateTheater {
 
   private Integer theaterId;
 
+  @NotNull
   private String theaterName;
 
+  @NotNull
   private String street;
 
+  @NotNull
   private String zipcode;
 
-  private String city;
-
-  private String state;
+  @NotNull
+  private Integer cityId;
 
   public Integer getTheaterId() {
     return theaterId;
@@ -48,19 +50,11 @@ public class TheaterDto {
     this.zipcode = zipcode;
   }
 
-  public String getCity() {
-    return city;
+  public Integer getCityId() {
+    return cityId;
   }
 
-  public void setCity(String city) {
-    this.city = city;
-  }
-
-  public String getState() {
-    return state;
-  }
-
-  public void setState(String state) {
-    this.state = state;
+  public void setCityId(Integer cityId) {
+    this.cityId = cityId;
   }
 }

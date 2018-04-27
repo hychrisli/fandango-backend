@@ -9,7 +9,7 @@ public class GenericMapper {
 
   protected ModelMapper modelMapper;
 
-  GenericMapper() {
+  public GenericMapper() {
     modelMapper = new ModelMapper();
     modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
   }

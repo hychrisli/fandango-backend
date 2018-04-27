@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
   public UserDto updateUser(Integer userId, UserDto userDto) {
     User user = userDao.findUserByUserId(userId);
     System.out.print(userDto.getCardExpire());
-    if (user != null){
+    if (user != null) {
       user = userMapper.updPojo(userDto, user);
       userDao.save(user);
       return userMapper.toDto(user);
@@ -71,9 +71,9 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserDto loginUser(ParamLogin paramLogin) {
     User user = userDao.findUserByUsername(paramLogin.getUsername());
-    if ( user == null )
+    if (user == null)
       return null;
-    if(passwordEncoder.matches(paramLogin.getPassword(), user.getPassword()))
+    if (passwordEncoder.matches(paramLogin.getPassword(), user.getPassword()))
       return userMapper.toDto(user);
     else
       return null;
@@ -84,6 +84,6 @@ public class UserServiceImpl implements UserService {
     Page<User> users = userDao.findAllBy(pageable);
     return new PageImpl<>(
         StreamSupport.stream(users.spliterator(), false)
-        .map( userMapper::toSimpleDto).collect(Collectors.toList()));
+            .map(userMapper::toSimpleDto).collect(Collectors.toList()), pageable, users.getTotalElements());
   }
 }

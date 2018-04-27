@@ -144,23 +144,6 @@ CREATE TABLE MOVIE_REVIEW
 
 );
 
-CREATE TABLE `TICKET_ORDER`
-(
-  order_id      BIGINT PRIMARY KEY AUTO_INCREMENT,
-  schedule_id   BIGINT,
-  user_id       INTEGER,
-  ticket_num    INTEGER,
-  order_total   DECIMAL(6, 2),
-  tax           DECIMAL(4, 2),
-  grand_total   DECIMAL(6, 2),
-  order_ts      DATETIME,
-  order_date    DATE,
-  order_month   DATE,
-  status        INTEGER,
-  FOREIGN KEY (schedule_id) REFERENCES SCHEDULE (schedule_id),
-  FOREIGN KEY (user_Id) REFERENCES USER (user_id)
-);
-
 
 CREATE TABLE REVENUE
 (

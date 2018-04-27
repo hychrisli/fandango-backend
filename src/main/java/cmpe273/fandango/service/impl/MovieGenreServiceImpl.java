@@ -2,11 +2,11 @@ package cmpe273.fandango.service.impl;
 
 import cmpe273.fandango.dao.GenreDao;
 import cmpe273.fandango.dao.MovieDao;
-import cmpe273.fandango.dto.MovieDto;
 import cmpe273.fandango.dto.MovieGenreDto;
 import cmpe273.fandango.entity.Genre;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.mapper.MovieMapper;
+import cmpe273.fandango.mapper.impl.MovieMapperImpl;
 import cmpe273.fandango.service.MovieGenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,8 @@ public class MovieGenreServiceImpl implements MovieGenreService{
   @Autowired
   MovieDao movieDao;
 
-  private MovieMapper movieMapper = new MovieMapper();
+  @Autowired
+  MovieMapper movieMapper;
 
   @Override
   public List<Genre> getAllGenres() {

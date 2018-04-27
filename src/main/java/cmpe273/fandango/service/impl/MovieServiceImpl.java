@@ -2,11 +2,10 @@ package cmpe273.fandango.service.impl;
 
 import cmpe273.fandango.dao.*;
 import cmpe273.fandango.dto.MovieDto;
-import cmpe273.fandango.dto.MovieFormatDto;
-import cmpe273.fandango.dto.MovieGenreDto;
 import cmpe273.fandango.dto.MovieSimpleDto;
 import cmpe273.fandango.entity.*;
 import cmpe273.fandango.mapper.MovieMapper;
+import cmpe273.fandango.mapper.impl.MovieMapperImpl;
 import cmpe273.fandango.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,7 +13,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -27,7 +25,8 @@ public class MovieServiceImpl implements MovieService {
   @Autowired
   private MpaaRatingDao mpaaRatingDao;
 
-  private MovieMapper movieMapper = new MovieMapper();
+  @Autowired
+  MovieMapper movieMapper;
 
   @Override
   public MovieSimpleDto CreateMovie(MovieSimpleDto movieSimpleDto) {
@@ -62,7 +61,7 @@ public class MovieServiceImpl implements MovieService {
 
     return new PageImpl<>(StreamSupport
         .stream(movies.spliterator(), false)
-        .map(movieMapper::toSimpleDto).collect(Collectors.toList()));
+        .map(movieMapper::toSimpleDto).collect(Collectors.toList()), pageable, movies.getTotalElements());
 
   }
 
@@ -91,6 +90,6 @@ public class MovieServiceImpl implements MovieService {
 
     return new PageImpl<>(StreamSupport
         .stream(movies.spliterator(), false)
-        .map(movieMapper::toSimpleDto).collect(Collectors.toList()));
+        .map(movieMapper::toSimpleDto).collect(Collectors.toList()), pageable, movies.getTotalElements());
   }
 }

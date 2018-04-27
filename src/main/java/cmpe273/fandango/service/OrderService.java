@@ -2,7 +2,9 @@ package cmpe273.fandango.service;
 
 import cmpe273.fandango.dto.OrderDto;
 import cmpe273.fandango.dto.ParamCreateOrder;
+import cmpe273.fandango.dto.ParamFilterOrder;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface OrderService {
 
@@ -14,9 +16,6 @@ public interface OrderService {
 
   OrderDto payOrder(Long orderId);
 
-  Page<OrderDto> getOrderByUserId(Integer userId);
-
-  Page<OrderDto> getOrderByMovieId(Integer movieId);
-
+  Page<OrderDto> getOrders(ParamFilterOrder dto, Pageable pageable);
 
 }
