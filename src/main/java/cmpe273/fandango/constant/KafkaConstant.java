@@ -6,6 +6,9 @@ public interface KafkaConstant {
   String KAFKA_TOPIC_MOVIES = "movies";
   String KAFKA_TOPIC_THEATERS = "theaters";
   String KAFKA_TOPIC_SCHEDULES = "schedules";
+  String KAFKA_TOPIC_REVIEWS = "reviews";
+  String KAFKA_TOPIC_ORDERS = "orders";
+  String KAFKA_TOPIC_ANALYTICS = "analytics";
 
   String METHOD = "method";
   String API_URL = "apiURL";

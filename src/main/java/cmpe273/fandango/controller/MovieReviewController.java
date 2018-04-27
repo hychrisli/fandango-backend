@@ -34,7 +34,7 @@ public class MovieReviewController extends AbstractController {
     return notFound();
   }
 
-  @ApiOperation(value = "Add New Review to Movie [Topic: Reviews]", response = JsonResponse.class)
+  @ApiOperation(value = "Add New Review to Movie [Topic: reviews]", response = JsonResponse.class)
   @PostMapping(MOVIE_REVIEW)
   public ResponseEntity<JsonResponse> addMovieReview(@RequestBody ParamCreateReview dto) {
     MovieReviewDto review = movieReviewService.addReview(dto);
@@ -44,7 +44,7 @@ public class MovieReviewController extends AbstractController {
       return notFound();
   }
 
-  @ApiOperation(value = "Delete a Review [Topic: Reviews]", response = JsonResponse.class)
+  @ApiOperation(value = "Delete a Review [Topic: reviews]", response = JsonResponse.class)
   @DeleteMapping(MOVIE_REVIEWID)
   public ResponseEntity<JsonResponse> removeMovieReview(@PathVariable Integer reviewId) {
 
@@ -55,7 +55,7 @@ public class MovieReviewController extends AbstractController {
       return notFound();
   }
 
-  @ApiOperation(value = "Update a Movie Review [Topic: movies]", response = JsonResponse.class)
+  @ApiOperation(value = "Update a Movie Review [Topic: reviews]", response = JsonResponse.class)
   @PutMapping(MOVIE_REVIEW_USER_REVIEWID)
   public ResponseEntity<JsonResponse> updateMovie(@PathVariable Integer userId, @PathVariable Integer reviewId, @RequestBody ParamUpdateReview dto) {
     MovieReviewDto movieReviewDto = movieReviewService.updateReview(userId, reviewId, dto);
@@ -66,7 +66,7 @@ public class MovieReviewController extends AbstractController {
   }
 
 
-  @ApiOperation(value = "Get All MovieReviews by movieId or userId [Topic: movieReview]", response = JsonResponse.class)
+  @ApiOperation(value = "Get All MovieReviews by movieId or userId [Topic: reviews]", response = JsonResponse.class)
   @ApiImplicitParams({
 
       @ApiImplicitParam(name = "movieId", dataType = "integer", paramType = "query",
