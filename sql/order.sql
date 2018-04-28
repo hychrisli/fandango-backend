@@ -1,5 +1,6 @@
 use fandango;
 
+DROP TABLE IF EXISTS `TICKET_ORDER` ;
 CREATE TABLE `TICKET_ORDER`
 (
   order_id      BIGINT PRIMARY KEY AUTO_INCREMENT,
@@ -2030,3 +2031,11 @@ set
   order_date = date(order_ts),
   order_month = date_format(order_ts, '%Y-%m-01'),
   status = 2;
+
+commit;
+
+update SCHEDULE s
+SET avail_seats =  avail_seats - COALESCE((select sum(ticket_num) from TICKET_ORDER o
+      where o.schedule_id = s.schedule_id), 0);
+
+commit;
