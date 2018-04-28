@@ -12,9 +12,11 @@ public interface OrderService {
 
   OrderDto getOrder(Long orderId);
 
-  OrderDto cancelOrder(Long orderId);
+  OrderDto cancelOrder(Integer userId, Long orderId);
 
-  OrderDto payOrder(Long orderId);
+  OrderDto payOrder(Integer userId, Long orderId);
+
+  Boolean deleteOrder(Long orderId);
 
   Page<OrderDto> getOrders(ParamFilterOrder dto, Pageable pageable);
 

@@ -58,5 +58,9 @@ public interface UrlConstant {
   String MOVIE_REVIEWS = "/movie-reviews";
 
   String ORDERS = "/orders";
+  String ORDER = "/order";
+  String ORDER_ID = "/order/{orderId}";
+  String CANCEL_ORDER_ID = "/cancel-order/{userId}/{orderId}";
+  String Pay_ORDER_ID = "/pay-order/{userId}/{orderId}";
 
 }
