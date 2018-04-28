@@ -7,7 +7,7 @@ import cmpe273.fandango.dto.ParamUpdateReview;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.User;
 import cmpe273.fandango.mapper.MovieMapper;
-import cmpe273.fandango.mapper.impl.MovieMapperImpl;
+import cmpe273.fandango.mapper.ReviewMapper;
 import cmpe273.fandango.mapper.UserMapper;
 import cmpe273.fandango.service.MovieReviewService;
 import cmpe273.fandango.dao.MovieReviewDao;
@@ -17,7 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import cmpe273.fandango.mapper.MovieReviewMapper;
+import cmpe273.fandango.mapper.impl.MovieReviewMapperImpl;
 import cmpe273.fandango.dao.MovieDao;
 
 import java.util.ArrayList;
@@ -38,7 +38,8 @@ public class MovieReviewServiceImpl implements MovieReviewService {
   @Autowired
   MovieMapper movieMapper;
 
-  private MovieReviewMapper movieReviewMapper = new MovieReviewMapper();
+  @Autowired
+  ReviewMapper movieReviewMapper;
 
   private UserMapper userMapper = new UserMapper();
 
