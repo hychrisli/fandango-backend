@@ -1,5 +1,6 @@
 USE fandango;
 
+SET autocommit = 0;
 INSERT INTO USER
 (username, password, first_name, last_name, street, city, state, zipcode, email,phone)
 VALUES
@@ -6369,3 +6370,6 @@ insert into MOVIE_REVIEW (movie_id, user_id, review_title, stars, comment, post_
 
 
 update MOVIE m set stars = COALESCE( (SELECT avg(stars) FROM MOVIE_REVIEW mr WHERE mr.movie_id = m.movie_id), 5);
+
+
+commit;

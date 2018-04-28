@@ -4,10 +4,13 @@ import cmpe273.fandango.dto.MovieReviewDto;
 import cmpe273.fandango.dto.ParamCreateReview;
 import cmpe273.fandango.dto.ParamUpdateReview;
 import cmpe273.fandango.entity.MovieReview;
+import cmpe273.fandango.mapper.impl.MovieMapperImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MovieReviewMapper extends GenericMapper {
 
-  private MovieMapper movieMapper = new MovieMapper();
+  @Autowired
+  MovieMapper movieMapper;
 
   private UserMapper userMapper = new UserMapper();
 

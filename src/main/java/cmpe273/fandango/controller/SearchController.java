@@ -1,7 +1,6 @@
 package cmpe273.fandango.controller;
 
 import cmpe273.fandango.dto.MovieSimpleDto;
-import cmpe273.fandango.dto.TheaterDto;
 import cmpe273.fandango.entity.City;
 import cmpe273.fandango.entity.Theater;
 import cmpe273.fandango.response.JsonResponse;

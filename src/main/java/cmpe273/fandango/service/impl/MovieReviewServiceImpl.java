@@ -7,6 +7,7 @@ import cmpe273.fandango.dto.ParamUpdateReview;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.User;
 import cmpe273.fandango.mapper.MovieMapper;
+import cmpe273.fandango.mapper.impl.MovieMapperImpl;
 import cmpe273.fandango.mapper.UserMapper;
 import cmpe273.fandango.service.MovieReviewService;
 import cmpe273.fandango.dao.MovieReviewDao;
@@ -34,9 +35,10 @@ public class MovieReviewServiceImpl implements MovieReviewService {
   @Autowired
   UserDao userDao;
 
-  private MovieReviewMapper movieReviewMapper = new MovieReviewMapper();
+  @Autowired
+  MovieMapper movieMapper;
 
-  private MovieMapper movieMapper = new MovieMapper();
+  private MovieReviewMapper movieReviewMapper = new MovieReviewMapper();
 
   private UserMapper userMapper = new UserMapper();
 

@@ -1,8 +1,7 @@
 package cmpe273.fandango.controller;
 
-import cmpe273.fandango.dto.TheaterDto;
+import cmpe273.fandango.dto.ParamCreateTheater;
 import cmpe273.fandango.dto.TheaterMovieTodayDto;
-import cmpe273.fandango.entity.City;
 import cmpe273.fandango.entity.Theater;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.ScheduleService;
@@ -19,11 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 import static cmpe273.fandango.constant.JsonConstant.KEY_MESSAGE;
 import static cmpe273.fandango.constant.JsonConstant.KEY_THEATER;
-import static cmpe273.fandango.constant.JsonConstant.KEY_THEATERS;
 import static cmpe273.fandango.constant.UrlConstant.*;
 
 @RestController
@@ -92,7 +89,7 @@ public class TheaterController extends AbstractController{
   @ApiOperation(value = "Add a new theater [Topic: theaters]", response = JsonResponse.class,
       notes = "theaterId field is ignored. All other fields are required")
   @PostMapping(THEATER)
-  public ResponseEntity<JsonResponse> createTheater(@Valid @RequestBody TheaterDto theaterDto) {
+  public ResponseEntity<JsonResponse> createTheater(@Valid @RequestBody ParamCreateTheater theaterDto) {
     Theater theater = theaterService.addTheater(theaterDto);
     if ( theater != null )
       return success(KEY_THEATER, theater);
