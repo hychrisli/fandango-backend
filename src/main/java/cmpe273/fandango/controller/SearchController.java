@@ -37,7 +37,7 @@ public class SearchController extends AbstractController {
   @Autowired
   MovieService movieService;
 
-  @ApiOperation(value = "Get Cities in a city[Topic: cities]", response = JsonResponse.class)
+  @ApiOperation(value = "Get Cities in a city[Topic: theaters]", response = JsonResponse.class)
   @ApiImplicitParams({
       @ApiImplicitParam(name = "page", dataType = "integer", paramType = "query",
           value = "Results page you want to retrieve (0..N)"),
