@@ -1,6 +1,7 @@
 package cmpe273.fandango.controller;
 
 import cmpe273.fandango.dto.ParamCreateTheater;
+import cmpe273.fandango.dto.ParamUpdateTheater;
 import cmpe273.fandango.dto.TheaterMovieTodayDto;
 import cmpe273.fandango.entity.Theater;
 import cmpe273.fandango.response.JsonResponse;
@@ -102,6 +103,24 @@ public class TheaterController extends AbstractController{
     if ( theaterService.removeTheater(theaterId) )
       return success(KEY_MESSAGE, "deleted");
     return badRequest("Delete unsuccessful");
+  }
+
+  @ApiOperation(value = "Get a theater [Topic: theaters]", response = JsonResponse.class)
+  @GetMapping(THEATER_THEATERID)
+  public ResponseEntity<JsonResponse> getTheater(@PathVariable Integer theaterId) {
+    Theater theater = theaterService.getTheater(theaterId);
+    if ( theater != null )
+      return success(KEY_THEATER, theater);
+    return notFound();
+  }
+
+  @ApiOperation(value = "Update a theater [Topic: theaters]", response = JsonResponse.class)
+  @PutMapping(THEATER_THEATERID)
+  public ResponseEntity<JsonResponse> updateTheater(@PathVariable Integer theaterId, @RequestBody ParamUpdateTheater param) {
+    Theater theater = theaterService.updateTheater(theaterId, param);
+    if ( theater != null )
+      return success(KEY_THEATER, theater);
+    return notFound();
   }
 
 

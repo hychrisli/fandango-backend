@@ -17,5 +17,7 @@ public interface TheaterMapper {
   TheaterMovieTodayDto toTheaterMovieTodayDto (Theater pojo);
 
   ScheduleAllTheaterMovieDto toSceduleAllTheaterMovieDto (Theater pojo);
+
+  Theater updPojo (Theater pojo, ParamUpdateTheater dto);
 }
 
