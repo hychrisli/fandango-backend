@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -96,7 +97,6 @@ public class ScheduleController extends AbstractController{
       Pageable pageable) {
     return scheduleService.getMovieScheduleInTheatersByCityId(cityId, movieId,param, pageable);
   }
-
 
   @ApiOperation(value = "Get All Movie Schedules by cityId [Topic: schedules]", response = JsonResponse.class)
   @ApiImplicitParams({

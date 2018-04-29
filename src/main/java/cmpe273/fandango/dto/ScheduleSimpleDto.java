@@ -3,9 +3,10 @@ package cmpe273.fandango.dto;
 import cmpe273.fandango.entity.Format;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.sql.Time;
 
-public class ScheduleSimpleDto {
+public class ScheduleSimpleDto implements Serializable {
 
   private Long scheduleId;
 

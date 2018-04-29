@@ -2,6 +2,7 @@ package cmpe273.fandango.dao;
 
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Schedule;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
