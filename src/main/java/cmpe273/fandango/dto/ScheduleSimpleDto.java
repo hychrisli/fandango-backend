@@ -13,6 +13,8 @@ public class ScheduleSimpleDto {
 
   private Time showtime;
 
+  private Float price;
+
   public Long getScheduleId() {
     return scheduleId;
   }
@@ -36,5 +38,13 @@ public class ScheduleSimpleDto {
 
   public void setShowtime(Time showtime) {
     this.showtime = showtime;
+  }
+
+  public Float getPrice() {
+    return price;
+  }
+
+  public void setPrice(Float price) {
+    this.price = price;
   }
 }
