@@ -14,7 +14,7 @@ public class OrderDto {
 
   private TheaterDto theater;
 
-  private ScheduleSimpleDto schedule;
+  private ScheduleOrderDto schedule;
 
   private Integer ticketNum;
 
@@ -61,11 +61,11 @@ public class OrderDto {
     this.theater = theater;
   }
 
-  public ScheduleSimpleDto getSchedule() {
+  public ScheduleOrderDto getSchedule() {
     return schedule;
   }
 
-  public void setSchedule(ScheduleSimpleDto schedule) {
+  public void setSchedule(ScheduleOrderDto schedule) {
     this.schedule = schedule;
   }
 

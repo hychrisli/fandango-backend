@@ -26,7 +26,7 @@ public class OrderMapperImpl extends GenericMapper implements OrderMapper{
     OrderDto dto = mapT1toT2(pojo, new OrderDto());
     dto.setMovie(movieMapper.toSimpleDto(pojo.getSchedule().getMovie()));
     dto.setTheater(theaterMapper.toDto(pojo.getSchedule().getTheater()));
-    dto.setSchedule(scheduleMapper.toScheduleSimpleDto(pojo.getSchedule()));
+    dto.setSchedule(scheduleMapper.toOrderDto(pojo.getSchedule()));
 
     return dto;
   }
