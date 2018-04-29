@@ -1,15 +1,14 @@
 package cmpe273.fandango.service.impl;
 
 import cmpe273.fandango.dao.OrderDao;
+import cmpe273.fandango.dao.SalesDao;
 import cmpe273.fandango.dao.ScheduleDao;
 import cmpe273.fandango.dao.UserDao;
 import cmpe273.fandango.dao.filter.OrderFilter;
 import cmpe273.fandango.dto.OrderDto;
 import cmpe273.fandango.dto.ParamCreateOrder;
 import cmpe273.fandango.dto.ParamFilterOrder;
-import cmpe273.fandango.entity.Schedule;
-import cmpe273.fandango.entity.TicketOrder;
-import cmpe273.fandango.entity.User;
+import cmpe273.fandango.entity.*;
 import cmpe273.fandango.lib.Calc;
 import cmpe273.fandango.lib.DateTime;
 import cmpe273.fandango.mapper.OrderMapper;
@@ -39,6 +38,9 @@ public class OrderServiceImpl implements OrderService{
 
   @Autowired
   UserDao userDao;
+
+  @Autowired
+  SalesDao salesDao;
 
   @Autowired
   OrderMapper orderMapper;
@@ -93,6 +95,8 @@ public class OrderServiceImpl implements OrderService{
     Schedule schedule = order.getSchedule();
     schedule.setAvailSeats(schedule.getAvailSeats() + order.getTicketNum());
     scheduleDao.save(schedule);
+    if ( order.getStatus().equals(PAID))
+      updateSales(order, false);
     orderDao.delete(order);
     return true;
   }
@@ -115,6 +119,27 @@ public class OrderServiceImpl implements OrderService{
     User user = userDao.findOne(userId);
     if (order == null || order.getUser() != user || !order.getStatus().equals(initStatus)) return null;
     order.setStatus(targetStatus);
+    if (targetStatus.equals(PAID)) updateSales(order, true);
     return orderMapper.toDto(orderDao.save(order));
+  }
+
+  private void updateSales(TicketOrder order, Boolean isBuy){
+    Schedule schedule = order.getSchedule();
+    Movie movie = schedule.getMovie();
+    Theater theater = schedule.getTheater();
+    Sales sales = salesDao.findByMovieIdAndTheaterId(movie.getMovieId(), theater.getTheaterId());
+
+    if ( sales == null ) {
+      sales = new Sales();
+      sales.setMovie(movie);
+      sales.setTheater(theater);
+    }
+
+    Integer ticketChange = isBuy ? order.getTicketNum() : - order.getTicketNum();
+    Float dollarAmountChange = isBuy ? order.getOrderTotal() : - order.getOrderTotal();
+
+    sales.setTicketNum(sales.getTicketNum() + ticketChange);
+    sales.setDollarAmount(sales.getDollarAmount() + dollarAmountChange);
+    salesDao.save(sales);
   }
 }

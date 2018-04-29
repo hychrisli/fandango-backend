@@ -63,4 +63,11 @@ public interface UrlConstant {
   String CANCEL_ORDER_ID = "/cancel-order/{userId}/{orderId}";
   String Pay_ORDER_ID = "/pay-order/{userId}/{orderId}";
 
+  String ANALYTICS = "/analytics";
+  String ANALYTICS_MOVIE_REVENUE_ID = ANALYTICS + "/movie-revenue/{movieId}";
+  String ANALYTICS_THEATER_REVENUE_ID = ANALYTICS + "/theater-revenue/{theaterId}";
+  String ANALYTICS_TOP10_MOVIE_REVENUE = ANALYTICS +"/top10-movie-revenue";
+  String ANALYTICS_TOP10_MOVIE_TICKET_SALES = ANALYTICS + "/top10-movie-tickets";
+  String ANALYTICS_TOP10_THEATER_REVENUE = ANALYTICS + "/top10-theater-revenue";
+
 }

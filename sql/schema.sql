@@ -144,19 +144,6 @@ CREATE TABLE MOVIE_REVIEW
 
 );
 
-
-CREATE TABLE REVENUE
-(
-  revenue_id    BIGINT PRIMARY KEY AUTO_INCREMENT,
-  movie_id      INTEGER,
-  theater_id    INTEGER,
-  ticket_num    INTEGER,
-  amount        DECIMAL (8, 2),
-  FOREIGN KEY (movie_id) REFERENCES MOVIE(movie_id),
-  FOREIGN KEY (theater_id) REFERENCES THEATER(theater_id)
-);
-
-
 -- test database
 
 DROP DATABASE IF EXISTS fandango_test;
