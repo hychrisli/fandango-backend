@@ -24,4 +24,7 @@ public interface SalesDao extends PagingAndSortingRepository<Sales, Integer> {
   @Query("select s.movie, sum(s.dollarAmount), sum(s.ticketNum) from Sales s group by s.movie order by sum(s.ticketNum) desc")
   Page<Object> findTop10MovieTicketSales(Pageable pageable);
 
+  @Query("select s from Sales s where s.movie.movieId = :movieId and s.theater.theaterId = :theaterId")
+  Sales findByMovieIdAndTheaterId(@Param("movieId") Integer movieId, @Param("theaterId") Integer theaterId);
+
 }

@@ -20,10 +20,10 @@ public class Sales {
   private Theater theater;
 
   @Column(name="ticket_num")
-  private Integer ticketNum;
+  private Integer ticketNum = 0;
 
   @Column(name="dollar_amount")
-  private Double dollarAmount;
+  private Double dollarAmount = 0.0;
 
 
   public Long getSalesId() {
