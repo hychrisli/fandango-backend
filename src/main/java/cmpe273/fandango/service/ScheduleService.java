@@ -7,15 +7,15 @@ import org.springframework.data.domain.Pageable;
 
 public interface ScheduleService {
 
-  Page<SchedulePerTheaterDto> getMovieScheduleInTheatersByCityId(Integer cityId, Integer movieId, Pageable pageable);
+  Page<SchedulePerTheaterDto> getMovieScheduleInTheatersByCityId(Integer cityId, Integer movieId, ParamFilterSchedule param, Pageable pageable);
 
-  Page<SchedulePerTheaterDto> getMovieScheduleInTheatersByzipcode(String zipcode, Integer movieId, Pageable pageable);
+  Page<SchedulePerTheaterDto> getMovieScheduleInTheatersByzipcode(String zipcode, Integer movieId, ParamFilterSchedule param, Pageable pageable);
 
-  Page<ScheduleAllTheaterMovieDto> getAllScheduleInTheatersByCityId(Integer cityId, Pageable pageable);
+  Page<ScheduleAllTheaterMovieDto> getAllScheduleInTheatersByCityId(Integer cityId, ParamFilterSchedule param, Pageable pageable);
 
-  Page<ScheduleAllTheaterMovieDto> getAllScheduleInTheatersByzipcode(String zipcode, Pageable pageable);
+  Page<ScheduleAllTheaterMovieDto> getAllScheduleInTheatersByzipcode(String zipcode, ParamFilterSchedule param, Pageable pageable);
 
-  Page<SchedulePerMovieDto> getScheduleByTheaterId(Integer theaterId, Pageable pageable);
+  Page<SchedulePerMovieDto> getScheduleByTheaterId(Integer theaterId, ParamFilterSchedule param, Pageable pageable);
 
   Page<MovieSearchDto> searchMovies(Pageable pageable, Integer cityId, ParamSearchMovie paramSearchMovie);
 

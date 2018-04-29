@@ -2,6 +2,8 @@ package cmpe273.fandango.dao;
 
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Schedule;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -10,7 +12,11 @@ import org.springframework.data.repository.query.Param;
 import java.util.Date;
 import java.util.List;
 
-public interface ScheduleDao extends PagingAndSortingRepository<Schedule, Long> {
+public interface ScheduleDao extends
+    PagingAndSortingRepository<Schedule, Long>,
+    JpaSpecificationExecutor<Schedule> {
+
+  List<Schedule> findAll(Specification<Schedule> specs);
 
   @Query("select count(s) from Schedule s where s.theater.theaterId = :theaterId")
   Integer countAllByTheaterId(@Param("theaterId") Integer theaterId);
@@ -37,7 +43,7 @@ public interface ScheduleDao extends PagingAndSortingRepository<Schedule, Long> 
   @Query("select s from Schedule s where " +
       "s.theater.city.cityId = :cityId and " +
       "s.scheduleDate = :today " +
-      "order by s.theater.theaterId, s.movie.movieId, s.movie.releaseDate desc, s.showtime")
+      "order by s.theater.theaterId, s.movie.releaseDate desc, s.movie.movieId, s.showtime")
   List<Schedule> findAllScheduleByCityId (
       @Param("cityId") Integer cityId,
       @Param("today") Date today);
@@ -45,7 +51,7 @@ public interface ScheduleDao extends PagingAndSortingRepository<Schedule, Long> 
   @Query("select s from Schedule s where " +
       "s.theater.zipcode = :zipcode and " +
       "s.scheduleDate = :today " +
-      "order by s.theater.theaterId, s.movie.movieId, s.movie.releaseDate desc, s.showtime" )
+      "order by s.theater.theaterId, s.movie.releaseDate desc, s.movie.movieId,  s.showtime" )
   List<Schedule> findAllScheduleByZipcode (
       @Param("zipcode") String zipcode,
       @Param("today") Date today);
