@@ -5,6 +5,7 @@ import cmpe273.fandango.dto.ParamCreateUser;
 import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.entity.User;
+import cmpe273.fandango.exception.AppException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,7 +15,7 @@ public interface UserService {
 
   Boolean deleteUser(Integer userId);
 
-  UserDto updateUser(Integer userId, UserDto userDto);
+  UserDto updateUser(Integer userId, UserDto userDto) throws AppException;
 
   UserDto getUser(Integer userId);
 

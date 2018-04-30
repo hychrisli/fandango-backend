@@ -6,6 +6,8 @@ import cmpe273.fandango.dto.ParamCreateUser;
 import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
 import cmpe273.fandango.entity.User;
+import cmpe273.fandango.exception.AppException;
+import cmpe273.fandango.lib.Validate;
 import cmpe273.fandango.mapper.UserMapper;
 import cmpe273.fandango.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+
+import static cmpe273.fandango.exception.ErrorCode.ERR_INVALID_ZIPCODE;
 
 
 @Service
@@ -47,10 +51,16 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public UserDto updateUser(Integer userId, UserDto userDto) {
+  public UserDto updateUser(Integer userId, UserDto userDto) throws AppException {
     User user = userDao.findUserByUserId(userId);
-    System.out.print(userDto.getCardExpire());
     if (user != null) {
+
+      if ( userDto.getZipcode() != null) {
+        if (! Validate.isValidZipcode(userDto.getZipcode()))
+          throw new AppException(ERR_INVALID_ZIPCODE, "Invalid Zipcode. Failed to update user");
+        userDto.setZipcode(Validate.getMainZipcode(userDto.getZipcode()));
+      }
+
       user = userMapper.updPojo(userDto, user);
       userDao.save(user);
       return userMapper.toDto(user);

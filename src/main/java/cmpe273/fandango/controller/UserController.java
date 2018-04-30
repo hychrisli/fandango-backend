@@ -4,6 +4,7 @@ import cmpe273.fandango.dto.ParamLogin;
 import cmpe273.fandango.dto.ParamCreateUser;
 import cmpe273.fandango.dto.UserDto;
 import cmpe273.fandango.dto.UserSimpleDto;
+import cmpe273.fandango.exception.AppException;
 import cmpe273.fandango.exception.ErrorCode;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.UserService;
@@ -56,7 +57,7 @@ public class UserController extends AbstractController {
 
   @ApiOperation(value = "Put User [Topic: users]", response = JsonResponse.class)
   @PutMapping(USER_USERID)
-  public ResponseEntity<JsonResponse> putUser(@PathVariable Integer userId, @RequestBody UserDto userDto){
+  public ResponseEntity<JsonResponse> putUser(@PathVariable Integer userId, @RequestBody UserDto userDto) throws AppException {
     userDto = userService.updateUser(userId, userDto);
     if (userDto != null)
       return success(KEY_USER, userDto);
