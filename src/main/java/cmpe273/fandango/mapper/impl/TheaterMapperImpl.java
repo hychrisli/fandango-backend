@@ -40,4 +40,13 @@ public class TheaterMapperImpl extends GenericMapper implements TheaterMapper {
   public ScheduleAllTheaterMovieDto toSceduleAllTheaterMovieDto (Theater pojo) {
     return mapT1toT2(pojo, new ScheduleAllTheaterMovieDto());
   }
+
+  @Override
+  public Theater updPojo(Theater pojo, ParamUpdateTheater dto) {
+    if ( dto == null ) return pojo;
+    updateValue(pojo::setStreet, dto.getStreet());
+    updateValue(pojo::setTheaterName, dto.getTheaterName());
+    updateValue(pojo::setZipcode, dto.getZipcode());
+    return pojo;
+  }
 }

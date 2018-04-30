@@ -4,6 +4,7 @@ import cmpe273.fandango.dao.CityDao;
 import cmpe273.fandango.dao.ScheduleDao;
 import cmpe273.fandango.dao.TheaterDao;
 import cmpe273.fandango.dto.ParamCreateTheater;
+import cmpe273.fandango.dto.ParamUpdateTheater;
 import cmpe273.fandango.entity.City;
 import cmpe273.fandango.entity.Theater;
 import cmpe273.fandango.mapper.TheaterMapper;
@@ -27,6 +28,26 @@ public class TheaterServiceImpl implements TheaterService {
 
   @Autowired
   TheaterMapper theaterMapper;
+
+
+  @Override
+  public Theater getTheater(Integer theaterId) {
+    return theaterDao.findOne(theaterId);
+  }
+
+  @Override
+  public Theater updateTheater(Integer theaterId, ParamUpdateTheater param) {
+    Theater theater = theaterDao.findOne(theaterId);
+    if (theater == null) return null;
+    theater = theaterMapper.updPojo(theater, param);
+    if ( param.getCityId() != null ){
+      City city = cityDao.findOne(param.getCityId());
+      if (city != null)
+        theater.setCity(city);
+    }
+
+    return theaterDao.save(theater);
+  }
 
   @Override
   public Page<Theater> getAllTheatersByCityId(Integer cityId, Pageable pageable) {
