@@ -1,9 +1,11 @@
 package cmpe273.fandango.dto;
 
 import cmpe273.fandango.entity.City;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class SchedulePerTheaterDto implements Comparable<SchedulePerTheaterDto>{
+public class SchedulePerTheaterDto implements Comparable<SchedulePerTheaterDto>, Serializable {
 
   private Integer theaterId;
 

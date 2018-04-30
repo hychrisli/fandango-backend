@@ -4,6 +4,7 @@ import cmpe273.fandango.dto.ParamCreateTheater;
 import cmpe273.fandango.dto.ParamUpdateTheater;
 import cmpe273.fandango.dto.TheaterMovieTodayDto;
 import cmpe273.fandango.entity.Theater;
+import cmpe273.fandango.exception.AppException;
 import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.ScheduleService;
 import cmpe273.fandango.service.TheaterService;
@@ -90,7 +91,7 @@ public class TheaterController extends AbstractController{
   @ApiOperation(value = "Add a new theater [Topic: theaters]", response = JsonResponse.class,
       notes = "theaterId field is ignored. All other fields are required")
   @PostMapping(THEATER)
-  public ResponseEntity<JsonResponse> createTheater(@Valid @RequestBody ParamCreateTheater theaterDto) {
+  public ResponseEntity<JsonResponse> createTheater(@Valid @RequestBody ParamCreateTheater theaterDto) throws AppException {
     Theater theater = theaterService.addTheater(theaterDto);
     if ( theater != null )
       return success(KEY_THEATER, theater);
@@ -116,7 +117,7 @@ public class TheaterController extends AbstractController{
 
   @ApiOperation(value = "Update a theater [Topic: theaters]", response = JsonResponse.class)
   @PutMapping(THEATER_THEATERID)
-  public ResponseEntity<JsonResponse> updateTheater(@PathVariable Integer theaterId, @RequestBody ParamUpdateTheater param) {
+  public ResponseEntity<JsonResponse> updateTheater(@PathVariable Integer theaterId, @RequestBody ParamUpdateTheater param) throws AppException {
     Theater theater = theaterService.updateTheater(theaterId, param);
     if ( theater != null )
       return success(KEY_THEATER, theater);
