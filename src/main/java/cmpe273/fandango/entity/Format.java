@@ -4,11 +4,12 @@ package cmpe273.fandango.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="FORMAT")
-public class Format {
+public class Format implements Serializable{
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

@@ -5,10 +5,11 @@ import cmpe273.fandango.entity.Genre;
 import cmpe273.fandango.entity.MovieCharacter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class SchedulePerMovieDto implements Comparable<SchedulePerMovieDto>{
+public class SchedulePerMovieDto implements Comparable<SchedulePerMovieDto>, Serializable{
 
   private Integer movieId;
 

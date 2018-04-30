@@ -5,12 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name="MOVIE")
-public class Movie {
+public class Movie implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

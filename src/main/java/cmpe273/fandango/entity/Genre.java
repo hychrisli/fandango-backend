@@ -3,11 +3,12 @@ package cmpe273.fandango.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name="GENRE")
-public class Genre {
+public class Genre implements Serializable{
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
