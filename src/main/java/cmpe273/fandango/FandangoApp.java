@@ -8,10 +8,18 @@ package cmpe273.fandango;
     import org.springframework.security.crypto.password.PasswordEncoder;
     import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+    import javax.annotation.PostConstruct;
+    import java.util.TimeZone;
+
 @SpringBootApplication
 @EnableTransactionManagement
 @EnableCaching
 public class FandangoApp {
+
+  @PostConstruct
+  void started() {
+    TimeZone.setDefault(TimeZone.getTimeZone("US/Pacific"));
+  }
 
   public static void main(String[] args) {
 
