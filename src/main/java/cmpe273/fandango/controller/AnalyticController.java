@@ -61,6 +61,12 @@ public class AnalyticController extends AbstractController {
     return analyticService.getTop10MoviesByTickets();
   }
 
+  @ApiOperation(value = "Get Top 10 Theaters By Revenue [Topic: analytics]", response = JsonResponse.class)
+  @GetMapping(ANALYTICS_TOP10_THEATER_REVENUE)
+  public Page<RevenueTheaterDto> getTop10TheatersByTicketSales() {
+    return analyticService.getTop10TheaterSByRevenue();
+  }
+
   @ApiOperation(value = "Get Top 10 Cities By Revenue [Topic: analytics]", response = JsonResponse.class)
   @GetMapping(ANALYTICS_TOP10_CITY_REVENUE)
   public Page<RevenueCityDto> getTop10CitiesByTicketSales() {
