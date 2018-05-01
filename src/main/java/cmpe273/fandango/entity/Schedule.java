@@ -4,12 +4,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
 @Entity
 @Table(name="SCHEDULE")
-public class Schedule {
+public class Schedule implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -99,6 +100,9 @@ public class TheaterController extends AbstractController{
   }
 
   @ApiOperation(value = "Delete a theater [Topic: theaters]", response = JsonResponse.class)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
+
   @DeleteMapping(THEATER_THEATERID)
   public ResponseEntity<JsonResponse> deleteTheater(@PathVariable Integer theaterId) {
     if ( theaterService.removeTheater(theaterId) )
@@ -116,6 +120,8 @@ public class TheaterController extends AbstractController{
   }
 
   @ApiOperation(value = "Update a theater [Topic: theaters]", response = JsonResponse.class)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @PutMapping(THEATER_THEATERID)
   public ResponseEntity<JsonResponse> updateTheater(@PathVariable Integer theaterId, @RequestBody ParamUpdateTheater param) throws AppException {
     Theater theater = theaterService.updateTheater(theaterId, param);

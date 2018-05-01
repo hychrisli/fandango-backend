@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +42,8 @@ public class ScheduleController extends AbstractController{
   }
 
   @ApiOperation(value = "Post Schedule [Topic: schedules]", response = JsonResponse.class)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @PostMapping(SCHEDULE)
   public ResponseEntity<JsonResponse> createSchedule(@RequestBody ParamCreateSchedule param) {
     Schedule schedule = scheduleService.createSchedule(param);
@@ -50,6 +53,8 @@ public class ScheduleController extends AbstractController{
   }
 
   @ApiOperation(value = "Update Schedule [Topic: schedules]", response = JsonResponse.class)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @PutMapping(SCHEDULE_ID)
   public ResponseEntity<JsonResponse> updateSchedule(@PathVariable Long scheduleId, @RequestBody ParamUpdateSchedule param) {
     Schedule schedule = scheduleService.updateSchedule(scheduleId, param);
@@ -59,6 +64,8 @@ public class ScheduleController extends AbstractController{
   }
 
   @ApiOperation(value = "Update Schedule [Topic: schedules]", response = JsonResponse.class)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @DeleteMapping(SCHEDULE_ID)
   public ResponseEntity<JsonResponse> deleteSchedule(@PathVariable Long scheduleId) {
     if (scheduleService.deleteSchedule(scheduleId))

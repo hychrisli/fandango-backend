@@ -7,6 +7,7 @@ import cmpe273.fandango.service.MovieGenreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +41,9 @@ public class MovieGenreController extends AbstractController{
 
 
   @ApiOperation(value="Add Genre [Topic: movies]", response = JsonResponse.class)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
+
   @PostMapping(MOVIE_GENRE)
   public ResponseEntity<JsonResponse> addGenre(@RequestBody MovieGenreDto movieGenreDto){
     if ( movieGenreDto.getGenreId() == null || movieGenreDto.getMovieId() == null)
@@ -53,6 +57,8 @@ public class MovieGenreController extends AbstractController{
   }
 
   @ApiOperation(value="Remove Format [Topic: movies]", response = JsonResponse.class)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @DeleteMapping(MOVIE_GENRE)
   public ResponseEntity<JsonResponse> deleteGenre(@RequestBody MovieGenreDto movieGenreDto){
     if ( movieGenreDto.getGenreId() == null || movieGenreDto.getMovieId() == null)

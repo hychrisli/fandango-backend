@@ -11,6 +11,7 @@ import cmpe273.fandango.service.MovieService;
 import cmpe273.fandango.service.ScheduleService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -67,7 +68,6 @@ public class MovieController extends  AbstractController{
       return success(KEY_MOVIE, movieDto);
     return notFound();
   }
-
   @ApiOperation(value="Create a Movie [Topic: movies]", response = JsonResponse.class,
       notes = "movieId, mpaaRating and stars in request body are ignored")
   @PostMapping(MOVIE)
@@ -86,6 +86,8 @@ public class MovieController extends  AbstractController{
 
   @ApiOperation(value="Update a Movie [Topic: movies]", response = JsonResponse.class,
       notes = "movieId, mpaaRating and stars in request body are ignored")
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @PutMapping(MOVIE_MOVIEID)
   public ResponseEntity<JsonResponse> updateMovie(@PathVariable Integer movieId, @RequestBody MovieSimpleDto movieSimpleDto){
     movieSimpleDto = movieService.UpdateMovie(movieId, movieSimpleDto);

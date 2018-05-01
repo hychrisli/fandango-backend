@@ -1,6 +1,8 @@
 package cmpe273.fandango.dto;
 
-public class MovieImageDto {
+import java.io.Serializable;
+
+public class MovieImageDto implements Serializable {
 
   private Integer imageId;
 

@@ -1,10 +1,11 @@
 package cmpe273.fandango.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="MPAA_RATING")
-public class MpaaRating {
+public class MpaaRating implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,6 +1,8 @@
 package cmpe273.fandango.dto;
 
-public class RevenueMovieDto {
+import java.io.Serializable;
+
+public class RevenueMovieDto implements Serializable {
 
   private MovieSimpleDto movie;
 

@@ -3,10 +3,11 @@ package cmpe273.fandango.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class ParamCreateSchedule {
+public class ParamCreateSchedule implements Serializable {
 
   @NotNull
   private Integer movieId;

@@ -1,8 +1,9 @@
 package cmpe273.fandango.dto;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class ParamSearchMovie {
+public class ParamSearchMovie implements Serializable {
 
   private Float maxPrice = 100.0f;
 

@@ -7,9 +7,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class MovieReviewDto {
+public class MovieReviewDto implements Serializable {
   private Integer reviewId;
 
   private MovieSimpleDto movie;

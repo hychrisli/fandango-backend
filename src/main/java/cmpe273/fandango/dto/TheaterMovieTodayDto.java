@@ -3,9 +3,10 @@ package cmpe273.fandango.dto;
 import cmpe273.fandango.entity.City;
 import cmpe273.fandango.entity.Movie;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class TheaterMovieTodayDto implements Comparable<TheaterMovieTodayDto>{
+public class TheaterMovieTodayDto implements Comparable<TheaterMovieTodayDto>, Serializable{
 
   private Integer theaterId;
 

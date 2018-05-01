@@ -1,8 +1,9 @@
 package cmpe273.fandango.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MovieSearchDto implements Comparable<MovieSearchDto>{
+public class MovieSearchDto implements Comparable<MovieSearchDto>, Serializable{
 
   private Integer movieId;
 
