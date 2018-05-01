@@ -1,6 +1,8 @@
 package cmpe273.fandango.controller;
 
 
+import cmpe273.fandango.dto.AggMovieReviewDto;
+import cmpe273.fandango.dto.RevenueCityDto;
 import cmpe273.fandango.dto.RevenueMovieDto;
 import cmpe273.fandango.dto.RevenueTheaterDto;
 import cmpe273.fandango.entity.City;
@@ -65,6 +67,17 @@ public class AnalyticController extends AbstractController {
     return analyticService.getTop10TheaterSByRevenue();
   }
 
+  @ApiOperation(value = "Get Top 10 Cities By Revenue [Topic: analytics]", response = JsonResponse.class)
+  @GetMapping(ANALYTICS_TOP10_CITY_REVENUE)
+  public Page<RevenueCityDto> getTop10CitiesByTicketSales() {
+    return analyticService.getTop10CitiesByRevenue();
+  }
+
+  @ApiOperation(value = "Get Top 10 Movies By # of Reviews [Topic: analytics]", response = JsonResponse.class)
+  @GetMapping(ANALYTICS_TOP10_MOVIE_REVIEWS)
+  public Page<AggMovieReviewDto> getTop10MoviewByReviewNum() {
+    return analyticService.getTop10MoviesByReviewNum();
+  }
 
 
 }

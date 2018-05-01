@@ -1,5 +1,6 @@
 package cmpe273.fandango.mapper;
 
+import cmpe273.fandango.dto.RevenueCityDto;
 import cmpe273.fandango.dto.RevenueMovieDto;
 import cmpe273.fandango.dto.RevenueTheaterDto;
 import cmpe273.fandango.entity.Movie;
@@ -15,5 +16,6 @@ public interface SalesMapper {
 
   RevenueMovieDto toRevMovieDto(Movie movie, Object row);
 
+  RevenueCityDto toRevCityDto(Object row);
 
 }
