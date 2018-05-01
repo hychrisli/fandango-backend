@@ -2,10 +2,11 @@ package cmpe273.fandango.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class ScheduleOrderDto {
+public class ScheduleOrderDto implements Serializable {
 
   private Long scheduleId;
 

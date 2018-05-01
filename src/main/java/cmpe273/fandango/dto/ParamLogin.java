@@ -3,8 +3,9 @@ package cmpe273.fandango.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class ParamLogin {
+public class ParamLogin implements Serializable {
 
   @NotNull
   @JsonProperty(required=true)

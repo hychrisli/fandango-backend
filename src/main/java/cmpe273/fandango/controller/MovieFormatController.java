@@ -7,6 +7,7 @@ import cmpe273.fandango.service.MovieFormatService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -41,6 +42,8 @@ public class MovieFormatController extends AbstractController{
 
   @ApiOperation(value="Add Format [Topic: movies]", response = JsonResponse.class)
   @PostMapping(MOVIE_FORMAT)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   public ResponseEntity<JsonResponse> addFormat(@RequestBody MovieFormatDto movieFormatDto){
     if ( movieFormatDto.getMovieId() == null || movieFormatDto.getFormatId() == null)
       return badRequest("Movie ID or Format ID Cannot Be null");
@@ -53,6 +56,8 @@ public class MovieFormatController extends AbstractController{
   }
 
   @ApiOperation(value="Remove Format [Topic: movies]", response = JsonResponse.class)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @DeleteMapping(MOVIE_FORMAT)
   public ResponseEntity<JsonResponse> deleteFormat(@RequestBody MovieFormatDto movieFormatDto){
     if ( movieFormatDto.getMovieId() == null || movieFormatDto.getFormatId() == null)

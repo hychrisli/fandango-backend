@@ -1,11 +1,12 @@
 package cmpe273.fandango.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="TICKET_ORDER")
-public class TicketOrder {
+public class TicketOrder implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name="order_id")

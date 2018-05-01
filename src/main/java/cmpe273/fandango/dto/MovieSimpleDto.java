@@ -6,9 +6,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import java.io.Serializable;
 import java.util.Date;
 
-public class MovieSimpleDto {
+public class MovieSimpleDto implements Serializable {
 
   @JsonProperty(access = JsonProperty.Access.READ_ONLY)
   private Integer movieId;

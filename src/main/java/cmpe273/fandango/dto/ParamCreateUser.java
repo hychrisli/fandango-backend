@@ -1,6 +1,8 @@
 package cmpe273.fandango.dto;
 
-public class ParamCreateUser {
+import java.io.Serializable;
+
+public class ParamCreateUser implements Serializable {
 
   private String username;
 

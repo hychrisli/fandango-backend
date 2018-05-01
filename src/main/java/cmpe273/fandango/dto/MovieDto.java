@@ -6,10 +6,11 @@ import cmpe273.fandango.entity.MovieCharacter;
 import cmpe273.fandango.entity.MovieImage;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class MovieDto {
+public class MovieDto implements Serializable {
 
   private Integer movieId;
 

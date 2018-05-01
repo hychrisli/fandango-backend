@@ -6,6 +6,7 @@ import cmpe273.fandango.service.CityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,8 @@ public class CityController extends AbstractController{
   }
 
   @ApiOperation(value = "Delete a city [Topic: theaters]", response = JsonResponse.class)
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @DeleteMapping(CITY_CITYID)
   public ResponseEntity<JsonResponse> deleteCity(@PathVariable Integer cityId) {
     if ( cityService.removeCity(cityId) )

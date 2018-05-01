@@ -1,10 +1,11 @@
 package cmpe273.fandango.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="THEATER")
-public class Theater {
+public class Theater implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

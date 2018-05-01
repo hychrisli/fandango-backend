@@ -3,8 +3,10 @@ package cmpe273.fandango.dto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
+import java.io.Serializable;
+
 @ApiModel(description = "A Movie Character")
-public class MovieCharacterDto {
+public class MovieCharacterDto implements Serializable{
 
   @ApiModelProperty(value = "movie Id", required = true)
   private Integer movieId;

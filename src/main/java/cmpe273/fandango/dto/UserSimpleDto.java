@@ -1,6 +1,8 @@
 package cmpe273.fandango.dto;
 
-public class UserSimpleDto {
+import java.io.Serializable;
+
+public class UserSimpleDto implements Serializable {
 
   private Integer userId;
 

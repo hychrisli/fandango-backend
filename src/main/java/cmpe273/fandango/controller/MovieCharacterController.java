@@ -7,6 +7,7 @@ import cmpe273.fandango.response.JsonResponse;
 import cmpe273.fandango.service.MovieCharacterService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,8 @@ public class MovieCharacterController extends AbstractController {
 
   @ApiOperation(value = "Add New Character to Movie [Topic: movies]", response = JsonResponse.class,
     notes = "characterId field is ignored")
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @PostMapping(MOVIE_CHARACTER)
   public ResponseEntity<JsonResponse> addMovieCharacter(@RequestBody MovieCharacterDto movieCharacterDto) {
     if ( movieCharacterDto.getMovieId() == null || movieCharacterDto.getCharacterName() == null)
@@ -49,6 +52,8 @@ public class MovieCharacterController extends AbstractController {
 
   @ApiOperation(value = "Delete a Character from Movie [Topic: movies]", response = JsonResponse.class,
       notes = "characterName field is ignored")
+  @CacheEvict(value={"get-schedules-by-city-id", "get-all-schedules-by-city-id",
+      "get-schedules-by-zipcode", "get-all-schedules-by-zipcode", "get-schedules-in-theater"}, allEntries = true)
   @DeleteMapping(MOVIE_CHARACTER)
   public ResponseEntity<JsonResponse> removeMovieCharacter(@RequestBody MovieCharacterDto movieCharacterDto) {
     if ( movieCharacterDto.getMovieId() == null || movieCharacterDto.getCharacterId() == null)

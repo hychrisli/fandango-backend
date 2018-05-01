@@ -3,7 +3,6 @@ package cmpe273.fandango.mapper.impl;
 import cmpe273.fandango.dto.RevenueMovieDto;
 import cmpe273.fandango.dto.RevenueTheaterDto;
 import cmpe273.fandango.entity.Movie;
-import cmpe273.fandango.entity.Revenue;
 import cmpe273.fandango.entity.Theater;
 import cmpe273.fandango.mapper.MovieMapper;
 import cmpe273.fandango.mapper.SalesMapper;

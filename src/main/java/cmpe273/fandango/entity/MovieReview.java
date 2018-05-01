@@ -3,11 +3,12 @@ package cmpe273.fandango.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "MOVIE_REVIEW")
-public class MovieReview {
+public class MovieReview implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "review_id")

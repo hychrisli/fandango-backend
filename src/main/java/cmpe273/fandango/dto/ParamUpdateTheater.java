@@ -1,6 +1,8 @@
 package cmpe273.fandango.dto;
 
-public class ParamUpdateTheater {
+import java.io.Serializable;
+
+public class ParamUpdateTheater implements Serializable {
 
   private String theaterName;
 

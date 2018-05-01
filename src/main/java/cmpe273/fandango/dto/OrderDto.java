@@ -2,9 +2,10 @@ package cmpe273.fandango.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class OrderDto {
+public class OrderDto implements Serializable {
 
   private Long orderId;
 

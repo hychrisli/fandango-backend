@@ -1,8 +1,9 @@
 package cmpe273.fandango.dto;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class ParamCreateTheater {
+public class ParamCreateTheater implements Serializable {
 
   private Integer theaterId;
 

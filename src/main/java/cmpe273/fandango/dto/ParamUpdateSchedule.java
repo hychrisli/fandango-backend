@@ -2,10 +2,11 @@ package cmpe273.fandango.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-public class ParamUpdateSchedule {
+public class ParamUpdateSchedule implements Serializable{
 
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone="US/Pacific")
   private Date scheduleDate;

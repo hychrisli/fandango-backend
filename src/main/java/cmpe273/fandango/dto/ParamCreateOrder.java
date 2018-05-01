@@ -1,8 +1,9 @@
 package cmpe273.fandango.dto;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
-public class ParamCreateOrder {
+public class ParamCreateOrder implements Serializable {
 
   @NotNull
   private Long scheduleId;

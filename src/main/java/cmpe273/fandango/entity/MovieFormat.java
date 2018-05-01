@@ -4,10 +4,11 @@ package cmpe273.fandango.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="MOVIE_FORMAT")
-public class MovieFormat {
+public class MovieFormat implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
