@@ -1,8 +1,10 @@
 package cmpe273.fandango.mapper.impl;
 
+import cmpe273.fandango.dto.AggMovieReviewDto;
 import cmpe273.fandango.dto.MovieReviewDto;
 import cmpe273.fandango.dto.ParamCreateReview;
 import cmpe273.fandango.dto.ParamUpdateReview;
+import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.MovieReview;
 import cmpe273.fandango.mapper.GenericMapper;
 import cmpe273.fandango.mapper.MovieMapper;
@@ -41,4 +43,18 @@ public class MovieReviewMapperImpl extends GenericMapper implements ReviewMapper
     return pojo;
   }
 
+  @Override
+  public AggMovieReviewDto toAggMovieReviewDto(Object row) {
+
+    Object[] fields = (Object[]) row;
+
+    AggMovieReviewDto dto = new AggMovieReviewDto();
+    dto.setMovie(movieMapper.toSimpleDto((Movie) fields[0]));
+    dto.setReivewNum((Long) fields[1]);
+    dto.setMinStars((Integer) fields[2]);
+    dto.setMaxStars((Integer) fields[3]);
+
+    return dto;
+
+  }
 }

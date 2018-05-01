@@ -1,7 +1,10 @@
 package cmpe273.fandango.mapper.impl;
 
+import cmpe273.fandango.dto.MovieSimpleDto;
+import cmpe273.fandango.dto.RevenueCityDto;
 import cmpe273.fandango.dto.RevenueMovieDto;
 import cmpe273.fandango.dto.RevenueTheaterDto;
+import cmpe273.fandango.entity.City;
 import cmpe273.fandango.entity.Movie;
 import cmpe273.fandango.entity.Theater;
 import cmpe273.fandango.mapper.MovieMapper;
@@ -18,7 +21,6 @@ public class SalesMapperImpl implements SalesMapper{
 
   @Autowired
   TheaterMapper theaterMapper;
-
 
 
   @Override
@@ -45,6 +47,11 @@ public class SalesMapperImpl implements SalesMapper{
     return toRevMovieDto(movie, (Double) fields[0], (Long) fields[1]);
   }
 
+  @Override
+  public RevenueCityDto toRevCityDto(Object row) {
+    Object[] fields = (Object[]) row;
+    return toRevCitDto((City) fields[0], (Double)fields[1], (Long) fields[2]);
+  }
 
   private RevenueMovieDto toRevMovieDto(Movie movie, Double revenue, Long tickets) {
     RevenueMovieDto dto = new RevenueMovieDto();
@@ -64,6 +71,18 @@ public class SalesMapperImpl implements SalesMapper{
     if (revenue != null)
       dto.setRevenue(revenue);
     if (tickets != null)
+      dto.setTickets(tickets);
+    return dto;
+  }
+
+  private RevenueCityDto toRevCitDto(City city, Double revenue, Long tickets){
+
+    RevenueCityDto dto = new RevenueCityDto();
+    dto.setCity(city);
+
+    if ( revenue != null)
+      dto.setRevenue(revenue);
+    if ( tickets != null)
       dto.setTickets(tickets);
     return dto;
   }

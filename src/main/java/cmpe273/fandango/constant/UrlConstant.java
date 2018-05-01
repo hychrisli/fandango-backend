@@ -69,5 +69,7 @@ public interface UrlConstant {
   String ANALYTICS_TOP10_MOVIE_REVENUE = ANALYTICS +"/top10-movie-revenue";
   String ANALYTICS_TOP10_MOVIE_TICKET_SALES = ANALYTICS + "/top10-movie-tickets";
   String ANALYTICS_TOP10_THEATER_REVENUE = ANALYTICS + "/top10-theater-revenue";
+  String ANALYTICS_TOP10_CITY_REVENUE = ANALYTICS + "/top10-city-revenue";
+  String ANALYTICS_TOP10_MOVIE_REVIEWS = ANALYTICS + "/top10-movie-reviews";
 
 }

@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Date;
+
 public interface SalesDao extends PagingAndSortingRepository<Sales, Integer> {
 
   @Query("select sum(s.dollarAmount), sum(s.ticketNum) from Sales s where s.movie.movieId = :movieId")
@@ -27,4 +29,6 @@ public interface SalesDao extends PagingAndSortingRepository<Sales, Integer> {
   @Query("select s from Sales s where s.movie.movieId = :movieId and s.theater.theaterId = :theaterId")
   Sales findByMovieIdAndTheaterId(@Param("movieId") Integer movieId, @Param("theaterId") Integer theaterId);
 
+  @Query("select s.theater.city, sum(s.dollarAmount), sum(s.ticketNum) from Sales s group by s.theater.city order by sum(s.dollarAmount) desc")
+  Page<Object> findTop10CitiesRevenue(Pageable pageable);
 }
