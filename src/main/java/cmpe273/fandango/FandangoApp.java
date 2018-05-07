@@ -13,7 +13,6 @@ package cmpe273.fandango;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@EnableCaching
 public class FandangoApp {
 
   @PostConstruct

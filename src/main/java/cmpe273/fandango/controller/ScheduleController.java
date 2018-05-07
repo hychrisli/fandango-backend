@@ -95,7 +95,6 @@ public class ScheduleController extends AbstractController{
               "Multiple sort criteria are supported.")
   })
   @GetMapping(SCHEDULES_CITYID_MOVIEID)
-  @Cacheable(value = "get-schedules-by-city-id", key="{#cityId, #movieId, #param, #pageable}")
   public Page<SchedulePerTheaterDto> getSchedulesByCityId(
       @PathVariable Integer cityId,
       @PathVariable Integer movieId,
@@ -126,7 +125,6 @@ public class ScheduleController extends AbstractController{
               "Multiple sort criteria are supported.")
   })
   @GetMapping(SCHEDULES_CITYID)
-  @Cacheable(value = "get-all-schedules-by-city-id", key="{#cityId, #param, #pageable}")
   public Page<ScheduleAllTheaterMovieDto> getAllSchedulesByCityId(
       @PathVariable Integer cityId,
       ParamFilterSchedule param,
@@ -157,7 +155,6 @@ public class ScheduleController extends AbstractController{
               "Multiple sort criteria are supported.")
   })
   @GetMapping(SCHEDULES_ZIPCODE_MOVIEID)
-  @Cacheable(value = "get-schedules-by-zipcode",  key="{#zipcode, #movieId, #param, #pageable}")
   public Page<SchedulePerTheaterDto> getSchedulesByZipcode(
       @PathVariable String zipcode,
       @PathVariable Integer movieId,
@@ -188,7 +185,6 @@ public class ScheduleController extends AbstractController{
               "Multiple sort criteria are supported.")
   })
   @GetMapping(SCHEDULES_ZIPCODE)
-  @Cacheable(value = "get-all-schedules-by-zipcode",  key="{#zipcode, #param, #pageable}")
   public Page<ScheduleAllTheaterMovieDto> getAllSchedulesByZipcode(
       @PathVariable String zipcode,
       ParamFilterSchedule param,
@@ -219,7 +215,6 @@ public class ScheduleController extends AbstractController{
               "Multiple sort criteria are supported.")
   })
   @GetMapping(SCHEDULES_THEATER)
-  @Cacheable(value = "get-schedules-in-theater", key="{#theaterId, #param, #pageable}")
   public Page<SchedulePerMovieDto> getSchedulesInTheater(
       @PathVariable Integer theaterId,
       ParamFilterSchedule param,
